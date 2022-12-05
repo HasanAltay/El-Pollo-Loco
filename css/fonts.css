@@ -1,0 +1,19 @@
+/* ROADSTORE */
+@font-face {
+  font-family: 'Roadstore';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../fonts/ROADSTORE Dafont.otf');
+  src: local(''),
+       url('../fonts/ROADSTORE Dafont.otf') format('embedded-opentype'),
+       url('../fonts/ROADSTORE Dafont.ttf') format('truetype'), /* Safari, Android, iOS */
+}
+
+@font-face {
+  font-family: 'Cactus Regular';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../fonts/Cactus Regular.otf');
+  src: local(''),
+       url('../fonts/Cactus Regular.otf') format('embedded-opentype'),
+}

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Pollo Loco</title>
+    <link rel="icon" href="./img/favicon.png">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/fonts.css">      
+    <script src="./models/drawable-object.class.js"></script>    
+    <script src="./models/movable-object.class.js"></script>
+    <script src="./models/character.class.js"></script>    
+    <script src="./models/status-bar.class.js"></script>
+    <script src="./models/world.class.js"></script>
+    <script src="./models/chicken.class.js"></script>
+    <script src="./models/cloud.class.js"></script>
+    <script src="./models/keyboard.class.js"></script>
+    <script src="./models/level.class.js"></script>
+    <script src="./models/endboss.class.js"></script>
+    <script src="./models/background-object.class.js"></script>
+    <script src="./models/throwable-object.class.js"></script>
+    <script src="./level/level1.js"></script>    
+    <script src="./js/game.js"></script>
+</head>
+
+<body>
+    <div class="title">        
+        <a class="t1">~ El</a>
+        <a class="t1 txtin40">Pollo</a>
+        <a class="t1 txtin200">Loco ~</a>
+    </div> 
+
+    <div class="main">
+        <canvas id="canvas" width="720" height="480"></canvas>
+    </div>
+
+    <div class="navigation">
+        <button onclick="init();" class="btn">Play Game</button>
+        <button onclick="pauseGame()" class="btn">Pause</button>
+        <button onclick="pauseGame()" class="btn">Restart</button>
+    </div>
+
+    <div class="footer">
+        LEFT = Walk left | RIGHT = Walk right | SPACE = Jump | D = Throw bottle
+    </div>
+
+    <!-- <img class="bottle" src="./img/6_salsa_bottle/salsa_bottle.png"> -->
+    
+</body>
+</html>

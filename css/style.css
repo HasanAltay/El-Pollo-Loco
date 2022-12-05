@@ -1,0 +1,144 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    font-family: 'Roadstore', monospace;
+    background-color: rgb(54, 54, 54);
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    user-select: none;
+    background-image: url('../img/backg.jpg');
+    background-size: cover;
+    height: 100vh;
+    background-position: center;
+}
+
+.t1 {
+    display: flex;
+    color: #307a3a;
+    text-shadow: 3px 3px 4px #000000;
+    font-size: 65px;    
+}
+
+.title {
+    padding: 50px;    
+    transform: rotate(-6deg);
+    line-height: 20px;
+    border-radius: 10px;
+}
+
+.txtin40 {
+    text-indent: 140px;
+}
+
+.txtin200 {
+    text-indent: 340px;
+}
+
+.main {
+    z-index: 9;
+}
+
+canvas {
+    display: block;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+    background-image: url(../img/9_intro_outro_screens/start/startscreen_web.png);
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    background-position: center;
+}
+
+.d-flex {
+    display: flex;
+}
+
+.pl-30 {
+    padding-left: 30px;
+}
+
+.navigation {
+    padding: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 4;
+}
+
+.btn {
+    display: flex;
+    color: #f0e676;
+    font-family: 'Cactus Regular', monospace;
+    font-size: 30px;
+    letter-spacing: 2px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px;
+    border: none;
+    cursor: pointer;
+    background-color: rgb(87, 92, 40);
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+}
+
+.btn:hover {
+    background-color: rgb(134, 143, 55);
+}
+
+.btn:active {
+    background-color: rgb(52, 54, 31);
+}
+
+.footer {
+    position: fixed;
+    height: 50px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    background-color: #00000098;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cactus Regular', monospace;
+    font-weight: 100;
+    font-style: italic;
+    font-size: 18px;
+    color: rgb(158, 221, 56);
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 3px #000000;
+    z-index: 2;
+}
+
+.bottle {
+    position: fixed;
+    bottom: -100px;
+    right: 220px;
+    transform: rotate(4deg);
+    z-index: 1;
+}
+
+.turn180deg {
+    transform: rotate(180deg);
+}
+
+/* Smartphones */
+
+@media only screen and (max-width: 720px) {
+    canvas {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-height: 480px) {
+    canvas {
+        height: 100vh;
+    }
+}
+
+
+
+
+
