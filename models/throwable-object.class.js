@@ -25,17 +25,20 @@ class ThrowableObject extends MovableObject {
     this.y = y;
     this.height = 60;
     this.width = 50;
-    // this.animate();
     this.throw();
   }
 
 
   throw() {
-    this.speedY = 17;
+    this.speedY = 15;
     this.applyGravity();
     setInterval(() => { 
-      this.x += 9;
+      if (this.walkingLeft = true) { 
+        this.x -= 28;
+      } else {
+      this.x += 28;
+    }
       this.playAnimation(this.IMAGES_BOTTLE);
-    }, 20);
+    }, 70);
   }
 }

@@ -61,10 +61,11 @@ canvas {
 .navigation {
     padding: 30px;
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
-    flex-direction: column;
+    /* flex-direction: column; */
     z-index: 4;
+    width: 720px;
 }
 
 .btn {

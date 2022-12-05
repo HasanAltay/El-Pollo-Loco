@@ -6,11 +6,10 @@ class World {
   keyboard;
   camera_x = 0;
   statusBar = new StatusBar();
+  coinBar = new CoinBar();
+  bottleBar = new BottleBar();
   throwableObject = [];
 
-  // enemies = level1.enemies;
-  // clouds = level1.clouds;
-  // backgroundObjects = level1.backgroundObjects;
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext('2d');
@@ -30,6 +29,7 @@ class World {
     setInterval(() => {
       this.checkCollisions();
       this.checkThrowObjects();
+      this.checkHitTarget();
     }, 200);
   }
 
@@ -53,6 +53,11 @@ class World {
 }
 
 
+  checkHitTarget() {
+    // prüfen ob chicken getroffen von flasche!
+  }
+
+
   draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
@@ -66,6 +71,8 @@ class World {
     
       this.ctx.translate(-this.camera_x, 0); // Back
         this.addToMap(this.statusBar);
+        this.addToMap(this.bottleBar);
+        this.addToMap(this.coinBar);
       this.ctx.translate(this.camera_x, 0); // Forward
 
     this.ctx.translate(-this.camera_x, 0);

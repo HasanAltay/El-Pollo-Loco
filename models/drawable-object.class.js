@@ -20,13 +20,13 @@ draw(ctx) {
 
 
 drawFrame(ctx) {
-  if (this instanceof Character || this instanceof Chicken || this instanceof ThrowableObject) {
-  ctx.beginPath();
-  ctx.lineWidth = '0';
-  ctx.strokeStyle = 'darkred';
-  ctx.rect(this.x, this.y, this.width-20, this.height-20);
-  ctx.stroke();
-  }
+  // if (this instanceof Character || this instanceof Chicken || this instanceof ThrowableObject) {
+  // ctx.beginPath();
+  // ctx.lineWidth = '0';
+  // ctx.strokeStyle = 'darkred';
+  // ctx.rect(this.x, this.y, this.width-20, this.height-20);
+  // ctx.stroke();
+  // }
 }
 
 

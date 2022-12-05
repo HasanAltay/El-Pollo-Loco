@@ -2,7 +2,7 @@ class Character extends MovableObject {
   width = 120;
   height = 240;
   y = 190;
-  x = 0;
+  x = -500;
   speed = 5;
 
   IMAGES_IDLE = [
@@ -118,6 +118,10 @@ animate() {
     if (this.isDead()) {
       // is Dead animation
       this.playAnimation(this.IMAGES_DEAD);
+
+      setInterval(() => {
+        this.fallOut();
+      }, 40);
     } 
 
     else if (this.isHurt()) {

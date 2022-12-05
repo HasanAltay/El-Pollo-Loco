@@ -5,6 +5,7 @@ class MovableObject extends DrawableObject {
   acceleration = 2;
   energy = 100;
   lastHit = 0;
+  walkingLeft = false;
 
 
   applyGravity() {
@@ -27,28 +28,11 @@ class MovableObject extends DrawableObject {
 
   
   isColliding(mo) {
-
     return this.x + this.width-20 > mo.x &&
           this.y + this.height-20 > mo.y &&
           this.x < mo.x &&
-          this.y < mo.y + mo.height;
-    
-    // return (this.x + this.width) >= mo.x && this.x <= (mo.x + mo.width) && 
-    //         (this.y + this.offsetY + this.height) >= mo.y &&
-    //         (this.y + this.offsetY) <= (mo.y + mo.height);
-  
+          this.y < mo.y + mo.height;  
   }
-
-  // isColliding (obj) {
-  //   return  (this.X + this.width) >= obj.X && this.X <= (obj.X + obj.width) && 
-  //           (this.Y + this.offsetY + this.height) >= obj.Y &&
-  //           (this.Y + this.offsetY) <= (obj.Y + obj.height) && 
-  //           obj.onCollisionCourse; 
-            // Optional: hiermit könnten wir schauen, ob ein Objekt sich in die 
-            // richtige Richtung bewegt. Nur dann kollidieren wir. 
-            // Nützlich bei Gegenständen, auf denen man stehen kann.
-
-// }
 
 
   hit() {
@@ -70,6 +54,7 @@ class MovableObject extends DrawableObject {
 
   isDead() {
     return this.energy == 0;
+    this.character.y = 100
   }
 
 
@@ -83,6 +68,7 @@ class MovableObject extends DrawableObject {
 
   moveLeft() {
       this.x -= this.speed;
+      this.walkingLeft = true;
   }
 
   
@@ -91,8 +77,20 @@ class MovableObject extends DrawableObject {
     this.turn = false;
   }
 
+  
+  fallOut() {
+    this.y += this.speed;
+    this.gameOver();
+  }
+
 
   jump() {
     this.speedY = 20;
   }
+
+
+  gameOver() {
+    console.log('GAME OVER');
+  }
+
 }
