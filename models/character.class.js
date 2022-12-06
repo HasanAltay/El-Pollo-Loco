@@ -92,10 +92,12 @@ animate() {
     if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
       this.moveRight();
       this.walking_sound.play();
+      this.walkingLeft = false;
     }
 
     else if (this.world.keyboard.LEFT && this.x > -625) {
       this.turn = true;
+      this.walkingLeft = true;
       this.moveLeft();
       this.walking_sound.play();
     }

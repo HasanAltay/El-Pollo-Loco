@@ -5,7 +5,7 @@ class MovableObject extends DrawableObject {
   acceleration = 2;
   energy = 100;
   lastHit = 0;
-  walkingLeft = false;
+  walkingLeft;
 
 
   applyGravity() {
@@ -69,12 +69,15 @@ class MovableObject extends DrawableObject {
   moveLeft() {
       this.x -= this.speed;
       this.walkingLeft = true;
+      // console.log(this.walkingLeft);
   }
 
   
   moveRight() {
     this.x += this.speed;
     this.turn = false;
+    this.walkingLeft = false;
+    // console.log(this.walkingLeft);
   }
 
   
