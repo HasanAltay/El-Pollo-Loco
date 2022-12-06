@@ -20,6 +20,7 @@ class World {
     this.run();
   }
 
+  
   setWorld() {
     this.character.world = this;
   }
@@ -35,7 +36,7 @@ class World {
 
 
   checkThrowObjects() {
-    if (this.keyboard.D) {
+    if (this.keyboard.D && !this.character.walkingLeft) {
       let bottle = new ThrowableObject(this.character.x +79, this.character.y +120);
       this.throwableObject.push(bottle);
     }
@@ -60,7 +61,6 @@ class World {
 
   draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-
     this.ctx.translate(this.camera_x, 0);
     this.addObjectsToMap(this.level.backgroundObjects);
 
@@ -77,12 +77,11 @@ class World {
 
     this.ctx.translate(-this.camera_x, 0);
     
-
     // Draw() wird immer wieder aufgerufen
     let self = this;
     requestAnimationFrame(function() {
       self.draw();
-    });
+    }); 
   }
 
 

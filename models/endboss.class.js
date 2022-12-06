@@ -30,4 +30,13 @@ animate(){
 }
 
 
+endboss_ambience_sound = new Audio('audio/boss.wav');
+
+endboss_ambience_sound() {
+  if (this.character.x == 3600) {
+    this.endboss_ambience_sound_lvl1.play();
+  }
+  
+}
+
 }

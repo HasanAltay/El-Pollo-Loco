@@ -5,6 +5,8 @@ class Character extends MovableObject {
   x = -500;
   speed = 5;
 
+
+
   IMAGES_IDLE = [
     'img/2_character_pepe/1_idle/idle/I-1.png',
     'img/2_character_pepe/1_idle/idle/I-2.png',
@@ -70,8 +72,10 @@ class Character extends MovableObject {
 
   world;
   walking_sound = new Audio('audio/walking.mp3');
-  // walking_sound = new Audio('audio/walk.mp3');
-
+  jumping_sound = new Audio('audio/jump.wav');
+  hit_sound = new Audio('audio/hit.wav');
+  dead_sound = new Audio('audio/dead.wav');
+  
 
   constructor(){
     super().loadImage('img/2_character_pepe/2_walk/W-21.png');
@@ -84,10 +88,12 @@ class Character extends MovableObject {
   }
   
 
+  // console.log(this.x);
 animate() {
 
   setInterval(() => {
     this.walking_sound.playbackRate = 2.2;
+    this.jumping_sound.playbackRate = 0.8;
 
     if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
       this.moveRight();
@@ -105,6 +111,7 @@ animate() {
     if (this.world.keyboard.SPACE && !this.aboveGround()) {
       this.jump();
       this.walking_sound.pause();
+      this.jumping_sound.play();
     }
 
     if (this.world.keyboard.SPACE && this.world.keyboard.RIGHT || this.world.keyboard.SPACE && this.world.keyboard.RIGHT) {
@@ -120,9 +127,11 @@ animate() {
     if (this.isDead()) {
       // is Dead animation
       this.playAnimation(this.IMAGES_DEAD);
+      // this.draw('img/9_intro_outro_screens/game_over/game over.png');
 
       setInterval(() => {
         this.fallOut();
+        this.stopAnimation(this.IMAGES_DEAD);
       }, 40);
     } 
 

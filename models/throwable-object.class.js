@@ -31,15 +31,8 @@ class ThrowableObject extends MovableObject {
   throw() {
     this.speedY = 15;
     this.applyGravity();
-
-      console.log(this.walkingLeft);
     setInterval(() => { 
-      if (this.walkingLeft = true) { 
-
-        this.x -= 28;
-      } else {
       this.x += 28;
-    }
       this.playAnimation(this.IMAGES_BOTTLE);
     }, 70);
   }

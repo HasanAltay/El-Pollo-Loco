@@ -6,6 +6,7 @@ class DrawableObject {
   y = 200;
   height = 140;
   width = 135;
+  num = 0;
 
 
 loadImage(path) {
@@ -19,14 +20,19 @@ draw(ctx) {
 }
 
 
+drawNumber(num) {
+  num.drawNumber(this.x, this.y, this.size);
+}
+
+
 drawFrame(ctx) {
-  // if (this instanceof Character || this instanceof Chicken || this instanceof ThrowableObject) {
-  // ctx.beginPath();
-  // ctx.lineWidth = '0';
-  // ctx.strokeStyle = 'darkred';
-  // ctx.rect(this.x, this.y, this.width-20, this.height-20);
-  // ctx.stroke();
-  // }
+  if (this instanceof Character || this instanceof Chicken || this instanceof ThrowableObject) {
+  ctx.beginPath();
+  ctx.lineWidth = 0;
+  ctx.strokeStyle = 'darkred';
+  ctx.rect(this.x, this.y, this.width-20, this.height-20);
+  ctx.stroke();
+  }
 }
 
 

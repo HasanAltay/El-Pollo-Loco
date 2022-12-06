@@ -39,8 +39,11 @@ class MovableObject extends DrawableObject {
     this.energy -= 10;
     if (this.energy < 0) {
       this.energy = 0;
+      this.dead_sound.play();
+      this.gameOver();
     } else {
       this.lastHit = new Date().getTime();
+      this.hit_sound.play();
     }
   }
 
@@ -54,7 +57,6 @@ class MovableObject extends DrawableObject {
 
   isDead() {
     return this.energy == 0;
-    this.character.y = 100
   }
 
 
@@ -65,11 +67,15 @@ class MovableObject extends DrawableObject {
     this.currentImg++;
   }
 
+  // soll die Animation anhalten
+  stopAnimation() {
+    return
+  }
+
 
   moveLeft() {
       this.x -= this.speed;
       this.walkingLeft = true;
-      // console.log(this.walkingLeft);
   }
 
   
@@ -77,13 +83,14 @@ class MovableObject extends DrawableObject {
     this.x += this.speed;
     this.turn = false;
     this.walkingLeft = false;
-    // console.log(this.walkingLeft);
   }
 
-  
+  // fällt nach Tod nach unten aus dem Frame
   fallOut() {
     this.y += this.speed;
-    this.gameOver();
+    setInterval(() => {
+      this.y = 500;
+    }, 500);
   }
 
 
@@ -93,6 +100,7 @@ class MovableObject extends DrawableObject {
 
 
   gameOver() {
+    // GAME OVER SCREEN IMAGE HERE
     console.log('GAME OVER');
   }
 
