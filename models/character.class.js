@@ -69,12 +69,14 @@ class Character extends MovableObject {
     'img/2_character_pepe/4_hurt/H-42.png',
     'img/2_character_pepe/4_hurt/H-43.png',
   ];
-
   world;
+
   walking_sound = new Audio('audio/walking.mp3');
   jumping_sound = new Audio('audio/jump.wav');
   hit_sound = new Audio('audio/hit.wav');
   dead_sound = new Audio('audio/dead.wav');
+  endboss_ambience_sound = new Audio('audio/boss.wav');
+  // throw_sound = new Audio('audio/throw.mp3');
   
 
   constructor(){
@@ -93,6 +95,7 @@ animate() {
 
   setInterval(() => {
     this.walking_sound.playbackRate = 2.2;
+    this.walking_sound.volume = 1;
     this.jumping_sound.playbackRate = 0.8;
 
     if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
