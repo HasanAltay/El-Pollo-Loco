@@ -4,6 +4,7 @@ height = 400;
 width = 300;
 y = 55;
 
+
 IMAGES_WALKING = [
   'img/4_enemie_boss_chicken/2_alert/G5.png',
   'img/4_enemie_boss_chicken/2_alert/G6.png',
@@ -15,13 +16,14 @@ IMAGES_WALKING = [
   'img/4_enemie_boss_chicken/2_alert/G12.png',
 ];
 
+
 constructor(){
   super().loadImage('img/4_enemie_boss_chicken/2_alert/G5.png');
   this.loadImages(this.IMAGES_WALKING);
-
-    this.x = 4200;
-    this.animate();
+  this.x = 4200;
+  this.animate(); 
 }
+
 
 animate(){
     setInterval(() => {
@@ -29,14 +31,5 @@ animate(){
     }, 160);
 }
 
-
-endboss_ambience_sound = new Audio('audio/boss.wav');
-
-endboss_ambience_sound() {
-  if (this.character.x == 3600) {
-    this.endboss_ambience_sound_lvl1.play();
-  }
-  
-}
 
 }

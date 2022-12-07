@@ -10,6 +10,10 @@ class World {
   bottleBar = new BottleBar();
   throwableObject = [];
 
+  endboss_ambience_sound = new Audio('audio/boss.wav');
+  ambience_lvl1 = new Audio('audio/ambience.flac');
+  music = new Audio('audio/mexican_music.mp3');
+
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext('2d');
@@ -22,7 +26,13 @@ class World {
 
   
   setWorld() {
-    this.character.world = this;
+    this.character.world = this;  
+    this.ambience_lvl1.play();
+    this.music.play();  
+    this.music.loop = true;
+    this.music.volume = 0.1;
+    this.ambience_lvl1.loop = true;
+    this.endboss_ambience_sound.volume = 0.3;
   }
 
 
@@ -31,6 +41,7 @@ class World {
       this.checkCollisions();
       this.checkThrowObjects();
       this.checkHitTarget();
+      this.endboss_ambience();
     }, 200);
   }
 
@@ -105,6 +116,7 @@ class World {
     }
   }
 
+
   flipImage(mo) {
     this.ctx.save();
     this.ctx.translate(mo.width, 0);
@@ -112,9 +124,23 @@ class World {
     mo.x = mo.x * -1;
   }
 
+
   flipImageBack(mo) {
     mo.x = mo.x * -1;
     this.ctx.restore();
+  }
+
+
+  endboss_ambience() {
+    if (this.character.x >= 3500) {
+      this.endboss_ambience_sound.play();
+      this.music.pause();
+    }
+  }
+
+
+  throwSound() {
+    this.throw_sound.play();
   }
 
 

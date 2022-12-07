@@ -1,8 +1,6 @@
 let level1;
 function initLevel() {
 
-ambience_lvl1 = new Audio('audio/ambience.flac');
-this.ambience_lvl1.play();
 
 level1 = new Level (
   enemies = [
