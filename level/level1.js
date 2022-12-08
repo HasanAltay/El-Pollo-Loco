@@ -3,6 +3,23 @@ function initLevel() {
 
 
 level1 = new Level (
+
+  coins = [
+    new Coins(-100, 340),
+    new Coins(-300, 340),
+    new Coins(-400, 340),
+    new Coins(0, 340),
+    new Coins(100, 200),
+    new Coins(200, 220),
+    new Coins(250, 340),
+    new Coins(300, 340),
+    new Coins(400, 340),
+    new Coins(500, 340),
+    new Coins(800, 340),
+    new Coins(1000, 340),
+    new Coins(1200, 340),
+  ],
+
   enemies = [
     new Chicken(),
     new Chicken(),
@@ -25,6 +42,7 @@ level1 = new Level (
     new Cloud(),
     new Cloud(),
   ],
+
 
   backgroundObjects = [
     new BackgroundObject('img/5_background/layers/air.png', -719, 0),

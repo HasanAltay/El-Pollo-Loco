@@ -80,11 +80,13 @@ class Character extends MovableObject {
   
 
   constructor(){
-    super().loadImage('img/2_character_pepe/2_walk/W-21.png');
+    super().loadImage('img/2_character_pepe/1_idle/idle/I-1.png');
     this.loadImages(this.IMAGES_WALKING);
     this.loadImages(this.IMAGES_JUMPING);
     this.loadImages(this.IMAGES_DEAD);
     this.loadImages(this.IMAGES_HURT);
+    this.loadImages(this.IMAGES_IDLE);
+    this.loadImages(this.IMAGES_LONG_IDLE);
     this.applyGravity();
     this.animate();
   }
@@ -104,7 +106,7 @@ animate() {
       this.walkingLeft = false;
     }
 
-    else if (this.world.keyboard.LEFT && this.x > -625) {
+    if (this.world.keyboard.LEFT && this.x > -625) {
       this.turn = true;
       this.walkingLeft = true;
       this.moveLeft();
@@ -117,8 +119,10 @@ animate() {
       this.jumping_sound.play();
     }
 
-    if (this.world.keyboard.SPACE && this.world.keyboard.RIGHT || this.world.keyboard.SPACE && this.world.keyboard.RIGHT) {
+    if (this.world.keyboard.SPACE && this.world.keyboard.RIGHT && !this.aboveGround() || this.world.keyboard.SPACE && this.world.keyboard.LEFT && !this.aboveGround()) {
       this.walking_sound.pause();
+      this.jump();
+      this.jumping_sound.play();
     }
 
     this.world.camera_x = -this.x + 90;
@@ -130,31 +134,52 @@ animate() {
     if (this.isDead()) {
       // is Dead animation
       this.playAnimation(this.IMAGES_DEAD);
-      // this.draw('img/9_intro_outro_screens/game_over/game over.png');
-
       setInterval(() => {
         this.fallOut();
         this.stopAnimation(this.IMAGES_DEAD);
       }, 40);
     } 
 
-    else if (this.isHurt()) {
+    if (this.isHurt()) {
       // is Hurt animation
       this.playAnimation(this.IMAGES_HURT);
     } 
-    
-    else if (this.aboveGround()) {
+  
+    if (this.aboveGround()) {
       // Jumping animation
       this.playAnimation(this.IMAGES_JUMPING);
     }
 
-    else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
+    if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
       // Walking animation
       this.playAnimation(this.IMAGES_WALKING);
     }
+  }, 80);
 
-  }, 70);
+
+  setInterval(() => {
+    if (!this.world.keyboard.RIGHT || !this.world.keyboard.LEFT) {
+    setTimeout(() => {
+      this.playAnimation(this.IMAGES_LONG_IDLE);
+    }, 10000)
+      }
+    }, 500);
+
+
+  setInterval(() => {
+    if (!this.world.keyboard.RIGHT || !this.world.keyboard.LEFT) {
+    setTimeout(() => {
+      this.playAnimation(this.IMAGES_IDLE);
+    }, 100)
+      }
+    }, 500);
+  }
 }
 
 
-}
+
+
+
+
+
+
