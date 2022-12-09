@@ -18,11 +18,11 @@ body {
     display: flex;
     color: #307a3a;
     text-shadow: 3px 3px 4px #000000;
-    font-size: 65px;    
+    font-size: 65px;
 }
 
 .title {
-    padding: 50px;    
+    padding: 50px;
     transform: rotate(-6deg);
     line-height: 20px;
     border-radius: 10px;
@@ -38,12 +38,16 @@ body {
 
 .main {
     z-index: 9;
+    position: relative;
 }
 
 canvas {
     display: block;
-    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
-    background-image: url(../img/9_intro_outro_screens/start/startscreen_web.png);
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, 
+                rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, 
+                rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+    background-image: 
+        url(../img/9_intro_outro_screens/start/startscreen_web.png);
     background-size: cover;
     width: 100%;
     height: 100%;
@@ -69,28 +73,37 @@ canvas {
 }
 
 .btn {
-    display: flex;
+    display: block;
+    position: absolute;
+    z-index: 9;
+    top: 76%;
+    left: 38%;
     color: #f0e676;
     font-family: 'Cactus Regular', monospace;
-    font-size: 30px;
-    letter-spacing: 2px;
+    font-size: 29px;
+    letter-spacing: 1px;
     align-items: center;
     justify-content: center;
     border-radius: 5px;
-    padding: 10px;
+    padding: 10px 20px 7px 20px;
+    transition: all 125ms ease-in-out;
     margin: 10px;
     border: none;
     cursor: pointer;
     background-color: rgb(87, 92, 40);
-    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
+                rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,
+                rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
 }
 
 .btn:hover {
     background-color: rgb(134, 143, 55);
+    transition: all 125ms ease-in-out;
 }
 
 .btn:active {
     background-color: rgb(52, 54, 31);
+    transition: all 125ms ease-in-out;
 }
 
 .footer {
@@ -125,6 +138,25 @@ canvas {
     transform: rotate(180deg);
 }
 
+.game_over {
+    display: none;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 720px;
+    height: 480px;
+}
+
+.you_lost {
+    display: none;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 720px;
+    height: 480px;
+}
+
+
 /* Smartphones */
 
 @media only screen and (max-width: 720px) {
@@ -138,8 +170,3 @@ canvas {
         height: 100vh;
     }
 }
-
-
-
-
-

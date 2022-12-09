@@ -22,7 +22,7 @@
     <script src="./models/background-object.class.js"></script>
     <script src="./models/throwable-object.class.js"></script>
     <script src="./models/coin-bar.class.js"></script>
-    <script src="./models/bottle-bar.class.js"></script>
+    <!-- <script src="./models/bottle-bar.class.js"></script> -->
     <script src="./models/number.class.js"></script>
     <script src="./level/level1.js"></script>    
     <script src="./js/game.js"></script>
@@ -36,12 +36,10 @@
     </div> 
 
     <div class="main">
+        <div class="btn" id="btn" onclick="init(); clearScreen()">Play Game</div>
+        <img class="game_over" id="game_over" src="./img/9_intro_outro_screens/game_over/game over.png">
+        <img class="you_lost" id="you_lost" src="./img/9_intro_outro_screens/game_over/you lost.png">
         <canvas id="canvas" width="720" height="480"></canvas>
-    </div>
-
-    <div class="navigation">
-        <div onclick="init()" class="btn">Play Game</div>
-        <!-- <div onclick="init()" class="btn">Restart</div> -->
     </div>
 
     <div class="footer">

@@ -1,5 +1,7 @@
 class World {
   character = new Character();
+  chicken = new Chicken();
+  coin = new Coins();
   level = level1;
   canvas;
   ctx;
@@ -7,12 +9,13 @@ class World {
   camera_x = 0;
   statusBar = new StatusBar();
   coinBar = new CoinBar();
-  bottleBar = new BottleBar();
+  // bottleBar = new BottleBar();
   throwableObject = [];
-
   endboss_ambience_sound = new Audio('audio/boss.wav');
   ambience_lvl1 = new Audio('audio/ambience.flac');
   music = new Audio('audio/mexican_music.mp3');
+  collectedCoins = 0;
+
 
 
   constructor(canvas, keyboard) {
@@ -40,9 +43,10 @@ class World {
     setInterval(() => {
       this.checkCollisions();
       this.checkThrowObjects();
-      this.checkHitTarget();
+      this.checkCollisionThrowBottle();
+      this.checkCollisionsCoins()
       this.endboss_ambience();
-    }, 200);
+    }, 100);
   }
 
 
@@ -55,19 +59,48 @@ class World {
 
 
   checkCollisions() {
-  this.level.enemies.forEach((enemy) => {
-    if (this.character.isColliding(enemy) ) {
-      this.character.hit();
-      this.statusBar.setPercentage(this.character.energy);
-      console.log('Collision with Enemy, Energy:', this.character.energy);
-    }
-  });
-}
-
-
-  checkHitTarget() {
-    // prüfen ob chicken getroffen von flasche!
+    this.level.enemies.forEach((enemy) => {
+      if (this.character.isColliding(enemy) ) {
+        this.character.hit();
+        this.statusBar.setPercentage(this.character.energy);
+        console.log('Collision with Enemy, Energy:', this.character.energy);
+      }
+    });
   }
+
+
+  // prüfen ob chicken getroffen von flasche!
+  checkCollisionThrowBottle() { 
+    this.throwableObject.forEach((bottle) => {
+      this.level.enemies.forEach((enemy) => {
+        if (bottle.isColliding(enemy) ) {
+          console.log('Target Hit');
+
+          this.chicken.diyingChicken();
+          console.log(this.chicken.diyingChicken());
+        }
+    });
+    })
+  }
+
+
+  checkCollisionsCoins() {
+    this.level.coins.forEach((coin) => {
+      if (this.character.isColliding(coin) ) {
+        this.character.collecting_sound.play();
+        this.coin.y += 200;
+
+        console.log('Coins', this.collectedCoins);
+      }
+    });
+  }
+
+
+  // diyingChicken() {
+  //   setInterval(() => {
+  //     this.chicken.playAnimation(this.IMAGES_DYING);
+  //   }, 100);
+  // }
 
 
   draw() {
@@ -83,7 +116,7 @@ class World {
 
       this.ctx.translate(-this.camera_x, 0); // Back
         this.addToMap(this.statusBar);
-        this.addToMap(this.bottleBar);
+        // this.addToMap(this.bottleBar);
         this.addToMap(this.coinBar);
       this.ctx.translate(this.camera_x, 0); // Forward
 

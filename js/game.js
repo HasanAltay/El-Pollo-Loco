@@ -7,14 +7,24 @@ function init() {
     canvas = document.getElementById('canvas');
     initLevel();
     world = new World(canvas, keyboard);
-    console.log('My character is', world.character);
+    // console.log('My character is', world.character);
 }
 
 
-function pauseGame() {
-    this.draw.pause();
-    console.log('Paused');
-    keyboard.pause();   
+// function pauseGame() {
+//     this.world.draw.pause();
+//     console.log('Paused');
+//     keyboard.pause();   
+// }
+
+
+function clearScreen() {
+
+    document.getElementById('game_over').style.display = 'none';
+    document.getElementById('you_lost').style.display = 'none';
+    document.getElementById('btn').style.display = 'none';
+    // location.reload();
+
 }
 
 

@@ -28,7 +28,7 @@ class MovableObject extends DrawableObject {
 
   
   isColliding(mo) {
-    return this.x + this.width-20 > mo.x &&
+    return this.x + this.width-40 > mo.x &&
           this.y + this.height-20 > mo.y &&
           this.x < mo.x &&
           this.y < mo.y + mo.height;  
@@ -40,7 +40,6 @@ class MovableObject extends DrawableObject {
     if (this.energy < 0) {
       this.energy = 0;
       this.dead_sound.play();
-      this.gameOver();
     } else {
       this.lastHit = new Date().getTime();
       this.hit_sound.play();
@@ -65,11 +64,6 @@ class MovableObject extends DrawableObject {
     let path = images[i];
     this.img = this.imgCache[path];
     this.currentImg++;
-  }
-
-  // soll die Animation anhalten
-  stopAnimation() {
-    return
   }
 
 
@@ -99,9 +93,5 @@ class MovableObject extends DrawableObject {
   }
 
 
-  gameOver() {
-    // GAME OVER SCREEN IMAGE HERE
-    console.log('GAME OVER');
-  }
 
 }
