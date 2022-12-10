@@ -137,9 +137,9 @@ class Character extends MovableObject {
         
         setInterval(() => {
           this.fallOut();
-          // this.stopAnimation(this.IMAGES_DEAD);
         }, 40);
-        this.youLost();
+
+          this.youLost();     
       }
 
       if (this.isHurt()) {
@@ -183,37 +183,21 @@ class Character extends MovableObject {
   }
 
 
-youLost() {
+  youLost() {
     document.getElementById('you_lost').style.display = 'block';
-    document.getElementById('btn').innerHTML = 'Play Again';
-    document.getElementById('btn').style.display = 'block';
+    // document.getElementById('btn').innerHTML = 'Play Again';
+    // document.getElementById('btn').style.display = 'block';
     this.world.ambience_lvl1.pause();
     this.world.music.pause();
     this.world.keyboard = false;
+    
+    this.playAgain();
+}
 
-    // this.world.canvas = false;
-    // this.world.Character = false;
-    // this.world.level = false;
-    // this.world.playAnimation = false;
-    // this.world.checkCollisionThrowBottle = false;
-    // this.world.checkCollisions = false;
-    // this.world.draw = false;
-    // this.world.addToMap = false;
-    // this.world.addObjectsToMap = false;
-    // this.world = false;
-    // this.character = false;
-    // this.level = false;
-    // this.playAnimation = false;
-    // this.chicken = false;
-    // this.level = false;
-    // this.level1 = false;
-    // this.MovableObject = false;
-    // this.character = false;
-    // this.draw = false;
-    // this.clouds = false;
-    // this.animate() = false;
-    // this.selfDraw() = false;
-
+  playAgain() {
+    document.getElementById('button_place').innerHTML = /*html*/`
+      <div class="btn" id="btn" onclick="resetPlay()">Play Again</div>
+    `;
 }
 
 

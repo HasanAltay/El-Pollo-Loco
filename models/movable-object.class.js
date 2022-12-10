@@ -6,6 +6,9 @@ class MovableObject extends DrawableObject {
   energy = 100;
   lastHit = 0;
   walkingLeft;
+  chicken_hit;
+  chicken;
+
 
 
   applyGravity() {
@@ -90,6 +93,15 @@ class MovableObject extends DrawableObject {
 
   jump() {
     this.speedY = 20;
+    // console.log(this.chicken_hit);
+  }
+
+
+
+
+
+  coinsCollect(c) {
+    this.y += c;
   }
 
 
