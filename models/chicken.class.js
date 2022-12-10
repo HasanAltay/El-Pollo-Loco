@@ -13,7 +13,7 @@ class Chicken extends MovableObject {
     'img/3_enemies_chicken/chicken_normal/2_dead/dead.png',
     'img/3_enemies_chicken/chicken_normal/2_dead/dead.png',
   ];
-
+  world;
   currentImg = 0;
 
 
@@ -28,20 +28,28 @@ class Chicken extends MovableObject {
 
 
   animate() {
+
     setInterval(() => {
       this.moveLeft();
     }, 1000 / 60);
+
     setInterval(() => {
       this.playAnimation(this.IMAGES_WALKING);
-    }, 100);
+    }, 110);
   }
 
 
   diyingChicken() {
-    setInterval(() => {
-      this.playAnimation(this.IMAGES_DYING);
-    }, 10);
+    
+    console.log('Chicken Hit!');
+      setInterval(() => {
+        this.playAnimation(this.IMAGES_DYING);
+        this.y += 700;
+      }, 200);
   }
+
+
+
 
 
 }

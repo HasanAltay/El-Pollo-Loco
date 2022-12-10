@@ -18,6 +18,7 @@ class World {
 
 
 
+
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext('2d');
     this.canvas = canvas;
@@ -30,6 +31,7 @@ class World {
   
   setWorld() {
     this.character.world = this;  
+    this.chicken.world = this;
     this.ambience_lvl1.play();
     this.music.play();  
     this.music.loop = true;
@@ -49,7 +51,7 @@ class World {
     }, 100);
   }
 
-
+  // press D and throw bottle
   checkThrowObjects() {
     if (this.keyboard.D && !this.character.walkingLeft) {
       let bottle = new ThrowableObject(this.character.x +79, this.character.y +120);
@@ -57,7 +59,7 @@ class World {
     }
   }
 
-
+  // character hit enemy then lose health
   checkCollisions() {
     this.level.enemies.forEach((enemy) => {
       if (this.character.isColliding(enemy) ) {
@@ -69,38 +71,34 @@ class World {
   }
 
 
-  // prüfen ob chicken getroffen von flasche!
+  // chicken die if hit by bottle and vanish
   checkCollisionThrowBottle() { 
+
     this.throwableObject.forEach((bottle) => {
       this.level.enemies.forEach((enemy) => {
         if (bottle.isColliding(enemy) ) {
-          console.log('Target Hit');
 
+          // this.chicken.chicken_hit = true;
           this.chicken.diyingChicken();
-          console.log(this.chicken.diyingChicken());
+
+          
         }
     });
     })
   }
 
-
+  // coin collect sound and let them vanish 
   checkCollisionsCoins() {
     this.level.coins.forEach((coin) => {
       if (this.character.isColliding(coin) ) {
         this.character.collecting_sound.play();
-        this.coin.y += 200;
+        this.coin.x += 400
+        this.coin.coinsCollect(400);
 
         console.log('Coins', this.collectedCoins);
       }
     });
   }
-
-
-  // diyingChicken() {
-  //   setInterval(() => {
-  //     this.chicken.playAnimation(this.IMAGES_DYING);
-  //   }, 100);
-  // }
 
 
   draw() {

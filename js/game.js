@@ -19,12 +19,15 @@ function init() {
 
 
 function clearScreen() {
-
     document.getElementById('game_over').style.display = 'none';
     document.getElementById('you_lost').style.display = 'none';
     document.getElementById('btn').style.display = 'none';
-    // location.reload();
+}
 
+
+function resetPlay() {
+    location.reload();
+    init();
 }
 
 
