@@ -8,6 +8,7 @@ class World {
   keyboard;
   camera_x = 0;
   statusBar = new StatusBar();
+  endbossBar = new EndbossBar();
   coinBar = new CoinBar();
   // bottleBar = new BottleBar();
   throwableObject = [];
@@ -48,8 +49,9 @@ class World {
       this.checkCollisionThrowBottle();
       this.checkCollisionsCoins()
       this.endboss_ambience();
-    }, 400);
+    }, 140);
   }
+
 
   // press D and throw bottle
   checkThrowObjects() {
@@ -73,27 +75,29 @@ class World {
 
   // chicken die if hit by bottle and vanish
   checkCollisionThrowBottle() { 
-
     this.throwableObject.forEach((bottle) => {
       this.level.enemies.forEach((enemy) => {
         if (bottle.isColliding(enemy) ) {
-          console.log('Chicken hit');
-          this.chicken.diyingChicken();
-         
+          enemy.energy = 0;
+          this.chicken.chicken_dead_sound.volume = 0.2;
+          this.chicken.chicken_dead_sound.playbackRate = 1.5;
+          this.chicken.chicken_dead_sound.play();
         }
     });
     })
   }
+
 
   // coin collect sound and let them vanish 
   checkCollisionsCoins() {
     this.level.coins.forEach((coin) => {
       if (this.character.isColliding(coin) ) {
         this.character.collecting_sound.play();
-        this.coin.x += 400
-        this.coin.coinsCollect(400);
+        this.level.coins.y += 700;
+        // this.coin.x += 400
+        // this.coin.coinsCollect(400);
 
-        console.log('Coins', this.collectedCoins);
+        // console.log('Coins', this.collectedCoins);
       }
     });
   }
@@ -112,6 +116,11 @@ class World {
 
       this.ctx.translate(-this.camera_x, 0); // Back
         this.addToMap(this.statusBar);
+
+          if (this.character.x == 2000) {
+         this.addToMap(this.endbossBar);
+          } 
+      
         // this.addToMap(this.bottleBar);
         this.addToMap(this.coinBar);
       this.ctx.translate(this.camera_x, 0); // Forward
