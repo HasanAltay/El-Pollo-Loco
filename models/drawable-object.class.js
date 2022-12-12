@@ -30,7 +30,7 @@ drawFrame(ctx) {
   ctx.beginPath();
   ctx.lineWidth = 0;
   ctx.strokeStyle = 'darkred';
-  ctx.rect(this.x, this.y, this.width -30, this.height-20);
+  ctx.rect(this.x, this.y, this.width -25, this.height-20);
   ctx.stroke();
   }
 }

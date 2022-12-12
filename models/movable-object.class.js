@@ -4,11 +4,11 @@ class MovableObject extends DrawableObject {
   speedY = 0;
   acceleration = 2;
   energy = 100;
+  energy_boss = 100;
   lastHit = 0;
   walkingLeft;
   chicken_hit;
   chicken;
-
 
 
   applyGravity() {
@@ -31,7 +31,7 @@ class MovableObject extends DrawableObject {
 
   
   isColliding(mo) {
-    return this.x + this.width-40 > mo.x &&
+    return this.x + this.width-20 > mo.x &&
           this.y + this.height-20 > mo.y &&
           this.x < mo.x &&
           this.y < mo.y + mo.height;  
@@ -62,6 +62,8 @@ class MovableObject extends DrawableObject {
   isDead() {
     return this.energy == 0;
   }
+
+
 
 
   playAnimation(images) {
@@ -99,6 +101,20 @@ class MovableObject extends DrawableObject {
 
   jump() {
     this.speedY = 20;
+  }
+
+
+  hitBoss() {
+    this.energy_boss -= 10;
+    if (this.energy_boss < 0) {
+      this.energy_boss = 0;
+      // this.dead_sound.volume = 0.3;
+      // this.dead_sound.playbackRate = 1.5;
+      // this.dead_sound.play();
+    } else {
+      this.lastHit = new Date().getTime();
+      this.hit_sound.play();
+    }
   }
 
 
