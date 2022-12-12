@@ -95,7 +95,7 @@ class Character extends MovableObject {
 
   animate() {
 
-    setInterval(() => {
+    let interval02 = setInterval(() => {
       this.dead = false;
       this.walking_sound.playbackRate = 2.2;
       this.walking_sound.volume = 1;
@@ -130,11 +130,16 @@ class Character extends MovableObject {
         this.jumping_sound.play();
       }
 
+      if (this.world.keyboard.M) {
+        console.log('m');
+        this.world.ambience_lvl1.pause();
+      }
+      // this.world.intervalArray.push(interval02);
       this.world.camera_x = -this.x + 90;
     }, 1000 / 60);
 
 
-    setInterval(() => {
+    let interval03 = setInterval(() => {
 
       if (this.isDead()) {
         // is Dead animation
@@ -162,14 +167,15 @@ class Character extends MovableObject {
         // Walking animation
         this.playAnimation(this.IMAGES_WALKING);
       }
+      // this.world.intervalArray.push(interval03);
     }, 80);
-
+    
   }
 
 
   idle() {
 
-    setInterval(() => {
+    let interval04 = setInterval(() => {
     this.afkTimer++;
     // console.log(this.afkTimer);
 
@@ -184,8 +190,8 @@ class Character extends MovableObject {
     if (this.afkTimer >= 20) {
       this.playAnimation(this.IMAGES_LONG_IDLE);
     }
-
-  }, 500)
+    // this.world.intervalArray.push(interval04);
+    }, 500)
   }
 
 
@@ -195,6 +201,7 @@ class Character extends MovableObject {
       document.getElementById('btn_play_again').style.display = 'block';
       this.world.ambience_lvl1.pause();
       this.world.music.pause();
+      this.world.endboss_ambience_sound.pause();
       this.world.keyboard = false;
     }
     

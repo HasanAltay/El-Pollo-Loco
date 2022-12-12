@@ -47,7 +47,7 @@ canvas {
                 rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, 
                 rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
     background-image: 
-        url(../img/9_intro_outro_screens/start/startscreen_web.png);
+        url('../img/background.png');
     background-size: cover;
     width: 100%;
     height: 100%;
@@ -127,7 +127,7 @@ canvas {
     font-family: 'Cactus Regular', monospace;
     font-weight: 100;
     font-style: italic;
-    font-size: 18px;
+    font-size: 16px;
     color: rgb(158, 221, 56);
     letter-spacing: 2px;
     text-shadow: 2px 2px 3px #000000;

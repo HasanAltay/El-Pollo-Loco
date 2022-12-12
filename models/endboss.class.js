@@ -57,9 +57,10 @@ constructor(){
 
 
 animate(){
-    setInterval(() => {
+  let interval09 = setInterval(() => {
       this.playAnimation(this.IMAGES_ALERT);
     }, 160);
+    // this.world.intervalArray.push(interval09);
 }
 
 

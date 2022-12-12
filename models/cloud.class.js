@@ -12,10 +12,12 @@ class Cloud extends MovableObject {
 
 
   animate() {
-    setInterval(() => {
+    let interval07 =  setInterval(() => {
       this.moveLeft();
+      // this.world.intervalArray.push(interval07);
     }, 1000 / 20);
-
   }
  
+
+
 }

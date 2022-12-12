@@ -12,11 +12,12 @@ class MovableObject extends DrawableObject {
 
 
   applyGravity() {
-    setInterval(() => {
+    let interval10 = setInterval(() => {
       if (this.aboveGround() || this.speedY > 0) {      
         this.y -= this.speedY;
         this.speedY -= this.acceleration;
     }
+    // this.intervalArray.push(interval10);
     }, 1000 / 25);
   }
 
@@ -31,11 +32,35 @@ class MovableObject extends DrawableObject {
 
   
   isColliding(mo) {
+    return this.x+27 + this.width-65 > mo.x &&
+          this.y+100 + this.height-110 > mo.y &&
+          this.x < mo.x &&
+          this.y < mo.y + mo.height;  
+  }
+
+
+  isCollidingBottle(mo) {
+    return this.x+10 + this.width-15 > mo.x &&
+          this.y+10 + this.height-15 > mo.y &&
+          this.x < mo.x &&
+          this.y < mo.y + mo.height;  
+  }
+
+
+  isCollidingChicken(mo) {
+    return this.x+4 + this.width-8 > mo.x &&
+          this.y+4 + this.height-8 > mo.y &&
+          this.x < mo.x &&
+          this.y < mo.y + mo.height;  
+  }
+
+  isCollidingCoin(mo) {
     return this.x + this.width-20 > mo.x &&
           this.y + this.height-20 > mo.y &&
           this.x < mo.x &&
           this.y < mo.y + mo.height;  
   }
+
 
 
   hit() {
@@ -64,8 +89,6 @@ class MovableObject extends DrawableObject {
   }
 
 
-
-
   playAnimation(images) {
     let i = this.currentImg % images.length; // let i = 0 % 6; 0, rest 0 
     let path = images[i];
@@ -89,12 +112,12 @@ class MovableObject extends DrawableObject {
   // fällt nach Tod nach unten aus dem Frame
   fallOut() {
     this.y += this.speed;
-    setInterval(() => {
+    let interval12 = setInterval(() => {
       this.loadImage('img/2_character_pepe/1_idle/idle/I-1.png');
       this.y = 440;
       this.height = 0;
       this.width = 0;
-      this.speedY = 0; 
+      this.speedY = 0;
     }, 500);
   }
 

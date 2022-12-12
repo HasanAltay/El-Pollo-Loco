@@ -16,8 +16,7 @@ class World {
   ambience_lvl1 = new Audio('audio/ambience.flac');
   music = new Audio('audio/mexican_music.mp3');
   collectedCoins = 0;
-
-
+  intervalArray = [];
 
 
   constructor(canvas, keyboard) {
@@ -33,6 +32,12 @@ class World {
   setWorld() {
     this.character.world = this;  
     this.chicken.world = this;
+    this.coin.world = this;
+    // this.level.world = this;
+    // this.coinBar.world = this;
+    // this.throwableObject.world = this;
+
+
     this.ambience_lvl1.play();
     this.music.play();  
     this.music.loop = true;
@@ -43,13 +48,15 @@ class World {
 
 
   run() {
-    setInterval(() => {
+    let interval11 = setInterval(() => {
       this.checkCollisions();
       this.checkThrowObjects();
       this.checkCollisionThrowBottle();
       this.checkCollisionsCoins()
       this.endboss_ambience();
     }, 140);
+    this.intervalArray.push(interval11);
+    console.log(this.intervalArray);
   }
 
 
@@ -77,7 +84,7 @@ class World {
   checkCollisionThrowBottle() { 
     this.throwableObject.forEach((bottle) => {
       this.level.enemies.forEach((enemy) => {
-        if (bottle.isColliding(enemy) ) {
+        if (bottle.isCollidingBottle(enemy) ) {
           enemy.energy = 0;
           this.chicken.chicken_dead_sound.volume = 0.2;
           this.chicken.chicken_dead_sound.playbackRate = 1.5;
@@ -91,7 +98,7 @@ class World {
   // coin collect sound and let them vanish 
   checkCollisionsCoins() {
     this.level.coins.forEach((coin) => {
-      if (this.character.isColliding(coin) ) {
+      if (this.character.isCollidingCoin(coin) ) {
         this.character.collecting_sound.play();
         this.level.coins.y += 700;
         // this.coin.x += 400
@@ -117,7 +124,7 @@ class World {
       this.ctx.translate(-this.camera_x, 0); // Back
         this.addToMap(this.statusBar);
 
-          if (this.character.x == 2000) {
+          if (this.character.x >= 3500) {
          this.addToMap(this.endbossBar);
           } 
       
@@ -149,6 +156,9 @@ class World {
 
     mo.draw(this.ctx);
     mo.drawFrame(this.ctx);
+    mo.drawFrameBottle(this.ctx);
+    mo.drawFrameChicken(this.ctx);
+    mo.drawFrameCoin(this.ctx);
 
     if (mo.turn) {
       this.flipImageBack(mo);

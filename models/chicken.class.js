@@ -30,16 +30,17 @@ class Chicken extends MovableObject {
 
   animate() {
 
-    setInterval(() => {
+    let interval05 = setInterval(() => {
       if (this.isDead()) {
         this.y = 700;
       }
       else {
         this.moveLeft();
       }
+      // this.world.intervalArray.push(interval05);
     }, 1000 / 60);
 
-    setInterval(() => {
+    let interval06 = setInterval(() => {
       if (this.isDead()) {
         this.playAnimation(this.IMAGES_DYING);
         console.log('Chicken Hit!');
@@ -47,7 +48,7 @@ class Chicken extends MovableObject {
       else {
         this.playAnimation(this.IMAGES_WALKING);
       }
-
+    // this.intervalArray.push(interval06);
     }, 110);
   }
 
