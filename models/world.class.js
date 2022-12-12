@@ -48,7 +48,7 @@ class World {
       this.checkCollisionThrowBottle();
       this.checkCollisionsCoins()
       this.endboss_ambience();
-    }, 100);
+    }, 400);
   }
 
   // press D and throw bottle
@@ -77,11 +77,9 @@ class World {
     this.throwableObject.forEach((bottle) => {
       this.level.enemies.forEach((enemy) => {
         if (bottle.isColliding(enemy) ) {
-
-          // this.chicken.chicken_hit = true;
+          console.log('Chicken hit');
           this.chicken.diyingChicken();
-
-          
+         
         }
     });
     })

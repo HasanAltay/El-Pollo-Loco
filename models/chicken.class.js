@@ -15,6 +15,7 @@ class Chicken extends MovableObject {
   ];
   world;
   currentImg = 0;
+  chicken_dead_sound = new Audio('audio/chicken_dead.wav');
 
 
   constructor(){
@@ -42,10 +43,16 @@ class Chicken extends MovableObject {
   diyingChicken() {
     
     console.log('Chicken Hit!');
+    this.y = 700;
+    this.walkingLeft = false;
+    this.chicken_dead_sound.volume = 0.2;
+    this.chicken_dead_sound.playbackRate = 1.5;
+    this.chicken_dead_sound.play();
       setInterval(() => {
-        this.playAnimation(this.IMAGES_DYING);
-        this.y += 700;
-      }, 200);
+        this.loadImage('img/3_enemies_chicken/chicken_normal/2_dead/dead.png');
+        // this.playAnimation(this.IMAGES_DYING);
+        
+      }, 10);
   }
 
 

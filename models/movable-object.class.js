@@ -25,7 +25,7 @@ class MovableObject extends DrawableObject {
     if (this instanceof ThrowableObject) {
       return true;
     } else {
-      return this.y < 180;
+      return this.y < 190;
     }
   }
 
@@ -42,6 +42,8 @@ class MovableObject extends DrawableObject {
     this.energy -= 10;
     if (this.energy < 0) {
       this.energy = 0;
+      this.dead_sound.volume = 0.3;
+      this.dead_sound.playbackRate = 1.5;
       this.dead_sound.play();
     } else {
       this.lastHit = new Date().getTime();
@@ -86,14 +88,17 @@ class MovableObject extends DrawableObject {
   fallOut() {
     this.y += this.speed;
     setInterval(() => {
-      this.y = 500;
+      this.loadImage('img/2_character_pepe/1_idle/idle/I-1.png');
+      this.y = 440;
+      this.height = 0;
+      this.width = 0;
+      this.speedY = 0; 
     }, 500);
   }
 
 
   jump() {
     this.speedY = 20;
-    // console.log(this.chicken_hit);
   }
 
 

@@ -73,9 +73,7 @@ canvas {
 }
 
 .btn {
-    display: block;
     position: absolute;
-    z-index: 10;
     top: 76%;
     left: 38%;
     color: #f0e676;
@@ -104,6 +102,16 @@ canvas {
 .btn:active {
     background-color: rgb(52, 54, 31);
     transition: all 125ms ease-in-out;
+}
+
+.btn_play_game {
+    display: block;
+    z-index: 10;
+}
+
+.btn_play_again {
+    display: none;
+    z-index: 11;
 }
 
 .footer {

@@ -11,23 +11,16 @@ function init() {
 }
 
 
-// function pauseGame() {
-//     this.world.draw.pause();
-//     console.log('Paused');
-//     keyboard.pause();   
-// }
-
-
 function clearScreen() {
     document.getElementById('game_over').style.display = 'none';
     document.getElementById('you_lost').style.display = 'none';
-    document.getElementById('btn').style.display = 'none';
+    document.getElementById('btn_play_game').style.display = 'none';
+    document.getElementById('btn_play_again').style.display = 'none';
 }
 
 
-function resetPlay() {
-    location.reload();
-    init();
+function playAgain() {
+    document.location.reload();
 }
 
 

@@ -78,6 +78,7 @@ class Character extends MovableObject {
   collecting_sound = new Audio('audio/coin2.mp3');
 
 
+
   constructor() {
     super().loadImage('img/2_character_pepe/1_idle/idle/I-1.png');
     this.loadImages(this.IMAGES_WALKING);
@@ -95,6 +96,7 @@ class Character extends MovableObject {
   animate() {
 
     setInterval(() => {
+      this.dead = false;
       this.walking_sound.playbackRate = 2.2;
       this.walking_sound.volume = 1;
       this.jumping_sound.playbackRate = 0.8;
@@ -115,13 +117,16 @@ class Character extends MovableObject {
 
       if (this.world.keyboard.SPACE && !this.aboveGround()) {
         this.jump();
+        this.playAnimation(this.IMAGES_JUMPING);
         this.walking_sound.pause();
         this.jumping_sound.play();
       }
 
-      if (this.world.keyboard.SPACE && this.world.keyboard.RIGHT && !this.aboveGround() || this.world.keyboard.SPACE && this.world.keyboard.LEFT && !this.aboveGround()) {
+      if (this.world.keyboard.SPACE && this.world.keyboard.RIGHT && !this.aboveGround() || 
+          this.world.keyboard.SPACE && this.world.keyboard.LEFT && !this.aboveGround()) {
         this.walking_sound.pause();
         this.jump();
+        this.playAnimation(this.IMAGES_JUMPING);
         this.jumping_sound.play();
       }
 
@@ -139,7 +144,8 @@ class Character extends MovableObject {
           this.fallOut();
         }, 40);
 
-          this.youLost();     
+        this.dead = true;
+        this.youLost(this.dead);     
       }
 
       if (this.isHurt()) {
@@ -152,7 +158,7 @@ class Character extends MovableObject {
         this.playAnimation(this.IMAGES_JUMPING);
       }
 
-      if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
+      if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT)  {
         // Walking animation
         this.playAnimation(this.IMAGES_WALKING);
       }
@@ -168,7 +174,7 @@ class Character extends MovableObject {
     // console.log(this.afkTimer);
 
     if (this.afkTimer > 0) {
-      this.loadImage('img/2_character_pepe/1_idle/idle/I-1.png');
+      this.playAnimation(this.IMAGES_IDLE);
     }
 
     if (this.afkTimer >= 10) {
@@ -183,21 +189,15 @@ class Character extends MovableObject {
   }
 
 
-  youLost() {
-    document.getElementById('you_lost').style.display = 'block';
-    // document.getElementById('btn').innerHTML = 'Play Again';
-    // document.getElementById('btn').style.display = 'block';
-    this.world.ambience_lvl1.pause();
-    this.world.music.pause();
-    this.world.keyboard = false;
+  youLost(dead) {
+    if (dead == true) {
+      document.getElementById('you_lost').style.display = 'block';
+      document.getElementById('btn_play_again').style.display = 'block';
+      this.world.ambience_lvl1.pause();
+      this.world.music.pause();
+      this.world.keyboard = false;
+    }
     
-    this.playAgain();
-}
-
-  playAgain() {
-    document.getElementById('button_place').innerHTML = /*html*/`
-      <div class="btn" id="btn" onclick="resetPlay()">Play Again</div>
-    `;
 }
 
 

@@ -27,7 +27,7 @@ class ThrowableObject extends MovableObject {
     this.width = 60;
     this.throw(); 
     this.throw_sound.volume = 0.2;
-    this.throw_sound.playbackRate = 0.5;
+    this.throw_sound.playbackRate = 0.4;
   }
 
 
