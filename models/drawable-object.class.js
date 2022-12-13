@@ -61,7 +61,7 @@ drawFrameCoin(ctx) {
   ctx.lineWidth = 0;
   ctx.strokeStyle = 'white';
   ctx.rect(this.x +4, this.y +4, this.width -8, this.height -8);
-  ctx.stroke();
+  // ctx.stroke();
   }
 }
 

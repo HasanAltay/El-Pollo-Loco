@@ -17,10 +17,9 @@ class MovableObject extends DrawableObject {
       if (this.aboveGround() || this.speedY > 0) {      
         this.y -= this.speedY;
         this.speedY -= this.acceleration;
-    }
-    this.intervalArray.push(interval10); //*** */
-    // console.log(this.intervalArray);
+        }
     }, 1000 / 25);
+    this.intervalArray.push(interval10);
   }
 
 
@@ -114,7 +113,7 @@ class MovableObject extends DrawableObject {
   // fällt nach Tod nach unten aus dem Frame
   fallOut() {
     this.y += this.speed;
-    let interval12 = setInterval(() => {
+    setInterval(() => {
       this.loadImage('img/2_character_pepe/1_idle/idle/I-1.png');
       this.y = 440;
       this.height = 0;
@@ -141,9 +140,6 @@ class MovableObject extends DrawableObject {
       this.hit_sound.play();
     }
   }
-
-
-
 
 
   coinsCollect(c) {

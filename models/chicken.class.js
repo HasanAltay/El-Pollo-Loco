@@ -2,6 +2,7 @@ class Chicken extends MovableObject {
   width = 80;
   height = 80;
   y = 345;
+
   IMAGES_WALKING = [
     'img/3_enemies_chicken/chicken_normal/1_walk/1_w.png',
     'img/3_enemies_chicken/chicken_normal/1_walk/2_w.png',
@@ -15,8 +16,6 @@ class Chicken extends MovableObject {
   ];
 
   world;
-
-  
   currentImg = 0;
   chicken_dead_sound = new Audio('audio/chicken_dead.wav');
 
@@ -32,18 +31,17 @@ class Chicken extends MovableObject {
 
 
   animate() {
-
-    let interval05 = setInterval(() => {
+    setInterval(() => {
       if (this.isDead()) {
         this.y = 700;
       }
       else {
         this.moveLeft();
       }
-      // this.world.intervalArray.push(interval05);
     }, 1000 / 60);
 
-    let interval06 = setInterval(() => {
+
+    setInterval(() => {
       if (this.isDead()) {
         this.playAnimation(this.IMAGES_DYING);
         console.log('Chicken Hit!');
@@ -51,7 +49,6 @@ class Chicken extends MovableObject {
       else {
         this.playAnimation(this.IMAGES_WALKING);
       }
-    // this.intervalArray.push(interval06);
     }, 110);
   }
 

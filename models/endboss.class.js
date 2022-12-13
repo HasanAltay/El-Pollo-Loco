@@ -46,8 +46,6 @@ IMAGES_DEAD = [
 ];
 
 
-
-
 constructor(){
   super().loadImage('img/4_enemie_boss_chicken/2_alert/G5.png');
   this.loadImages(this.IMAGES_ALERT);
@@ -57,10 +55,9 @@ constructor(){
 
 
 animate(){
-  let interval09 = setInterval(() => {
+  setInterval(() => {
       this.playAnimation(this.IMAGES_ALERT);
-    }, 160);
-    // this.world.intervalArray.push(interval09);
+  }, 160);
 }
 
 

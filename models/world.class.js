@@ -15,8 +15,8 @@ class World {
   endboss_ambience_sound = new Audio('audio/boss.wav');
   ambience_lvl1 = new Audio('audio/ambience.flac');
   music = new Audio('audio/mexican_music.mp3');
-  collectedCoins = 0;
-  intervalArray = [];
+  collectedCoins;
+
 
 
   constructor(canvas, keyboard) {
@@ -33,11 +33,6 @@ class World {
     this.character.world = this;  
     this.chicken.world = this;
     this.coin.world = this;
-    // this.level.world = this;
-    // this.coinBar.world = this;
-    // this.throwableObject.world = this;
-
-
     this.ambience_lvl1.play();
     this.music.play();  
     this.music.loop = true;
@@ -48,15 +43,25 @@ class World {
 
 
   run() {
-    let interval11 = setInterval(() => {
+    setInterval(() => {
       this.checkCollisions();
+    }, 20);
+
+    setInterval(() => {
       this.checkThrowObjects();
+    }, 500); 
+
+    setInterval(() => {
       this.checkCollisionThrowBottle();
+    }, 20);  
+
+    setInterval(() => {
       this.checkCollisionsCoins()
+    }, 20);
+    
+    setInterval(() => {
       this.endboss_ambience();
-    }, 140);
-    // this.intervalArray.push(interval11);
-    console.log(this.intervalArray);
+    }, 100);  
   }
 
 
@@ -98,13 +103,13 @@ class World {
   // coin collect sound and let them vanish 
   checkCollisionsCoins() {
     this.level.coins.forEach((coin) => {
+      let collectedCoins = 0;
+      console.log("Coins collected:", collectedCoins);
+
       if (this.character.isCollidingCoin(coin) ) {
         this.character.collecting_sound.play();
-        this.level.coins.y += 700;
-        // this.coin.x += 400
-        // this.coin.coinsCollect(400);
-
-        // console.log('Coins', this.collectedCoins);
+        coin.y = 700;
+        collectedCoins++;
       }
     });
   }
@@ -124,10 +129,9 @@ class World {
       this.ctx.translate(-this.camera_x, 0); // Back
         this.addToMap(this.statusBar);
 
-          if (this.character.x >= 3500) {
-         this.addToMap(this.endbossBar);
-          } 
-      
+        if (this.character.x >= 3500) {
+        this.addToMap(this.endbossBar);
+        } 
         // this.addToMap(this.bottleBar);
         this.addToMap(this.coinBar);
       this.ctx.translate(this.camera_x, 0); // Forward

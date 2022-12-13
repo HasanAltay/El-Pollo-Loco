@@ -5,7 +5,7 @@ class Coins extends MovableObject {
   y = 0;
   world;
   character;
-  collectedCoins = 0;
+  collectedCoins = [];
 
 
   constructor(x, y) {
@@ -21,15 +21,11 @@ class Coins extends MovableObject {
 
 
   animate() {
-
-    let interval08 = setInterval(() => {
+    setInterval(() => {
       if (this.character.isColliding(this.world.coin)) {
-        
         console.log('Chicken Hit!');
-
       }
-      // this.world.intervalArray.push(interval08);
-    }, 110);
+    }, 110);      
   }
 
 

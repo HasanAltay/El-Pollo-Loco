@@ -3,11 +3,15 @@ let world;
 let keyboard = new Keyboard();
 
 
-function init() {
-    canvas = document.getElementById('canvas');
-    initLevel();
-    world = new World(canvas, keyboard);
-    // console.log('My character is', world.character);
+function playAgain() {
+    clearAllInterval();
+    clearScreen();
+    init();
+}
+
+
+function clearAllInterval() {
+    for (let i = 1; i < 9999; i++) window.clearInterval(i);
 }
 
 
@@ -19,8 +23,10 @@ function clearScreen() {
 }
 
 
-function playAgain() {
-    document.location.reload();
+function init() {
+    canvas = document.getElementById('canvas');
+    initLevel();
+    world = new World(canvas, keyboard);
 }
 
 
