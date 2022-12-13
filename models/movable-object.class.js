@@ -9,6 +9,7 @@ class MovableObject extends DrawableObject {
   walkingLeft;
   chicken_hit;
   chicken;
+  intervalArray = [];
 
 
   applyGravity() {
@@ -17,7 +18,8 @@ class MovableObject extends DrawableObject {
         this.y -= this.speedY;
         this.speedY -= this.acceleration;
     }
-    // this.intervalArray.push(interval10);
+    this.intervalArray.push(interval10); //*** */
+    // console.log(this.intervalArray);
     }, 1000 / 25);
   }
 

@@ -55,7 +55,7 @@ class World {
       this.checkCollisionsCoins()
       this.endboss_ambience();
     }, 140);
-    this.intervalArray.push(interval11);
+    // this.intervalArray.push(interval11);
     console.log(this.intervalArray);
   }
 

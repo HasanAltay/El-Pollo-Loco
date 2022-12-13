@@ -1,6 +1,13 @@
 let level1;
 function initLevel() {
 
+let air = 'img/5_background/layers/air.png';
+let first_layer_2 = 'img/5_background/layers/1_first_layer/2.png';
+let second_layer_2 = 'img/5_background/layers/2_second_layer/2.png';
+let third_layer_2 = 'img/5_background/layers/3_third_layer/2.png';
+let first_layer_1 = 'img/5_background/layers/1_first_layer/1.png';
+let second_layer_1 = 'img/5_background/layers/2_second_layer/1.png';
+let third_layer_1 = 'img/5_background/layers/3_third_layer/1.png';
 
 level1 = new Level (
 
@@ -43,48 +50,47 @@ level1 = new Level (
     new Cloud(),
   ],
 
-
   backgroundObjects = [
-    new BackgroundObject('img/5_background/layers/air.png', -719, 0),
-    new BackgroundObject('img/5_background/layers/3_third_layer/2.png', -719, 0),
-    new BackgroundObject('img/5_background/layers/2_second_layer/2.png', -719, 0),
-    new BackgroundObject('img/5_background/layers/1_first_layer/2.png', -719, 0),
+    new BackgroundObject(air, -719, 0),
+    new BackgroundObject(third_layer_2, -719, 0),
+    new BackgroundObject(second_layer_2, -719, 0),
+    new BackgroundObject(first_layer_2, -719, 0),
     new BackgroundObject('img/house.png', -700, -21),
 
-    new BackgroundObject('img/5_background/layers/air.png', 0, 0),
-    new BackgroundObject('img/5_background/layers/3_third_layer/1.png', 0, 0),
-    new BackgroundObject('img/5_background/layers/2_second_layer/1.png', 0, 0),
-    new BackgroundObject('img/5_background/layers/1_first_layer/1.png', 0, 0),
+    new BackgroundObject(air, 0, 0),
+    new BackgroundObject(third_layer_1, 0, 0),
+    new BackgroundObject(second_layer_1, 0, 0),
+    new BackgroundObject(first_layer_1, 0, 0),
 
-    new BackgroundObject('img/5_background/layers/air.png', 719, 0),
-    new BackgroundObject('img/5_background/layers/3_third_layer/2.png', 719, 0),
-    new BackgroundObject('img/5_background/layers/2_second_layer/2.png', 719, 0),
-    new BackgroundObject('img/5_background/layers/1_first_layer/2.png', 719, 0),
+    new BackgroundObject(air, 719, 0),
+    new BackgroundObject(third_layer_2, 719, 0),
+    new BackgroundObject(second_layer_2, 719, 0),
+    new BackgroundObject(first_layer_2, 719, 0),
 
-    new BackgroundObject('img/5_background/layers/air.png', 1438, 0),
-    new BackgroundObject('img/5_background/layers/3_third_layer/1.png', 1438, 0),
-    new BackgroundObject('img/5_background/layers/2_second_layer/1.png', 1438, 0),
-    new BackgroundObject('img/5_background/layers/1_first_layer/1.png', 1438, 0),
+    new BackgroundObject(air, 1438, 0),
+    new BackgroundObject(third_layer_1, 1438, 0),
+    new BackgroundObject(second_layer_1, 1438, 0),
+    new BackgroundObject(first_layer_1, 1438, 0),
 
-    new BackgroundObject('img/5_background/layers/air.png', 2157, 0),
-    new BackgroundObject('img/5_background/layers/3_third_layer/2.png', 2157, 0),
-    new BackgroundObject('img/5_background/layers/2_second_layer/2.png', 2157, 0),
-    new BackgroundObject('img/5_background/layers/1_first_layer/2.png', 2157, 0),
+    new BackgroundObject(air, 2157, 0),
+    new BackgroundObject(third_layer_2, 2157, 0),
+    new BackgroundObject(second_layer_2, 2157, 0),
+    new BackgroundObject(first_layer_2, 2157, 0),
 
-    new BackgroundObject('img/5_background/layers/air.png', 2876, 0),
-    new BackgroundObject('img/5_background/layers/3_third_layer/1.png', 2876, 0),
-    new BackgroundObject('img/5_background/layers/2_second_layer/1.png', 2876, 0),
-    new BackgroundObject('img/5_background/layers/1_first_layer/1.png', 2876, 0),
+    new BackgroundObject(air, 2876, 0),
+    new BackgroundObject(third_layer_1, 2876, 0),
+    new BackgroundObject(second_layer_1, 2876, 0),
+    new BackgroundObject(first_layer_1, 2876, 0),
 
-    new BackgroundObject('img/5_background/layers/air.png', 3595, 0),
-    new BackgroundObject('img/5_background/layers/3_third_layer/2.png', 3595, 0),
-    new BackgroundObject('img/5_background/layers/2_second_layer/2.png', 3595, 0),
-    new BackgroundObject('img/5_background/layers/1_first_layer/2.png', 3595, 0),
+    new BackgroundObject(air, 3595, 0),
+    new BackgroundObject(third_layer_2, 3595, 0),
+    new BackgroundObject(second_layer_2, 3595, 0),
+    new BackgroundObject(first_layer_2, 3595, 0),
 
-    new BackgroundObject('img/5_background/layers/air.png', 4314, 0),
-    new BackgroundObject('img/5_background/layers/3_third_layer/1.png', 4314, 0),
-    new BackgroundObject('img/5_background/layers/2_second_layer/1.png', 4314, 0),
-    new BackgroundObject('img/5_background/layers/1_first_layer/1.png', 4314, 0),
+    new BackgroundObject(air, 4314, 0),
+    new BackgroundObject(third_layer_1, 4314, 0),
+    new BackgroundObject(second_layer_1, 4314, 0),
+    new BackgroundObject(first_layer_1, 4314, 0),
   ],
 );
 

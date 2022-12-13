@@ -32,7 +32,7 @@ drawFrame(ctx) {
   ctx.strokeStyle = 'white';
   ctx.rect(this.x + 27, this.y + 100, this.width -65, this.height -110);
   ctx.stroke();
-  }
+}
 }
 
 drawFrameBottle(ctx) {
