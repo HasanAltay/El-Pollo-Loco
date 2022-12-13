@@ -13,13 +13,12 @@ class MovableObject extends DrawableObject {
 
 
   applyGravity() {
-    let interval10 = setInterval(() => {
+    setInterval(() => {
       if (this.aboveGround() || this.speedY > 0) {      
         this.y -= this.speedY;
         this.speedY -= this.acceleration;
         }
     }, 1000 / 25);
-    this.intervalArray.push(interval10);
   }
 
 
@@ -27,37 +26,37 @@ class MovableObject extends DrawableObject {
     if (this instanceof ThrowableObject) {
       return true;
     } else {
-      return this.y < 190;
+      return this.y < 180;
     }
   }
 
   
   isColliding(mo) {
-    return this.x+27 + this.width-65 > mo.x &&
-          this.y+100 + this.height-110 > mo.y &&
+    return this.x+25 + this.width-65 > mo.x &&
+          this.y+115 + this.height-128 > mo.y &&
           this.x < mo.x &&
           this.y < mo.y + mo.height;  
   }
 
 
   isCollidingBottle(mo) {
-    return this.x+10 + this.width-15 > mo.x &&
-          this.y+10 + this.height-15 > mo.y &&
+    return this.x+12 + this.width-17 > mo.x &&
+          this.y+12 + this.height-17 > mo.y &&
           this.x < mo.x &&
           this.y < mo.y + mo.height;  
   }
 
 
   isCollidingChicken(mo) {
-    return this.x+4 + this.width-8 > mo.x &&
-          this.y+4 + this.height-8 > mo.y &&
+    return this.x + this.width-5 > mo.x &&
+          this.y+5 + this.height-10 > mo.y &&
           this.x < mo.x &&
           this.y < mo.y + mo.height;  
   }
 
   isCollidingCoin(mo) {
-    return this.x + this.width-20 > mo.x &&
-          this.y + this.height-20 > mo.y &&
+    return this.x + this.width-22 > mo.x+20 &&
+          this.y + this.height-22 > mo.y &&
           this.x < mo.x &&
           this.y < mo.y + mo.height;  
   }

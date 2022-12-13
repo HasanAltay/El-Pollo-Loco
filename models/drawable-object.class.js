@@ -6,7 +6,7 @@ class DrawableObject {
   y = 200;
   height = 140;
   width = 135;
-  num = 0;
+  num = 100;
 
 
 loadImage(path) {
@@ -21,7 +21,12 @@ draw(ctx) {
 
 
 drawNumber(num) {
-  num.drawNumber(this.x, this.y, this.size);
+  num.drawNumber(this.x, this.y);
+  num.beginPath();
+  num.lineWidth = 0;
+  num.strokeStyle = 'white';
+  num.stroke();
+
 }
 
 
@@ -30,7 +35,7 @@ drawFrame(ctx) {
   ctx.beginPath();
   ctx.lineWidth = 0;
   ctx.strokeStyle = 'white';
-  ctx.rect(this.x + 27, this.y + 100, this.width -65, this.height -110);
+  ctx.rect(this.x + 25, this.y + 115, this.width -65, this.height -128);
   ctx.stroke();
 }
 }
@@ -40,7 +45,7 @@ drawFrameBottle(ctx) {
   ctx.beginPath();
   ctx.lineWidth = 0;
   ctx.strokeStyle = 'yellow';
-  ctx.rect(this.x +10, this.y +10, this.width -15, this.height -15);
+  ctx.rect(this.x +12, this.y +12, this.width -22, this.height -22);
   ctx.stroke();
   }
 }
@@ -61,7 +66,7 @@ drawFrameCoin(ctx) {
   ctx.lineWidth = 0;
   ctx.strokeStyle = 'white';
   ctx.rect(this.x +4, this.y +4, this.width -8, this.height -8);
-  // ctx.stroke();
+  ctx.stroke();
   }
 }
 

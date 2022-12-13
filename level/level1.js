@@ -15,7 +15,7 @@ level1 = new Level (
     new Coins(-100, 340),
     new Coins(-300, 340),
     new Coins(-540, 340),
-    new Coins(0, 340),
+    new Coins(0, 240),
     new Coins(100, 340),
     new Coins(200, 340),
     new Coins(250, 340),

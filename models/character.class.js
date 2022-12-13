@@ -97,7 +97,7 @@ class Character extends MovableObject {
     setInterval(() => {
       this.characterMovementSound();
       this.characterMovementKeys();
-    }, 1000 / 60);
+    }, 1000 / 50);
 
     setInterval(() => {
       this.characterAnimations();
@@ -110,9 +110,6 @@ class Character extends MovableObject {
       this.afkTimer++;
       // console.log(this.afkTimer);
       if (this.afkTimer > 0) {
-        this.playAnimation(this.IMAGES_IDLE);
-      }
-      if (this.afkTimer >= 10) {
         this.playAnimation(this.IMAGES_IDLE);
       }
       if (this.afkTimer >= 20) {
@@ -153,12 +150,14 @@ class Character extends MovableObject {
       this.walkingLeft = true;
       this.moveLeft();
       this.walking_sound.play();
+      this.afkTimer = 0;
     }
     if (this.world.keyboard.SPACE && !this.aboveGround()) {
       this.jump();
       this.playAnimation(this.IMAGES_JUMPING);
       this.walking_sound.pause();
       this.jumping_sound.play();
+      this.afkTimer = 0;
     }
     if (this.world.keyboard.SPACE && this.world.keyboard.RIGHT && !this.aboveGround() ||
       this.world.keyboard.SPACE && this.world.keyboard.LEFT && !this.aboveGround()) {
@@ -166,6 +165,7 @@ class Character extends MovableObject {
       this.jump();
       this.playAnimation(this.IMAGES_JUMPING);
       this.jumping_sound.play();
+      this.afkTimer = 0;
     }
     if (this.world.keyboard.M) {
       console.log('m');
@@ -176,12 +176,13 @@ class Character extends MovableObject {
 
 
   characterAnimations() {
+  
     if (this.isDead()) {
     // is Dead animation
     this.playAnimation(this.IMAGES_DEAD);
-    setInterval(() => {
-    this.fallOut();
-    }, 40);
+      setInterval(() => {
+        this.fallOut();
+      }, 40);
     this.dead = true;
     this.youLost(this.dead);
     }
@@ -189,14 +190,31 @@ class Character extends MovableObject {
     // is Hurt animation
     this.playAnimation(this.IMAGES_HURT);
     }
-    if (this.aboveGround()) {
-    // Jumping animation
-    this.playAnimation(this.IMAGES_JUMPING);
-    }
+    // if (this.aboveGround() == true) {
+    // // Jumping animation
+    // this.playAnimation(this.IMAGES_JUMPING);
+    // }
     if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
     // Walking animation
     this.playAnimation(this.IMAGES_WALKING);
     }
+
+    if (this.aboveGround() == true) {
+      let jumping = setInterval(() => {
+        this.playAnimation(this.IMAGES_JUMPING);
+      }, 200)
+      clearInterval(jumping);
+    }
+
+
+    // if (this.walkingLeft == false && this.aboveGround() == true && this.walkingRight == true) {
+    //   let jumping = setInterval(() => {
+    //     this.playAnimation(this.IMAGES_JUMPING);
+    //   }, 600)
+    //   clearInterval(jumping);
+    
+
+    // }
   }
 
 

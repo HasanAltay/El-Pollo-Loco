@@ -45,14 +45,15 @@ class World {
   run() {
     setInterval(() => {
       this.checkCollisions();
-    }, 20);
+    }, 200);
 
     setInterval(() => {
       this.checkThrowObjects();
-    }, 500); 
+      setTimeout(() => {}, 1000)
+    }, 200); 
 
-    setInterval(() => {
-      this.checkCollisionThrowBottle();
+    setInterval(() => { 
+        this.checkCollisionThrowBottle();
     }, 20);  
 
     setInterval(() => {
@@ -70,6 +71,7 @@ class World {
     if (this.keyboard.D && !this.character.walkingLeft) {
       let bottle = new ThrowableObject(this.character.x +79, this.character.y +120);
       this.throwableObject.push(bottle);
+        this.character.loadImage('img/2_character_pepe/2_walk/W-23.png');dd
     }
   }
 
@@ -106,7 +108,8 @@ class World {
       let collectedCoins = 0;
       console.log("Coins collected:", collectedCoins);
 
-      if (this.character.isCollidingCoin(coin) ) {
+      if (this.character.isCollidingCoin(coin)) {
+        this.character.collecting_sound.playbackRate = 1.7;
         this.character.collecting_sound.play();
         coin.y = 700;
         collectedCoins++;
@@ -163,6 +166,7 @@ class World {
     mo.drawFrameBottle(this.ctx);
     mo.drawFrameChicken(this.ctx);
     mo.drawFrameCoin(this.ctx);
+    // drawNumber(this.num);
 
     if (mo.turn) {
       this.flipImageBack(mo);
