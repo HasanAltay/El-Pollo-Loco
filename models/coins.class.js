@@ -20,13 +20,12 @@ class Coins extends MovableObject {
   }
 
 
-  animate() {
-    setInterval(() => {
-      if (this.character.isColliding(this.world.coin)) {
-        console.log('Chicken Hit!');
-      }
-    }, 110);      
-  }
+  // animate() {
+  //   setInterval(() => {
+  //     if (this.character.isColliding(this.world.coin)) {
+  //     }
+  //   }, 70);      
+  // }
 
 
 

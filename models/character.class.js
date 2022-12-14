@@ -108,7 +108,6 @@ class Character extends MovableObject {
   idle() {
     setInterval(() => {
       this.afkTimer++;
-      // console.log(this.afkTimer);
       if (this.afkTimer > 0) {
         this.playAnimation(this.IMAGES_IDLE);
       }

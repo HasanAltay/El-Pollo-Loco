@@ -49,8 +49,13 @@ IMAGES_DEAD = [
 constructor(){
   super().loadImage('img/4_enemie_boss_chicken/2_alert/G5.png');
   this.loadImages(this.IMAGES_ALERT);
+  this.loadImages(this.IMAGES_WALK);
+  this.loadImages(this.IMAGES_ATTACK);
+  this.loadImages(this.IMAGES_HURT);
+  this.loadImages(this.IMAGES_DEAD);
   this.x = 4200;
-  this.animate(); 
+  this.animate();
+  this.characterAnimations() 
 }
 
 
@@ -60,5 +65,19 @@ animate(){
   }, 160);
 }
 
+characterAnimations() {
+  
+  if (this.isDeadBoss()) {
+    setInterval(() => {
+      this.playAnimation(this.IMAGES_DEAD);
+    }, 40);
+  this.dead = true;
+  this.youLost(this.dead);
+  }
+  if (this.isHurtBoss()) {
+  // is Hurt animation
+  this.playAnimation(this.IMAGES_HURT);
+  }
 
+}
 }

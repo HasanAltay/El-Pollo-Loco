@@ -1,6 +1,7 @@
 class World {
   character = new Character();
   chicken = new Chicken();
+  boss = new Endboss();
   coin = new Coins();
   level = level1;
   canvas;
@@ -62,7 +63,11 @@ class World {
     
     setInterval(() => {
       this.endboss_ambience();
-    }, 100);  
+    }, 100);
+    
+    setInterval(() => {
+      this.endboss_attack();
+    }, 100); 
   }
 
 
@@ -71,7 +76,7 @@ class World {
     if (this.keyboard.D && !this.character.walkingLeft) {
       let bottle = new ThrowableObject(this.character.x +79, this.character.y +120);
       this.throwableObject.push(bottle);
-        this.character.loadImage('img/2_character_pepe/2_walk/W-23.png');dd
+        this.character.loadImage('img/2_character_pepe/2_walk/W-23.png');
     }
   }
 
@@ -132,7 +137,7 @@ class World {
       this.ctx.translate(-this.camera_x, 0); // Back
         this.addToMap(this.statusBar);
 
-        if (this.character.x >= 3500) {
+        if (this.character.x >= 3550) {
         this.addToMap(this.endbossBar);
         } 
         // this.addToMap(this.bottleBar);

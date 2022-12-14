@@ -6,6 +6,7 @@ class MovableObject extends DrawableObject {
   energy = 100;
   energy_boss = 100;
   lastHit = 0;
+  lastHitBoss = 0;
   walkingLeft;
   chicken_hit;
   chicken;
@@ -61,6 +62,12 @@ class MovableObject extends DrawableObject {
           this.y < mo.y + mo.height;  
   }
 
+  isCollidingChickenBoss(mo) {
+    return this.x + this.width-5 > mo.x &&
+          this.y+5 + this.height-10 > mo.y &&
+          this.x < mo.x &&
+          this.y < mo.y + mo.height;  
+  }
 
 
   hit() {
@@ -77,6 +84,18 @@ class MovableObject extends DrawableObject {
   }
 
 
+  hitBoss() {
+    this.energy_boss -= 5;
+    if (this.energy_boss < 0) {
+      this.energy_boss = 0;
+      console.log('BOSS IS DEAD');
+    } else {
+      this.lastHitBoss = new Date().getTime();
+      console.log('BOSS IS HIT');
+    }
+  }
+
+
   isHurt() {
     let timepassed = new Date().getTime() - this.lastHit; // Difference in ms
     timepassed = timepassed / 1000; // Difference in s
@@ -84,8 +103,20 @@ class MovableObject extends DrawableObject {
   }
 
 
+  isHurtBoss() {
+    let timepassed = new Date().getTime() - this.lastHitBoss; // Difference in ms
+    timepassed = timepassed / 1000; // Difference in s
+    return timepassed < 0.5;
+  }
+
+
   isDead() {
     return this.energy == 0;
+  }
+
+
+  isDeadBoss() {
+    return this.energy_boss == 0;
   }
 
 
@@ -127,23 +158,16 @@ class MovableObject extends DrawableObject {
   }
 
 
-  hitBoss() {
-    this.energy_boss -= 10;
-    if (this.energy_boss < 0) {
-      this.energy_boss = 0;
-      // this.dead_sound.volume = 0.3;
-      // this.dead_sound.playbackRate = 1.5;
-      // this.dead_sound.play();
-    } else {
-      this.lastHit = new Date().getTime();
-      this.hit_sound.play();
+  endboss_attack() {
+    if (this.character.x >= 3600) {
+      this.playAnimation(this.IMAGES_ATTACK);
     }
   }
 
 
-  coinsCollect(c) {
-    this.y += c;
-  }
+  // coinsCollect(c) {
+  //   this.y += c;
+  // }
 
 
 
