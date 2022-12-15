@@ -122,10 +122,14 @@ class Character extends MovableObject {
     if (dead == true) {
       document.getElementById('you_lost').style.display = 'block';
       document.getElementById('btn_play_again').style.display = 'block';
-      this.world.ambience_lvl1.pause();
+      // this.world.ambience_lvl1.pause();
       this.world.music.pause();
       this.world.endboss_ambience_sound.pause();
       this.world.keyboard = false;
+      setTimeout(function() {
+        for (let i = 1; i < 9999; i++) window.clearInterval(i);
+      }, 650)
+      
     }
   }
 
@@ -166,8 +170,11 @@ class Character extends MovableObject {
       this.jumping_sound.play();
       this.afkTimer = 0;
     }
+    if (this.world.keyboard.D) {
+      this.afkTimer = 0;
+    }
     if (this.world.keyboard.M) {
-      console.log('m');
+      console.log('MUTE');
       this.world.ambience_lvl1.pause();
     }
     this.world.camera_x = -this.x + 90;
@@ -177,7 +184,6 @@ class Character extends MovableObject {
   characterAnimations() {
   
     if (this.isDead()) {
-    // is Dead animation
     this.playAnimation(this.IMAGES_DEAD);
       setInterval(() => {
         this.fallOut();
@@ -185,38 +191,31 @@ class Character extends MovableObject {
     this.dead = true;
     this.youLost(this.dead);
     }
+
     if (this.isHurt()) {
-    // is Hurt animation
     this.playAnimation(this.IMAGES_HURT);
     }
-    // if (this.aboveGround() == true) {
-    // // Jumping animation
-    // this.playAnimation(this.IMAGES_JUMPING);
-    // }
+
     if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
-    // Walking animation
-    this.playAnimation(this.IMAGES_WALKING);
+        this.playAnimation(this.IMAGES_WALKING);
     }
 
-    if (this.aboveGround() == true) {
-      let jumping = setInterval(() => {
+    if (this.world.keyboard.RIGHT && this.aboveGround() || this.world.keyboard.LEFT && this.aboveGround()) {
+      this.jumping = setInterval(() => {
         this.playAnimation(this.IMAGES_JUMPING);
       }, 200)
-      clearInterval(jumping);
+      clearInterval(this.jumping);
+      }
+
+    if (this.aboveGround() || this.world.keyboard.SPACE) {
+      this.jumping = setInterval(() => {
+        this.playAnimation(this.IMAGES_JUMPING);
+      }, 1400)
+
+    clearInterval(this.jumping);
     }
 
-
-    // if (this.walkingLeft == false && this.aboveGround() == true && this.walkingRight == true) {
-    //   let jumping = setInterval(() => {
-    //     this.playAnimation(this.IMAGES_JUMPING);
-    //   }, 600)
-    //   clearInterval(jumping);
-    
-
-    // }
   }
-
-
 
 
 

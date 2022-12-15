@@ -119,10 +119,8 @@ class World {
 
           setTimeout(() => {
             enemy.y = 700;
-          },300)
-          
-          this.ThrowableObject.splash();
-          
+          },100)
+
         }
     });
     })
@@ -223,37 +221,17 @@ class World {
   }
 
 
-  // splash() {
-  //   // clearInterval(this.throwableObject.intervals.length);
-  //   setInterval(() => {
-  //     // this.x += 28;
-  //     // this.MovableObject.playAnimation(this.throwableObject.IMAGES_BOTTLE_SPLASH);
-  //     this.MovableObject.playAnimation(this.ThrowableObject.IMAGES_BOTTLE_SPLASH);
-  //   }, 70);
-  // }
-
-
-  // playAnimation(images) {
-  //   let i = this.currentImg % images.length; // let i = 0 % 6; 0, rest 0 
-  //   let path = images[i];
-  //   this.img = this.imgCache[path];
-  //   this.currentImg++;
-  // }
-
-
-  // throwSound() {
-  //   this.throw_sound.play();
-  // }
-
   gameOver(dead) {
     if (dead == true) {
       document.getElementById('game_over').style.display = 'block';
       document.getElementById('you_lost').style.display = 'none';
       document.getElementById('btn_play_again').style.display = 'block';
-      this.world.ambience_lvl1.pause();
       this.world.music.pause();
       this.world.endboss_ambience_sound.pause();
       this.world.keyboard = false;
+      
+
+
     }
   }
 

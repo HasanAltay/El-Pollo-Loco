@@ -1,5 +1,5 @@
 class MovableObject extends DrawableObject {
-  speed = 0.1;
+  speed = 0.2;
   turn = false;
   speedY = 0;
   acceleration = 2;
@@ -29,6 +29,10 @@ class MovableObject extends DrawableObject {
     } else {
       return this.y < 180;
     }
+  }
+
+  aboveGroundBottle() {
+    return this.y < this.groundPos;
   }
 
   
@@ -148,20 +152,13 @@ class MovableObject extends DrawableObject {
       this.width = 0;
       this.speedY = 0;
     }, 500);
+    
   }
 
 
   jump() {
     this.speedY = 20;
   }
-
-
-
-
-
-  // coinsCollect(c) {
-  //   this.y += c;
-  // }
 
 
 
