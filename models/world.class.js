@@ -1,8 +1,8 @@
 class World {
   character = new Character();
   chicken = new Chicken();
-  boss = new Endboss();
-  coin = new Coins();
+  // boss = new Endboss();
+  // coin = new Coins();
   level = level1;
   canvas;
   ctx;
@@ -16,7 +16,7 @@ class World {
   endboss_ambience_sound = new Audio('audio/boss.wav');
   ambience_lvl1 = new Audio('audio/ambience.flac');
   music = new Audio('audio/mexican_music.mp3');
-  collectedCoins;
+  collectedCoins = [];
 
 
 
@@ -33,7 +33,7 @@ class World {
   setWorld() {
     this.character.world = this;  
     this.chicken.world = this;
-    this.coin.world = this;
+    // this.coin.world = this;
     this.ambience_lvl1.play();
     this.music.play();  
     this.music.loop = true;
@@ -50,24 +50,32 @@ class World {
 
     setInterval(() => {
       this.checkThrowObjects();
-      setTimeout(() => {}, 1000)
-    }, 200); 
+      // setTimeout(() => {}, 4000)
+    }, 400); 
 
     setInterval(() => { 
         this.checkCollisionThrowBottle();
-    }, 20);  
+    }, 40);  
 
     setInterval(() => {
-      this.checkCollisionsCoins()
-    }, 20);
+      this.checkCollisionsCharacterWithCoins();
+    }, 100);
     
     setInterval(() => {
       this.endboss_ambience();
     }, 100);
-    
+
     setInterval(() => {
       this.endboss_attack();
-    }, 100); 
+    }, 100);
+
+  }
+
+
+  endboss_attack() {
+    if (this.character.x > 3550) {
+      this.level.enemies[this.level.enemies.length-1].characterCheckpoint = true;
+    }
   }
 
 
@@ -97,10 +105,24 @@ class World {
     this.throwableObject.forEach((bottle) => {
       this.level.enemies.forEach((enemy) => {
         if (bottle.isCollidingBottle(enemy) ) {
-          enemy.energy = 0;
-          this.chicken.chicken_dead_sound.volume = 0.2;
+          
+          setInterval(() => {
+            clearInterval(this.chicken.animate());
+            this.chicken.loadImage('img/3_enemies_chicken/chicken_normal/1_walk/1_w.png');
+          },500)
+
+          this.chicken.animateDying();
+          this.chicken.chicken_dead_sound.pause();
+          this.chicken.chicken_dead_sound.volume = 0.1;
           this.chicken.chicken_dead_sound.playbackRate = 1.5;
           this.chicken.chicken_dead_sound.play();
+
+          setTimeout(() => {
+            enemy.y = 700;
+          },300)
+          
+          this.ThrowableObject.splash();
+          
         }
     });
     })
@@ -108,16 +130,15 @@ class World {
 
 
   // coin collect sound and let them vanish 
-  checkCollisionsCoins() {
+  checkCollisionsCharacterWithCoins() {
     this.level.coins.forEach((coin) => {
-      let collectedCoins = 0;
-      console.log("Coins collected:", collectedCoins);
-
       if (this.character.isCollidingCoin(coin)) {
+        this.character.collecting_sound.pause();
         this.character.collecting_sound.playbackRate = 1.7;
         this.character.collecting_sound.play();
         coin.y = 700;
-        collectedCoins++;
+        this.collectedCoins.push(coin);
+        console.log(this.collectedCoins);
       }
     });
   }
@@ -171,6 +192,7 @@ class World {
     mo.drawFrameBottle(this.ctx);
     mo.drawFrameChicken(this.ctx);
     mo.drawFrameCoin(this.ctx);
+    mo.drawFrameEndboss(this.ctx);
     // drawNumber(this.num);
 
     if (mo.turn) {
@@ -201,9 +223,38 @@ class World {
   }
 
 
-  throwSound() {
-    this.throw_sound.play();
-  }
+  // splash() {
+  //   // clearInterval(this.throwableObject.intervals.length);
+  //   setInterval(() => {
+  //     // this.x += 28;
+  //     // this.MovableObject.playAnimation(this.throwableObject.IMAGES_BOTTLE_SPLASH);
+  //     this.MovableObject.playAnimation(this.ThrowableObject.IMAGES_BOTTLE_SPLASH);
+  //   }, 70);
+  // }
 
+
+  // playAnimation(images) {
+  //   let i = this.currentImg % images.length; // let i = 0 % 6; 0, rest 0 
+  //   let path = images[i];
+  //   this.img = this.imgCache[path];
+  //   this.currentImg++;
+  // }
+
+
+  // throwSound() {
+  //   this.throw_sound.play();
+  // }
+
+  gameOver(dead) {
+    if (dead == true) {
+      document.getElementById('game_over').style.display = 'block';
+      document.getElementById('you_lost').style.display = 'none';
+      document.getElementById('btn_play_again').style.display = 'block';
+      this.world.ambience_lvl1.pause();
+      this.world.music.pause();
+      this.world.endboss_ambience_sound.pause();
+      this.world.keyboard = false;
+    }
+  }
 
 }
