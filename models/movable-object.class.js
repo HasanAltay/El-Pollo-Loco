@@ -39,32 +39,30 @@ class MovableObject extends DrawableObject {
           this.y < mo.y + mo.height;  
   }
 
-
   isCollidingBottle(mo) {
-    return this.x+12 + this.width-17 > mo.x &&
-          this.y+12 + this.height-17 > mo.y &&
+    return this.x+25 + this.width-65 > mo.x &&
+          this.y+115 + this.height-128 > mo.y &&
           this.x < mo.x &&
           this.y < mo.y + mo.height;  
   }
 
-
   isCollidingChicken(mo) {
-    return this.x + this.width-5 > mo.x &&
-          this.y+5 + this.height-10 > mo.y &&
+    return this.x+25 + this.width-65 > mo.x &&
+          this.y+115 + this.height-128 > mo.y &&
           this.x < mo.x &&
           this.y < mo.y + mo.height;  
   }
 
   isCollidingCoin(mo) {
-    return this.x + this.width-22 > mo.x+20 &&
-          this.y + this.height-22 > mo.y &&
+    return this.x+25 + this.width-80 > mo.x-10 && 
+          this.y+100 + this.height-128 > mo.y &&
           this.x < mo.x &&
-          this.y < mo.y + mo.height;  
+          this.y+100 < mo.y + mo.height;  
   }
 
   isCollidingChickenBoss(mo) {
-    return this.x + this.width-5 > mo.x &&
-          this.y+5 + this.height-10 > mo.y &&
+    return this.x+25 + this.width-65 > mo.x &&
+          this.y+115 + this.height-128 > mo.y &&
           this.x < mo.x &&
           this.y < mo.y + mo.height;  
   }
@@ -158,11 +156,7 @@ class MovableObject extends DrawableObject {
   }
 
 
-  endboss_attack() {
-    if (this.character.x >= 3600) {
-      this.playAnimation(this.IMAGES_ATTACK);
-    }
-  }
+
 
 
   // coinsCollect(c) {

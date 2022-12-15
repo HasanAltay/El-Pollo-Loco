@@ -19,17 +19,4 @@ class Coins extends MovableObject {
     return this.collectedCoins += 1;
   }
 
-
-  // animate() {
-  //   setInterval(() => {
-  //     if (this.character.isColliding(this.world.coin)) {
-  //     }
-  //   }, 70);      
-  // }
-
-
-
-
-
-
 }

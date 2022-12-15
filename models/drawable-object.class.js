@@ -26,7 +26,6 @@ drawNumber(num) {
   num.lineWidth = 0;
   num.strokeStyle = 'white';
   num.stroke();
-
 }
 
 
@@ -36,7 +35,7 @@ drawFrame(ctx) {
   ctx.lineWidth = 0;
   ctx.strokeStyle = 'white';
   ctx.rect(this.x + 25, this.y + 115, this.width -65, this.height -128);
-  ctx.stroke();
+  // ctx.stroke();
 }
 }
 
@@ -46,7 +45,7 @@ drawFrameBottle(ctx) {
   ctx.lineWidth = 0;
   ctx.strokeStyle = 'yellow';
   ctx.rect(this.x +12, this.y +12, this.width -22, this.height -22);
-  ctx.stroke();
+  // ctx.stroke();
   }
 }
 
@@ -56,7 +55,7 @@ drawFrameChicken(ctx) {
   ctx.lineWidth = 0;
   ctx.strokeStyle = 'white';
   ctx.rect(this.x, this.y +5, this.width-5, this.height -10);
-  ctx.stroke();
+  // ctx.stroke();
   }
 }
 
@@ -66,7 +65,7 @@ drawFrameCoin(ctx) {
   ctx.lineWidth = 0;
   ctx.strokeStyle = 'white';
   ctx.rect(this.x +4, this.y +4, this.width -8, this.height -8);
-  ctx.stroke();
+  // ctx.stroke();
   }
 }
 
@@ -75,7 +74,7 @@ drawFrameEndboss(ctx) {
   ctx.beginPath();
   ctx.lineWidth = 0;
   ctx.strokeStyle = 'white';
-  ctx.rect(this.x, this.y +5, this.width-5, this.height -10);
+  ctx.rect(this.x, this.y, this.width, this.height);
   ctx.stroke();
   }
 } 
