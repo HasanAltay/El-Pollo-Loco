@@ -3,12 +3,12 @@ body {
     flex-direction: column;
     align-items: center;
     margin: 0;
-    font-family: 'Roadstore', monospace;
+    font-family: 'Cactus Regular', monospace;
     background-color: rgb(54, 54, 54);
     -moz-user-select: none;
     -khtml-user-select: none;
     user-select: none;
-    background-image: url('../img/backg.jpg');
+    background-image: url('../img/back.jpg');
     background-size: cover;
     height: 100vh;
     background-position: center;
@@ -16,16 +16,9 @@ body {
 
 .t1 {
     display: flex;
-    color: #307a3a;
+    color: #f0e676;
     text-shadow: 3px 3px 4px #000000;
-    font-size: 65px;
-}
-
-.title {
-    padding: 50px;
-    transform: rotate(-6deg);
-    line-height: 20px;
-    border-radius: 10px;
+    letter-spacing: 5px;
 }
 
 .txtin40 {
@@ -44,14 +37,16 @@ body {
 canvas {
     display: block;
     box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, 
-                rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, 
-                rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+                rgba(0, 0, 0, 0.3) 0px 7px 10px -3px;
     background-image: 
         url('../img/background.png');
     background-size: cover;
     width: 100%;
     height: 100%;
     background-position: center;
+    border-radius: 5px;
+    justify-content: center;
+    align-items: center;
 }
 
 .d-flex {
@@ -67,21 +62,20 @@ canvas {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    /* flex-direction: column; */
     z-index: 4;
     width: 720px;
 }
 
 .btn {
     position: absolute;
-    top: 76%;
-    left: 38%;
+    bottom: 20px;
+    left: 60px;
+    
     color: #f0e676;
     font-family: 'Cactus Regular', monospace;
-    font-size: 29px;
+    font-size: 28px;
     letter-spacing: 1px;
-    align-items: center;
-    justify-content: center;
+    text-shadow: 3px 3px 4px #000000;
     border-radius: 5px;
     padding: 10px 20px 7px 20px;
     transition: all 125ms ease-in-out;
@@ -101,6 +95,7 @@ canvas {
 
 .btn:active {
     background-color: rgb(52, 54, 31);
+    transform: scale(95%);
     transition: all 125ms ease-in-out;
 }
 
@@ -127,10 +122,11 @@ canvas {
     font-family: 'Cactus Regular', monospace;
     font-weight: 100;
     font-style: italic;
-    font-size: 16px;
-    color: rgb(158, 221, 56);
+    font-size: 1rem;
+    color: #f0e676;
     letter-spacing: 2px;
     text-shadow: 2px 2px 3px #000000;
+    text-align: center;
     z-index: 2;
 }
 
@@ -166,12 +162,51 @@ canvas {
     backdrop-filter: blur(2px);
 }
 
+.res_alert {
+    display: none;
+    position: absolute;
+    top: 50px;
+    left: 20px;
+    font-size: 1.6rem;
+    color: #f0e676;
+    text-shadow: 2px 2px 3px #000000;
+    text-align: center;
+    z-index: 2;
+    letter-spacing: 4px;
+
+}
+
 
 /* Smartphones */
 
 @media only screen and (max-width: 720px) {
     canvas {
         width: 100%;
+    }
+}
+
+@media only screen and (max-width: 660px) {
+    .footer {
+        font-size: 0.7rem;
+
+    }
+}
+
+@media only screen and (max-width: 510px) {
+    .footer {
+        font-size: 0.55rem;
+    }
+}
+
+@media only screen and (max-width: 280px) {
+    canvas {
+        display: none;  
+    }
+    .btn {
+        display: none
+    }
+    .res_alert {
+        display: block;
     }
 }
 

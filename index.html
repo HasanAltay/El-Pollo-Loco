@@ -23,21 +23,16 @@
         <script src="./models/throwable-object.class.js"></script>
         <script src="./models/coin-bar.class.js"></script>
         <script src="./models/endboss-bar.class.js"></script>
-        <!-- <script src="./models/bottle-bar.class.js"></script> -->
         <script src="./models/number.class.js"></script>
         <script src="./level/level1.js"></script>
         <script src="./js/game.js"></script>
     </head>
 
     <body>
-        <div class="title">
-            <a class="t1">~ El</a>
-            <a class="t1 txtin40">Pollo</a>
-            <a class="t1 txtin200">Loco ~</a>
-        </div>
+        <h1 class="t1">El Pollo Loco</h1>
 
         <div class="main">
-            <div id="button_place">
+            <div id="button_place" class="button_place">
                 <div class="btn_play_again btn" id="btn_play_again" onclick="playAgain()">
                     Play Again
                 </div>
@@ -56,6 +51,7 @@
             LEFT = Walk left | RIGHT = Walk right | SPACE = Jump | D = Throw salsa
             bottle
         </div>
+        <h1 class="res_alert"><img src="img/3_enemies_chicken/chicken_small/1_walk/1_w.png">You need a resolution bigger than 280px!</h1>
 
         <img class="bottle" src="./img/6_salsa_bottle/salsa_bottle.png">
     </body>

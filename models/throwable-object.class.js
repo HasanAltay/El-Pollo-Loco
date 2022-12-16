@@ -20,54 +20,81 @@ class ThrowableObject extends MovableObject {
     'img/6_salsa_bottle/bottle_rotation/bottle_splash/6_bottle_splash.png',
   ];
   throw_sound = new Audio('audio/throw.mp3');
-  groundPos = 370;
- 
+  bottle_smash_sound = new Audio('audio/breaking_glass.mp3');
+  groundPos = 355;
+
 
   constructor(x, y) {
     super().loadImage('img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png');
     this.loadImages(this.IMAGES_BOTTLE);
-    this.loadImages(this.IMAGES_BOTTLE_SPLASH);      
-    this.x = x-20;
-    this.y = y+2;
+    this.loadImages(this.IMAGES_BOTTLE_SPLASH);
+    this.x = x - 20;
+    this.y = y + 2;
     this.height = 65;
     this.width = 65;
     this.throw();
     this.throw_sound.volume = 0.2;
-    this.throw_sound.playbackRate = 0.4;
+    this.bottle_smash_sound.volume = 0.4;
+    this.throw_sound.playbackRate = 1;
   }
 
 
   throw() {
     this.throw_sound.pause();
     this.throw_sound.play();
-    this.speedY = 10;
+    this.speedY = 9;
     this.applyGravity();
-
+    
     this.bottles = setInterval(() => {
-      this.x += 40;
-      this.playAnimation(this.IMAGES_BOTTLE);
-    }, 66);
-
-    setTimeout(() => {
-      clearInterval(this.bottles);
-    }, 500)
-
-    this.playInterval = setInterval(() => {
-      this.checkAboveGroundBottle(this.bottle);
-    }, 70);
-  }
-
-
-  checkAboveGroundBottle() {
-    if (this.aboveGroundBottle()) {
+      if (this.aboveGroundBottle()) {
+        this.x += 31;
         this.playAnimation(this.IMAGES_BOTTLE);
-    } else {
-      this.playAnimation(this.IMAGES_BOTTLE_SPLASH);
-      setTimeout(() => {
-        clearInterval(this.playInterval);
-      }, 350)  
-    }
+      } else {
+        this.y = 355;
+        this.playAnimation(this.IMAGES_BOTTLE_SPLASH);
+        this.bottle_smash_sound.pause();
+        this.bottle_smash_sound.play();
+        // setTimeout(() => {
+        //   clearInterval(this.playInterval);
+        // }, 400)
+        clearInterval(this.bottles);
+      }
+      
+    }, 70);
+    
   }
 
+
+
+
+  // }
+
+
+  // setTimeout(() => {
+  //   clearInterval(this.bottles);
+  // }, 300)
+
+  // this.playInterval = setInterval(() => {
+  //   this.checkAboveGroundBottle(this.bottle);
+  // }, 160);
+  // }
+
+
+  // checkAboveGroundBottle() {
+  //   if (this.aboveGroundBottle()) {
+  //     this.playAnimation(this.IMAGES_BOTTLE);
+  //   } else {
+  //     clearInterval(this.bottles);
+
+  //     this.playAnimation(this.IMAGES_BOTTLE_SPLASH);
+
+  //     this.applyGravity = false;
+  //     this.bottle_smash_sound.play();
+  //     setTimeout(() => {
+  //       clearInterval(this.playInterval);
+  //     }, 400)
+  //   }
+  // }
 
 }
+

@@ -10,15 +10,19 @@ class Chicken extends MovableObject {
   ];
 
   IMAGES_DYING = [
-    'img/3_enemies_chicken/chicken_normal/2_dead/dead.png',
-    'img/3_enemies_chicken/chicken_normal/2_dead/dead.png',
-    'img/3_enemies_chicken/chicken_normal/2_dead/dead.png',
+    'img/3_enemies_chicken/chicken_normal/2_dead/1_dead.png',
+    'img/3_enemies_chicken/chicken_normal/2_dead/2_dead.png',
+    'img/3_enemies_chicken/chicken_normal/2_dead/3_dead.png',
+    'img/3_enemies_chicken/chicken_normal/2_dead/4_dead.png',
+    'img/3_enemies_chicken/chicken_normal/2_dead/5_dead.png',
+    'img/3_enemies_chicken/chicken_normal/2_dead/6_dead.png',
   ];
 
   world;
   currentImg = 0;
   chicken_dead_sound = new Audio('audio/chicken_dead.wav');
   chicken_is_dead = false;
+  walkingAnim = [];
 
 
   constructor() {
@@ -33,22 +37,20 @@ class Chicken extends MovableObject {
 
   animateDying() {
     console.log("Chicken");
-    setInterval(() => {
-      setTimeout(() => {
         this.playAnimation(this.IMAGES_DYING);
-      },500)
-    }, 300);
   }
   
 
   animate() {
-    let moving = setInterval(() => {
+    this.movingLeft = setInterval(() => {
       this.moveLeft();
     }, 10);
 
-    let walking = setInterval(() => {
+    this.walking = setInterval(() => {
       this.playAnimation(this.IMAGES_WALKING);
     }, 110);
+    this.walkingAnim.push(this.walking);
+
   }
 
 

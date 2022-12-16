@@ -17,6 +17,7 @@ class World {
   ambience_lvl1 = new Audio('audio/ambience.flac');
   music = new Audio('audio/mexican_music.mp3');
   collectedCoins = [];
+  killedEnemies = [];
 
 
 
@@ -40,6 +41,9 @@ class World {
     this.music.volume = 0.1;
     this.ambience_lvl1.loop = true;
     this.endboss_ambience_sound.volume = 0.3;
+    this.chicken.chicken_dead_sound.volume = 0.1;
+    this.chicken.chicken_dead_sound.playbackRate = 1.5;
+    this.character.collecting_sound.playbackRate = 1.7;
   }
 
 
@@ -51,11 +55,13 @@ class World {
     setInterval(() => {
       this.checkThrowObjects();
       // setTimeout(() => {}, 4000)
-    }, 400); 
+    }, 370);
+    
+
 
     setInterval(() => { 
-        this.checkCollisionThrowBottle();
-    }, 40);  
+      this.checkCollisionThrowBottle();
+    }, 10);  
 
     setInterval(() => {
       this.checkCollisionsCharacterWithCoins();
@@ -81,10 +87,17 @@ class World {
 
   // press D and throw bottle
   checkThrowObjects() {
+    
     if (this.keyboard.D && !this.character.walkingLeft) {
-      let bottle = new ThrowableObject(this.character.x +79, this.character.y +120);
-      this.throwableObject.push(bottle);
+      
+        this.bottle = new ThrowableObject(this.character.x +79, this.character.y +120);
+        this.throwableObject.push(this.bottle);
         this.character.loadImage('img/2_character_pepe/2_walk/W-23.png');
+      setTimeout(() => {}, 400)
+      return
+      
+      
+
     }
   }
 
@@ -101,29 +114,43 @@ class World {
 
 
   // chicken die if hit by bottle and vanish
-  checkCollisionThrowBottle() { 
+  checkCollisionThrowBottle() {           
+
+
     this.throwableObject.forEach((bottle) => {
       this.level.enemies.forEach((enemy) => {
         if (bottle.isCollidingBottle(enemy) ) {
-          
-          setInterval(() => {
-            clearInterval(this.chicken.animate());
-            this.chicken.loadImage('img/3_enemies_chicken/chicken_normal/1_walk/1_w.png');
-          },500)
 
-          this.chicken.animateDying();
-          this.chicken.chicken_dead_sound.pause();
-          this.chicken.chicken_dead_sound.volume = 0.1;
-          this.chicken.chicken_dead_sound.playbackRate = 1.5;
+          // this.chicken.chicken_dead_sound.pause();
           this.chicken.chicken_dead_sound.play();
 
+
+
+          clearInterval(this.chicken.walkingAnim.values());
+          this.boing = setInterval(() => {   
+            enemy.playAnimation(this.chicken.IMAGES_DYING)  
+          }, 300)
+          
+          
           setTimeout(() => {
+            clearInterval(this.boing);
             enemy.y = 700;
-          },100)
+          }, 450)
+
+          if (enemy.y >= 700) {
+            this.killedEnemies.push(enemy);
+            console.log(this.killedEnemies.length);
+          }
 
         }
     });
     })
+  }
+
+  chickenBoing() {
+              setInterval(() => {
+            this.enemy.playAnimation(this.chicken.IMAGES_DYING)  
+          }, 300)
   }
 
 
@@ -132,7 +159,6 @@ class World {
     this.level.coins.forEach((coin) => {
       if (this.character.isCollidingCoin(coin)) {
         this.character.collecting_sound.pause();
-        this.character.collecting_sound.playbackRate = 1.7;
         this.character.collecting_sound.play();
         coin.y = 700;
         this.collectedCoins.push(coin);
@@ -215,6 +241,7 @@ class World {
 
   endboss_ambience() {
     if (this.character.x >= 3500) {
+      this.endboss_ambience_sound.pause();
       this.endboss_ambience_sound.play();
       this.music.pause();
     }

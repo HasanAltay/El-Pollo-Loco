@@ -54,8 +54,8 @@ drawFrameChicken(ctx) {
   ctx.beginPath();
   ctx.lineWidth = 0;
   ctx.strokeStyle = 'white';
-  ctx.rect(this.x, this.y +5, this.width-5, this.height -10);
-  // ctx.stroke();
+  ctx.rect(this.x, this.y, this.width, this.height);
+  ctx.stroke();
   }
 }
 
