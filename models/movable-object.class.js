@@ -130,6 +130,17 @@ class MovableObject extends DrawableObject {
   }
 
 
+  playAnimationNoLoop(images) {
+    let i = this.currentImg % images.length; // let i = 0 % 6; 0, rest 0 
+    let path = images[i];
+    this.img = this.imgCache[path];
+    this.currentImg++;
+    if (this.currentImg === this.imgCache.length) {
+      this.currentImg = 0;
+    };
+  }
+
+
   moveLeft() {
       this.x -= this.speed;
       this.walkingLeft = true;

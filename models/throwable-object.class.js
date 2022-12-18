@@ -51,7 +51,7 @@ class ThrowableObject extends MovableObject {
         this.playAnimation(this.IMAGES_BOTTLE);
       } else {
         this.y = 355;
-        this.playAnimation(this.IMAGES_BOTTLE_SPLASH);
+        this.playAnimation(this.IMAGES_BOTTLE_SPLASH); 
         this.bottle_smash_sound.pause();
         this.bottle_smash_sound.play();
         // setTimeout(() => {

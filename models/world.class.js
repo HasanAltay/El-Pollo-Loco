@@ -1,8 +1,6 @@
 class World {
   character = new Character();
   chicken = new Chicken();
-  // boss = new Endboss();
-  // coin = new Coins();
   level = level1;
   canvas;
   ctx;
@@ -11,13 +9,13 @@ class World {
   statusBar = new StatusBar();
   endbossBar = new EndbossBar();
   coinBar = new CoinBar();
-  // bottleBar = new BottleBar();
   throwableObject = [];
   endboss_ambience_sound = new Audio('audio/boss.wav');
   ambience_lvl1 = new Audio('audio/ambience.flac');
   music = new Audio('audio/mexican_music.mp3');
   collectedCoins = [];
   killedEnemies = [];
+  music_play = true;
 
 
 
@@ -28,15 +26,16 @@ class World {
     this.draw();
     this.setWorld();
     this.run();
+    this.muteMusic();
+
   }
 
-  
+
   setWorld() {
-    this.character.world = this;  
+    this.character.world = this;
     this.chicken.world = this;
-    // this.coin.world = this;
     this.ambience_lvl1.play();
-    this.music.play();  
+    this.music.play();
     this.music.loop = true;
     this.music.volume = 0.1;
     this.ambience_lvl1.loop = true;
@@ -54,57 +53,48 @@ class World {
 
     setInterval(() => {
       this.checkThrowObjects();
-      // setTimeout(() => {}, 4000)
-    }, 370);
-    
+    }, 350);
 
-
-    setInterval(() => { 
+    setInterval(() => {
       this.checkCollisionThrowBottle();
-    }, 10);  
+    }, 0);
 
     setInterval(() => {
       this.checkCollisionsCharacterWithCoins();
-    }, 100);
-    
-    setInterval(() => {
-      this.endboss_ambience();
     }, 100);
 
     setInterval(() => {
       this.endboss_attack();
     }, 100);
-
   }
 
 
   endboss_attack() {
     if (this.character.x > 3550) {
-      this.level.enemies[this.level.enemies.length-1].characterCheckpoint = true;
+      this.level.enemies[this.level.enemies.length - 1].characterCheckpoint = true;
+      if (this.character.x > 3500) {
+        this.endboss_ambience_sound.pause();
+        this.endboss_ambience_sound.play();
+        this.music.pause();
+      }
     }
   }
 
 
   // press D and throw bottle
   checkThrowObjects() {
-    
     if (this.keyboard.D && !this.character.walkingLeft) {
-      
-        this.bottle = new ThrowableObject(this.character.x +79, this.character.y +120);
-        this.throwableObject.push(this.bottle);
-        this.character.loadImage('img/2_character_pepe/2_walk/W-23.png');
-      setTimeout(() => {}, 400)
-      return
-      
-      
-
+      this.bottle = new ThrowableObject(this.character.x + 79, this.character.y + 120);
+      this.throwableObject.push(this.bottle);
+      this.character.loadImage('img/2_character_pepe/2_walk/W-23.png');
     }
   }
+
 
   // character hit enemy then lose health
   checkCollisions() {
     this.level.enemies.forEach((enemy) => {
-      if (this.character.isColliding(enemy) ) {
+      if (this.character.isColliding(enemy)) {
         this.character.hit();
         this.statusBar.setPercentage(this.character.energy);
         console.log('Collision with Enemy, Energy:', this.character.energy);
@@ -114,24 +104,18 @@ class World {
 
 
   // chicken die if hit by bottle and vanish
-  checkCollisionThrowBottle() {           
-
-
+  checkCollisionThrowBottle() {
     this.throwableObject.forEach((bottle) => {
       this.level.enemies.forEach((enemy) => {
-        if (bottle.isCollidingBottle(enemy) ) {
+        if (bottle.isCollidingBottle(enemy)) {
 
           // this.chicken.chicken_dead_sound.pause();
           this.chicken.chicken_dead_sound.play();
-
-
-
           clearInterval(this.chicken.walkingAnim.values());
-          this.boing = setInterval(() => {   
-            enemy.playAnimation(this.chicken.IMAGES_DYING)  
+          this.boing = setInterval(() => {
+            enemy.playAnimation(this.chicken.IMAGES_DYING)
           }, 300)
-          
-          
+
           setTimeout(() => {
             clearInterval(this.boing);
             enemy.y = 700;
@@ -142,15 +126,10 @@ class World {
             console.log(this.killedEnemies.length);
           }
 
-        }
-    });
-    })
-  }
 
-  chickenBoing() {
-              setInterval(() => {
-            this.enemy.playAnimation(this.chicken.IMAGES_DYING)  
-          }, 300)
+        }
+      });
+    })
   }
 
 
@@ -168,34 +147,60 @@ class World {
   }
 
 
+  checkCollisionBottleEndboss() {
+    this.throwableObject.forEach((bottle) => {
+      this.level.enemies.forEach((enemy) => {
+        if (bottle.isCollidingBottle(enemy)) {
+
+          // this.chicken.chicken_dead_sound.pause();
+          this.chicken.chicken_dead_sound.play();
+          clearInterval(this.chicken.walkingAnim.values());
+          this.boing = setInterval(() => {
+            enemy.playAnimation(this.chicken.IMAGES_DYING)
+          }, 300)
+
+          setTimeout(() => {
+            clearInterval(this.boing);
+            enemy.y = 700;
+          }, 450)
+
+          if (enemy.y >= 700) {
+            this.killedEnemies.push(enemy);
+            console.log(this.killedEnemies.length);
+          }
+        }
+      });
+    })
+  }
+
+
   draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.ctx.translate(this.camera_x, 0);
     this.addObjectsToMap(this.level.backgroundObjects);
     this.addObjectsToMap(this.level.clouds);
-
-    this.addObjectsToMap(this.level.coins); 
+    this.addObjectsToMap(this.level.coins);
     this.addToMap(this.character);
     this.addObjectsToMap(this.level.enemies);
-    this.addObjectsToMap(this.throwableObject); 
+    this.addObjectsToMap(this.throwableObject);
 
-      this.ctx.translate(-this.camera_x, 0); // Back
-        this.addToMap(this.statusBar);
+    this.ctx.translate(-this.camera_x, 0); // Back
+    this.addToMap(this.statusBar);
 
-        if (this.character.x >= 3550) {
-        this.addToMap(this.endbossBar);
-        } 
-        // this.addToMap(this.bottleBar);
-        this.addToMap(this.coinBar);
-      this.ctx.translate(this.camera_x, 0); // Forward
+    if (this.character.x >= 3550) {
+      this.addToMap(this.endbossBar);
+    }
+    // this.addToMap(this.bottleBar);
+    this.addToMap(this.coinBar);
+    this.ctx.translate(this.camera_x, 0); // Forward
 
     this.ctx.translate(-this.camera_x, 0);
-    
+
     // Draw() wird immer wieder aufgerufen
     let self = this;
-    requestAnimationFrame(function() {
+    requestAnimationFrame(function () {
       self.draw();
-    }); 
+    });
   }
 
 
@@ -210,7 +215,6 @@ class World {
     if (mo.turn) {
       this.flipImage(mo);
     }
-
     mo.draw(this.ctx);
     mo.drawFrame(this.ctx);
     mo.drawFrameBottle(this.ctx);
@@ -218,7 +222,6 @@ class World {
     mo.drawFrameCoin(this.ctx);
     mo.drawFrameEndboss(this.ctx);
     // drawNumber(this.num);
-
     if (mo.turn) {
       this.flipImageBack(mo);
     }
@@ -239,12 +242,28 @@ class World {
   }
 
 
-  endboss_ambience() {
-    if (this.character.x >= 3500) {
-      this.endboss_ambience_sound.pause();
-      this.endboss_ambience_sound.play();
-      this.music.pause();
+  muteMusic() {
+    if (this.keyboard.M && this.music_play) {
+      setTimeout(() => {
+        this.music.pause();
+        this.music_play = false;
+        console.log('MUSIC DEACTIVATED!');
+      }, 100);
     }
+    if (this.keyboard.M && this.music_play == false) {
+      setTimeout(() => {
+        console.log('MUSIC ACTIVATED!');
+        this.music.play();
+        this.music_play = true;
+      }, 100);
+    }
+  }
+
+
+  chickenDeadAnimation() {
+
+
+
   }
 
 
@@ -256,7 +275,7 @@ class World {
       this.world.music.pause();
       this.world.endboss_ambience_sound.pause();
       this.world.keyboard = false;
-      
+
 
 
     }

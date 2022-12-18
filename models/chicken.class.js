@@ -35,10 +35,10 @@ class Chicken extends MovableObject {
   }
 
 
-  animateDying() {
-    console.log("Chicken");
-        this.playAnimation(this.IMAGES_DYING);
-  }
+  // animateDying() {
+  //   console.log("Chicken");
+  //       this.playAnimation(this.IMAGES_DYING);
+  // }
   
 
   animate() {
@@ -49,8 +49,7 @@ class Chicken extends MovableObject {
     this.walking = setInterval(() => {
       this.playAnimation(this.IMAGES_WALKING);
     }, 110);
-    this.walkingAnim.push(this.walking);
-
+    this.walkingAnim.push(this.walking, this.movingLeft);
   }
 
 

@@ -30,13 +30,14 @@
 
     <body>
         <h1 class="t1">El Pollo Loco</h1>
-
-        <div class="main">
+        <div id="fullscreen" ondblclick="screenSize()" class="main">
             <div id="button_place" class="button_place">
-                <div class="btn_play_again btn" id="btn_play_again" onclick="playAgain()">
+                <div class="btn_play_again btn" id="btn_play_again"
+                    onclick="playAgain()">
                     Play Again
                 </div>
-                <div class="btn_play_game btn" id="btn_play_game" onclick="init(); clearScreen()">
+                <div class="btn_play_game btn" id="btn_play_game"
+                    onclick="init(); clearScreen()">
                     Play Game
                 </div>
             </div>
@@ -47,11 +48,15 @@
             <canvas id="canvas" width="720" height="480"></canvas>
         </div>
 
+
         <div class="footer">
-            LEFT = Walk left | RIGHT = Walk right | SPACE = Jump | D = Throw salsa
+            LEFT = Walk left | RIGHT = Walk right | SPACE = Jump | D = Throw
+            salsa
             bottle
         </div>
-        <h1 class="res_alert"><img src="img/3_enemies_chicken/chicken_small/1_walk/1_w.png">You need a resolution bigger than 280px!</h1>
+        <h1 class="res_alert"><img
+                src="img/3_enemies_chicken/chicken_small/1_walk/1_w.png">You
+            need a resolution bigger than 280px!</h1>
 
         <img class="bottle" src="./img/6_salsa_bottle/salsa_bottle.png">
     </body>

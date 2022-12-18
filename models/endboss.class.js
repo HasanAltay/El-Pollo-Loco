@@ -40,7 +40,7 @@ IMAGES_HURT = [
   'img/4_enemie_boss_chicken/4_hurt/G23.png',
 ];
 
-IMAGES_DEAD = [
+IMAGES_DYING = [
   'img/4_enemie_boss_chicken/5_dead/G24.png',
   'img/4_enemie_boss_chicken/5_dead/G25.png',
   'img/4_enemie_boss_chicken/5_dead/G26.png',
@@ -53,7 +53,7 @@ constructor(){
   this.loadImages(this.IMAGES_WALK);
   this.loadImages(this.IMAGES_ATTACK);
   this.loadImages(this.IMAGES_HURT);
-  this.loadImages(this.IMAGES_DEAD);
+  this.loadImages(this.IMAGES_DYING);
   this.x = 4200;
   this.animate();
   this.characterAnimations();
@@ -66,29 +66,31 @@ animate(){
   }, 160);
 }
 
-characterAnimations() {
 
-  setInterval(() => {
+characterAnimations() {
+  
+  this.attack = setInterval(() => {
     if (this.characterCheckpoint) {
       this.playAnimation(this.IMAGES_ATTACK);
+      this.moveLeft();
+      console.log("ENDBOSS!");
     }
-}, 160);
-
+  }, 100);
   
-  
-  if (this.isDeadBoss()) {
-    setInterval(() => {
-      this.playAnimation(this.IMAGES_DEAD);
-    }, 40);
-  this.dead = true;
-  this.world.gameOver(this.dead);
+  setInterval(() => {
+    if (this.isDeadBoss()) {
+      this.playAnimation(this.IMAGES_DYING);    
+      clearInterval(this.attack);
+      this.dead = true;
+      this.world.gameOver(this.dead);
+    }    
+  }, 100);
+
+  setInterval(() => {
+    if (this.isHurtBoss()) {
+      this.playAnimation(this.IMAGES_HURT);
+    }    
+  }, 100);
+
   }
-  if (this.isHurtBoss()) {
-  this.playAnimation(this.IMAGES_HURT);
-  }
-}
-
-
-
-
 }
