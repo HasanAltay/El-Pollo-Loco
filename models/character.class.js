@@ -168,21 +168,7 @@ class Character extends MovableObject {
       this.afkTimer = 0;
     }
 
-    if (this.world.keyboard.M && this.music_play == true) {
-      setTimeout(() => {
-        this.world.music.pause();
-        this.music_play = false;
-        console.log('MUSIC DEACTIVATED!');
-      }, 500);
-    }
 
-    if (this.world.keyboard.M && this.music_play == false) {
-      setTimeout(() => {
-        console.log('MUSIC ACTIVATED!');
-        this.world.music.play();
-        this.music_play = true;
-      }, 500);
-    }
     this.world.camera_x = -this.x + 90;
   }
 
