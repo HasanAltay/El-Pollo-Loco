@@ -11,6 +11,10 @@ let third_layer_1 = 'img/5_background/layers/3_third_layer/1.png';
 
 level1 = new Level (
 
+  endboss = [
+    new Endboss(),
+  ],
+
   coins = [
     new Coins(-100, 340),
     new Coins(-300, 340),
@@ -39,7 +43,6 @@ level1 = new Level (
     new Chicken(),
     new Chicken(),
     new Chicken(),
-    new Endboss(),
   ],
 
   clouds = [

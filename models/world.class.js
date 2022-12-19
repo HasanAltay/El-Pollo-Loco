@@ -1,6 +1,7 @@
 class World {
   character = new Character();
   chicken = new Chicken();
+  endboss = new Endboss();  //endboss
   level = level1;
   canvas;
   ctx;
@@ -15,9 +16,8 @@ class World {
   music = new Audio('audio/mexican_music.mp3');
   collectedCoins = [];
   killedEnemies = [];
-  music_play = true;
-
-
+  music_play = this.music.play();
+  
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext('2d');
@@ -27,15 +27,15 @@ class World {
     this.setWorld();
     this.run();
     this.muteMusic();
-
   }
 
 
   setWorld() {
+    this.music_play = true;
     this.character.world = this;
     this.chicken.world = this;
     this.ambience_lvl1.play();
-    this.music.play();
+    this.music;
     this.music.loop = true;
     this.music.volume = 0.1;
     this.ambience_lvl1.loop = true;
@@ -65,6 +65,10 @@ class World {
 
     setInterval(() => {
       this.endboss_attack();
+    }, 100);
+
+    setInterval(() => {
+      this.muteMusic();
     }, 100);
   }
 
@@ -109,7 +113,6 @@ class World {
       this.level.enemies.forEach((enemy) => {
         if (bottle.isCollidingBottle(enemy)) {
 
-          // this.chicken.chicken_dead_sound.pause();
           this.chicken.chicken_dead_sound.play();
           clearInterval(this.chicken.walkingAnim.values());
           this.boing = setInterval(() => {
@@ -125,8 +128,6 @@ class World {
             this.killedEnemies.push(enemy);
             console.log(this.killedEnemies.length);
           }
-
-
         }
       });
     })
@@ -182,13 +183,17 @@ class World {
     this.addObjectsToMap(this.level.coins);
     this.addToMap(this.character);
     this.addObjectsToMap(this.level.enemies);
+
     this.addObjectsToMap(this.throwableObject);
+    
+    this.addObjectsToMap(this.level.endboss);
 
     this.ctx.translate(-this.camera_x, 0); // Back
     this.addToMap(this.statusBar);
 
-    if (this.character.x >= 3550) {
+    if (this.character.x > 3550) {
       this.addToMap(this.endbossBar);
+
     }
     // this.addToMap(this.bottleBar);
     this.addToMap(this.coinBar);
@@ -243,11 +248,11 @@ class World {
 
 
   muteMusic() {
-    if (this.keyboard.M && this.music_play) {
+    if (this.keyboard.M && this.music_play == true) {    
       setTimeout(() => {
         this.music.pause();
-        this.music_play = false;
         console.log('MUSIC DEACTIVATED!');
+        this.music_play = false;
       }, 100);
     }
     if (this.keyboard.M && this.music_play == false) {
@@ -260,25 +265,16 @@ class World {
   }
 
 
-  chickenDeadAnimation() {
-
-
-
-  }
-
-
   gameOver(dead) {
     if (dead == true) {
       document.getElementById('game_over').style.display = 'block';
       document.getElementById('you_lost').style.display = 'none';
       document.getElementById('btn_play_again').style.display = 'block';
-      this.world.music.pause();
-      this.world.endboss_ambience_sound.pause();
-      this.world.keyboard = false;
-
-
-
+      this.music.pause();
+      this.endboss_ambience_sound.pause();
+      this.keyboard = false;
     }
   }
+
 
 }

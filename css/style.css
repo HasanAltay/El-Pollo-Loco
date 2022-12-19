@@ -1,3 +1,12 @@
+@font-face {
+    font-family: 'Cactus Regular';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../fonts/Cactus Regular.otf');
+    src: local(''),
+         url('../fonts/Cactus Regular.otf') format('embedded-opentype'),
+}
+
 body {
     display: flex;
     flex-direction: column;

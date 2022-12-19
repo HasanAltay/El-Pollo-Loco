@@ -1,8 +1,10 @@
 class Endboss extends MovableObject {
-
+// world;
+// character;
 height = 400;
 width = 300;
 y = 55;
+x = 0;
 characterCheckpoint = false;
 
 IMAGES_ALERT = [
