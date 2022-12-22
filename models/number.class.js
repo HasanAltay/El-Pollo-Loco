@@ -1,8 +1,5 @@
 class Number extends DrawableObject {
-
-
-
-
+  
   constructor() {
     super().drawNumber(66);
     this.x = 30;

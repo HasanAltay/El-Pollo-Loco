@@ -65,6 +65,7 @@ class World {
 
     setInterval(() => {
       this.endboss_attack();
+      this.checkCollisionBottleEndboss();
     }, 100);
 
     setInterval(() => {
@@ -75,11 +76,16 @@ class World {
 
   endboss_attack() {
     if (this.character.x > 3550) {
-      this.level.enemies[this.level.enemies.length - 1].characterCheckpoint = true;
+      this.level.endboss.characterCheckpoint = true;
       if (this.character.x > 3500) {
         this.endboss_ambience_sound.pause();
         this.endboss_ambience_sound.play();
         this.music.pause();
+      }
+      if (this.endboss.isDeadBoss()) {
+        this.endboss_ambience_sound.pause();
+        this.music.pause();
+        this.keyboard = false;
       }
     }
   }
@@ -101,7 +107,7 @@ class World {
       if (this.character.isColliding(enemy)) {
         this.character.hit();
         this.statusBar.setPercentage(this.character.energy);
-        console.log('Collision with Enemy, Energy:', this.character.energy);
+        console.log('Collision with Enemy, Life:', this.character.energy);
       }
     });
   }
@@ -126,7 +132,7 @@ class World {
 
           if (enemy.y >= 700) {
             this.killedEnemies.push(enemy);
-            console.log(this.killedEnemies.length);
+            // console.log(this.killedEnemies.length);
           }
         }
       });
@@ -142,7 +148,7 @@ class World {
         this.character.collecting_sound.play();
         coin.y = 700;
         this.collectedCoins.push(coin);
-        console.log(this.collectedCoins);
+        console.log('Collected Coins: ',this.collectedCoins.length);
       }
     });
   }
@@ -150,25 +156,15 @@ class World {
 
   checkCollisionBottleEndboss() {
     this.throwableObject.forEach((bottle) => {
-      this.level.enemies.forEach((enemy) => {
+      this.level.endboss.forEach((enemy) => {
         if (bottle.isCollidingBottle(enemy)) {
 
-          // this.chicken.chicken_dead_sound.pause();
           this.chicken.chicken_dead_sound.play();
-          clearInterval(this.chicken.walkingAnim.values());
-          this.boing = setInterval(() => {
-            enemy.playAnimation(this.chicken.IMAGES_DYING)
-          }, 300)
 
-          setTimeout(() => {
-            clearInterval(this.boing);
-            enemy.y = 700;
-          }, 450)
-
-          if (enemy.y >= 700) {
-            this.killedEnemies.push(enemy);
-            console.log(this.killedEnemies.length);
-          }
+          this.endboss.hitBoss();
+          this.endbossBar.setPercentage(this.endboss.energy_boss);
+          console.log('Endboss Life: ', this.endboss.energy_boss);
+    
         }
       });
     })
@@ -265,16 +261,7 @@ class World {
   }
 
 
-  gameOver(dead) {
-    if (dead == true) {
-      document.getElementById('game_over').style.display = 'block';
-      document.getElementById('you_lost').style.display = 'none';
-      document.getElementById('btn_play_again').style.display = 'block';
-      this.music.pause();
-      this.endboss_ambience_sound.pause();
-      this.keyboard = false;
-    }
-  }
+
 
 
 }

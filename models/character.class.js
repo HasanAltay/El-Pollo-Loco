@@ -168,7 +168,6 @@ class Character extends MovableObject {
       this.afkTimer = 0;
     }
 
-
     this.world.camera_x = -this.x + 90;
   }
 

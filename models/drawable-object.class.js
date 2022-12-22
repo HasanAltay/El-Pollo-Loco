@@ -30,7 +30,7 @@ drawNumber(num) {
   num.beginPath();
   num.lineWidth = 0;
   num.strokeStyle = 'white';
-  num.stroke();
+  // num.stroke();
 }
 
 
@@ -80,7 +80,7 @@ drawFrameEndboss(ctx) {
   ctx.lineWidth = 0;
   ctx.strokeStyle = 'white';
   ctx.rect(this.x, this.y, this.width, this.height);
-  ctx.stroke();
+  // ctx.stroke();
   }
 } 
 
