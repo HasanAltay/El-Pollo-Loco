@@ -84,9 +84,9 @@ characterAnimations() {
       this.playAnimation(this.IMAGES_DYING);    
       clearInterval(this.attack);
       this.dead = true;
-      this.world.gameOver(this.dead);
+      this.gameOver(this.dead);
     }    
-  }, 100);
+  }, 300);
 
   setInterval(() => {
     if (this.isHurtBoss()) {
@@ -94,5 +94,15 @@ characterAnimations() {
     }    
   }, 100);
 
+  }
+
+
+  gameOver(dead) {
+    if (dead == true) {
+      document.getElementById('game_over').style.display = 'block';
+      document.getElementById('you_lost').style.display = 'none';
+      document.getElementById('btn_play_again').style.display = 'block';
+      
+    }
   }
 }
