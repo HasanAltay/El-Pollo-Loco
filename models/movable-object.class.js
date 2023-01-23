@@ -122,22 +122,40 @@ class MovableObject extends DrawableObject {
   }
 
 
+  // playAnimation(images) {
+  //   let i = this.currentImg % images.length; // let i = 0 % 6; 0, rest 0 
+  //   let path = images[i];
+  //   this.img = this.imgCache[path];
+  //   this.currentImg++;
+  // }
+
+
   playAnimation(images) {
-    let i = this.currentImg % images.length; // let i = 0 % 6; 0, rest 0 
+    let i = this.currentImg % images.length;
     let path = images[i];
-    this.img = this.imgCache[path];
+    if(this.imgCache[path]){
+        this.img = this.imgCache[path];
+    } else {
+        this.img = new Image();
+        this.img.src = path;
+        this.imgCache[path] = this.img;
+    }
     this.currentImg++;
-  }
+}
 
 
-  playAnimationNoLoop(images) {
-    let i = this.currentImg % images.length; // let i = 0 % 6; 0, rest 0 
+  playAnimationOnceAndFreeze(images) {
+    if(this.currentImg >= images.length) return;
+    let i = this.currentImg;
     let path = images[i];
-    this.img = this.imgCache[path];
+    if(this.imgCache[path]){
+        this.img = this.imgCache[path];
+    } else {
+        this.img = new Image();
+        this.img.src = path;
+        this.imgCache[path] = this.img;
+    }
     this.currentImg++;
-    if (this.currentImg === this.imgCache.length) {
-      this.currentImg = 0;
-    };
   }
 
 

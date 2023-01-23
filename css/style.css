@@ -17,10 +17,17 @@ body {
     -moz-user-select: none;
     -khtml-user-select: none;
     user-select: none;
-    background-image: url('../img/back.jpg');
+    background-image: url('../img/backg.png');
     background-size: cover;
     height: 100vh;
     background-position: center;
+}
+
+.crt {
+    position: absolute;
+    width: 100%;
+    filter: opacity(30%);
+    min-width: 720px;
 }
 
 .t1 {

@@ -1,7 +1,8 @@
 class World {
   character = new Character();
   chicken = new Chicken();
-  endboss = new Endboss();  //endboss
+  endboss = new Endboss();
+  // coinCounter = new CoinCounter();
   level = level1;
   canvas;
   ctx;
@@ -43,6 +44,9 @@ class World {
     this.chicken.chicken_dead_sound.volume = 0.1;
     this.chicken.chicken_dead_sound.playbackRate = 1.5;
     this.character.collecting_sound.playbackRate = 1.7;
+    // this.character.onCoinCollect = () => {
+    //   this.coinCounter.coinCount++;
+    // }
   }
 
 
@@ -113,40 +117,40 @@ class World {
   }
 
 
-  // chicken die if hit by bottle and vanish
+  // checking if the bottle is already colliding with an enemy, 
+  // if so, it plays the sound, stops the walking animation, 
+  // starts the dying animation for the enemy and set timeout 
+  // for the enemy to disappear off-screen. Pushes the killed 
+  // enemy to the killedEnemies array and logs the total killed
   checkCollisionThrowBottle() {
     this.throwableObject.forEach((bottle) => {
       this.level.enemies.forEach((enemy) => {
         if (bottle.isCollidingBottle(enemy)) {
-
           this.chicken.chicken_dead_sound.play();
           clearInterval(this.chicken.walkingAnim.values());
           this.boing = setInterval(() => {
             enemy.playAnimation(this.chicken.IMAGES_DYING)
           }, 300)
-
           setTimeout(() => {
             clearInterval(this.boing);
-            enemy.y = 700;
-          }, 450)
-
-          if (enemy.y >= 700) {
+            enemy.y = this.offScreenY;
             this.killedEnemies.push(enemy);
-            // console.log(this.killedEnemies.length);
-          }
+          }, 450)
         }
       });
     })
   }
 
 
-  // coin collect sound and let them vanish 
+  //  Checks for collisions between character and coins, 
+  //  plays sound, moves coin off-screen, adds to collected 
+  //  coins and logs total collected.
   checkCollisionsCharacterWithCoins() {
     this.level.coins.forEach((coin) => {
-      if (this.character.isCollidingCoin(coin)) {
+      if (this.character.isCollidingCoin(coin) && !this.collectedCoins.includes(coin)) {
         this.character.collecting_sound.pause();
         this.character.collecting_sound.play();
-        coin.y = 700;
+        coin.y = this.offScreenY;
         this.collectedCoins.push(coin);
         console.log('Collected Coins: ',this.collectedCoins.length);
       }
@@ -172,36 +176,38 @@ class World {
 
 
   draw() {
+    // Clear the canvas
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    // Translate the canvas to the camera position
     this.ctx.translate(this.camera_x, 0);
-    this.addObjectsToMap(this.level.backgroundObjects);
-    this.addObjectsToMap(this.level.clouds);
-    this.addObjectsToMap(this.level.coins);
-    this.addToMap(this.character);
-    this.addObjectsToMap(this.level.enemies);
 
-    this.addObjectsToMap(this.throwableObject);
-    
-    this.addObjectsToMap(this.level.endboss);
+      // Draw the background objects
+      this.level.backgroundObjects.forEach(obj => obj.draw(this.ctx));
+      // Draw the clouds
+      this.level.clouds.forEach(cloud => cloud.draw(this.ctx));
+      // Draw the coins
+      this.level.coins.forEach(coin => coin.draw(this.ctx));
+      // Draw the character
+      this.addToMap(this.character);
+      // Draw the enemies
+      this.level.enemies.forEach(enemy => enemy.draw(this.ctx));
+      // Draw the throwable object
+      this.throwableObject.forEach(obj => obj.draw(this.ctx));
+      // Draw the endboss
+      this.level.endboss.forEach(endboss => endboss.draw(this.ctx));
 
-    this.ctx.translate(-this.camera_x, 0); // Back
-    this.addToMap(this.statusBar);
-
-    if (this.character.x > 3550) {
-      this.addToMap(this.endbossBar);
-
-    }
-    // this.addToMap(this.bottleBar);
-    this.addToMap(this.coinBar);
-    this.ctx.translate(this.camera_x, 0); // Forward
-
+    // Translate the canvas back to the original position
     this.ctx.translate(-this.camera_x, 0);
-
-    // Draw() wird immer wieder aufgerufen
-    let self = this;
-    requestAnimationFrame(function () {
-      self.draw();
-    });
+    // Draw the status bar
+    this.addToMap(this.statusBar);
+    // Draw the endboss bar if the character is at a certain position
+    if (this.character.x > 3550) {
+      this.endbossBar.draw(this.ctx);
+    }
+    // Draw the coin bar
+    this.addToMap(this.coinBar);
+    // Request another animation frame to continue drawing
+    requestAnimationFrame(() => this.draw());
   }
 
 
@@ -222,7 +228,6 @@ class World {
     mo.drawFrameChicken(this.ctx);
     mo.drawFrameCoin(this.ctx);
     mo.drawFrameEndboss(this.ctx);
-    // drawNumber(this.num);
     if (mo.turn) {
       this.flipImageBack(mo);
     }
