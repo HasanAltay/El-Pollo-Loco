@@ -40,29 +40,50 @@ class ThrowableObject extends MovableObject {
 
 
   throw() {
-    this.throw_sound.pause();
+    this.throw_sound.currentTime = 0;
     this.throw_sound.play();
     this.speedY = 9;
     this.applyGravity();
-    
-    this.bottles = setInterval(() => {
+  
+    this.playInterval = setInterval(() => {
       if (this.aboveGroundBottle()) {
         this.x += 31;
         this.playAnimation(this.IMAGES_BOTTLE);
       } else {
         this.y = 355;
-        this.playAnimation(this.IMAGES_BOTTLE_SPLASH); 
-        this.bottle_smash_sound.pause();
+        this.playAnimation(this.IMAGES_BOTTLE_SPLASH);
+        this.bottle_smash_sound.currentTime = 0;
         this.bottle_smash_sound.play();
-        // setTimeout(() => {
-        //   clearInterval(this.playInterval);
-        // }, 400)
-        clearInterval(this.bottles);
+        clearInterval(this.playInterval);
       }
-      
     }, 70);
-    
   }
+
+
+  // throw() {
+  //   this.throw_sound.pause();
+  //   this.throw_sound.play();
+  //   this.speedY = 9;
+  //   this.applyGravity();
+    
+  //   this.bottles = setInterval(() => {
+  //     if (this.aboveGroundBottle()) {
+  //       this.x += 31;
+  //       this.playAnimation(this.IMAGES_BOTTLE);
+  //     } else {
+  //       this.y = 355;
+  //       this.playAnimation(this.IMAGES_BOTTLE_SPLASH); 
+  //       this.bottle_smash_sound.pause();
+  //       this.bottle_smash_sound.play();
+  //       // setTimeout(() => {
+  //       //   clearInterval(this.playInterval);
+  //       // }, 400)
+  //       clearInterval(this.bottles);
+  //     }
+      
+  //   }, 70);
+    
+  // }
 
 
 

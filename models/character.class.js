@@ -90,7 +90,8 @@ class Character extends MovableObject {
     this.loadImages(this.IMAGES_LONG_IDLE);
     this.applyGravity();
     this.idle();
-    this.characterAnimations();
+    // this.characterAnimations();
+    this.startCharacterAnimations();
     this.animate();
   }
 
@@ -125,7 +126,7 @@ class Character extends MovableObject {
       document.getElementById('you_lost').style.display = 'block';
       document.getElementById('btn_play_again').style.display = 'block';
       this.world.music.pause();
-      this.world.endboss_ambience_sound.pause();
+      this.world.endboss_ambience_sound.currentTime = 0;
       this.world.keyboard = false;
       setTimeout(function() {
         for (let i = 1; i < 9999; i++) window.clearInterval(i);
@@ -148,7 +149,6 @@ class Character extends MovableObject {
       this.walkingLeft = false;
       this.afkTimer = 0;
     }
-
     if (this.world.keyboard.LEFT && this.x > -625) {
       this.turn = true;
       this.walkingLeft = true;
@@ -156,7 +156,6 @@ class Character extends MovableObject {
       this.walking_sound.play();
       this.afkTimer = 0;
     }
-
     if (this.world.keyboard.SPACE && !this.aboveGround()) {
       this.jump();
       this.walking_sound.pause();
@@ -164,94 +163,67 @@ class Character extends MovableObject {
       this.afkTimer = 0;
       this.music_play = true;
     }
-
     if (this.world.keyboard.D) {
       this.afkTimer = 0;
     }
-
     this.world.camera_x = -this.x + 90;
   }
 
 
-  characterAnimations() {
-
-    setInterval(() => {
-      if (this.isHurt()) {
-      this.playAnimation(this.IMAGES_HURT);
-        }
-    }, 100);
-
-    setInterval(() => {
-      if (this.isDead()) {
-        this.playAnimation(this.IMAGES_DEAD);
-        this.fallOut();
-        this.dead = true;
-
-          setTimeout(() => {
-            this.youLost(this.dead);
-          }),100} 
-    }, 40);
-
-    setInterval(() => {
-      if (this.aboveGround()) {
-        this.playAnimation(this.IMAGES_JUMPING);
-        }
-      }, 100)
-        
-    setInterval(() => {
-      if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
-        this.playAnimation(this.IMAGES_WALKING);
-      }
-    }, 100);
-
-
-  }
-
-
-
-
-
-
   // characterAnimations() {
   //   setInterval(() => {
-
-  //     if (this.isDead()) {
-  //     this.playAnimation(this.IMAGES_DEAD);
-
-  //       setInterval(() => {
-  //         this.fallOut();
-  //       }, 40);
-        
-  //     this.dead = true;
-  //     this.youLost(this.dead);
-  //       }
-  //     }, 100)
-
-  //     setInterval(() => {
   //     if (this.isHurt()) {
   //     this.playAnimation(this.IMAGES_HURT);
   //       }
-  //     }, 100)
+  //   }, 100);
+  //   setInterval(() => {
+  //     if (this.isDead()) {
+  //       this.playAnimation(this.IMAGES_DEAD);
+  //       this.fallOut();
+  //       this.dead = true;
 
-  //     setInterval(() => {
-  //     if (this.aboveGround() || this.world.keyboard.SPACE) {
+  //         setTimeout(() => {
+  //           this.youLost(this.dead);
+  //         }),100} 
+  //   }, 40);
+  //   setInterval(() => {
+  //     if (this.aboveGround()) {
   //       this.playAnimation(this.IMAGES_JUMPING);
   //       }
-  //     }, 200)
-        
-  //     setInterval(() => {
+  //     }, 100)
+       
+  //   setInterval(() => {
   //     if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
   //       this.playAnimation(this.IMAGES_WALKING);
-  //       }
-        
-  //   }, 120)
+  //     }
+  //   }, 100);
   // }
 
 
 
+startCharacterAnimations() {
+  let animationInterval;
+  animationInterval = setInterval(() => {
+    if (this.isDead()) {
+      clearInterval(animationInterval);
+      this.playAnimation(this.IMAGES_DEAD);
+      this.fallOut();
+      this.dead = true;
+      setTimeout(() => {
+        this.youLost(this.dead);
+      }, 100);
+    } else if (this.isHurt()) {
+      this.playAnimation(this.IMAGES_HURT);
+    } else if (this.aboveGround()) {
+      this.playAnimation(this.IMAGES_JUMPING);
+    } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
+      this.playAnimation(this.IMAGES_WALKING);
+    }
+  }, 100);
 }
 
+stopCharacterAnimations() {
+  clearInterval(animationInterval);
+}
 
-
-
-
+}

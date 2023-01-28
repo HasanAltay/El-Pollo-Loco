@@ -36,12 +36,45 @@ class MovableObject extends DrawableObject {
   }
 
   
+  // isColliding(mo) {
+  //   return this.x+25 + this.width-65 > mo.x &&
+  //         this.y+115 + this.height-128 > mo.y &&
+  //         this.x < mo.x &&
+  //         this.y < mo.y + mo.height;  
+  // }
+
   isColliding(mo) {
-    return this.x+25 + this.width-65 > mo.x &&
-          this.y+115 + this.height-128 > mo.y &&
-          this.x < mo.x &&
-          this.y < mo.y + mo.height;  
+    let object1X = this.x + 25;
+    let object1Y = this.y + 115;
+    let object1Width = this.width - 65;
+    let object1Height = this.height - 128;
+    let object2X = mo.x;
+    let object2Y = mo.y;
+    let object2Width = mo.width;
+    let object2Height = mo.height;
+
+    return (object1X + object1Width > object2X &&
+            object1Y + object1Height > object2Y &&
+            object1X < object2X + object2Width &&
+            object1Y < object2Y + object2Height);
   }
+
+  checkCollision(mo) {
+    if (this.isColliding(mo)) {
+      stroke(255, 0, 0);
+      noFill();
+      let collisionX = max(this.x, mo.x);
+      let collisionY = max(this.y, mo.y);
+      let collisionWidth = min(this.x + this.width, mo.x + mo.width) - collisionX;
+      let collisionHeight = min(this.y + this.height, mo.y + mo.height) - collisionY;
+      rect(collisionX, collisionY, collisionWidth, collisionHeight);
+    }
+  }
+
+
+
+
+
 
   isCollidingBottle(mo) {
     return this.x+25 + this.width-65 > mo.x &&
@@ -122,31 +155,8 @@ class MovableObject extends DrawableObject {
   }
 
 
-  // playAnimation(images) {
-  //   let i = this.currentImg % images.length; // let i = 0 % 6; 0, rest 0 
-  //   let path = images[i];
-  //   this.img = this.imgCache[path];
-  //   this.currentImg++;
-  // }
-
-
   playAnimation(images) {
     let i = this.currentImg % images.length;
-    let path = images[i];
-    if(this.imgCache[path]){
-        this.img = this.imgCache[path];
-    } else {
-        this.img = new Image();
-        this.img.src = path;
-        this.imgCache[path] = this.img;
-    }
-    this.currentImg++;
-}
-
-
-  playAnimationOnceAndFreeze(images) {
-    if(this.currentImg >= images.length) return;
-    let i = this.currentImg;
     let path = images[i];
     if(this.imgCache[path]){
         this.img = this.imgCache[path];
@@ -172,23 +182,35 @@ class MovableObject extends DrawableObject {
   }
 
   // fällt nach Tod nach unten aus dem Frame
+  // fallOut() {
+  //   this.y += this.speed;
+  //   setInterval(() => {
+  //     this.loadImage('img/2_character_pepe/1_idle/idle/I-1.png');
+  //     this.y = 440;
+  //     this.height = 0;
+  //     this.width = 0;
+  //     this.speedY = 0;
+  //   }, 500); 
+  // }
+
   fallOut() {
-    this.y += this.speed;
-    setInterval(() => {
-      this.loadImage('img/2_character_pepe/1_idle/idle/I-1.png');
-      this.y = 440;
-      this.height = 0;
-      this.width = 0;
-      this.speedY = 0;
-    }, 500);
-    
+    let fallingSpeed = this.speed;
+    let fallingInterval = setInterval(() => {
+      if (this.y >= 440) {
+        this.loadImage('img/2_character_pepe/1_idle/idle/I-1.png');
+        this.y = 440;
+        this.height = 0;
+        this.width = 0;
+        clearInterval(fallingInterval);
+      } else {
+        this.y += fallingSpeed;
+        fallingSpeed += this.acceleration;
+      }
+    }, 40);
   }
 
 
   jump() {
     this.speedY = 20;
   }
-
-
-
 }

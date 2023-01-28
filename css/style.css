@@ -7,13 +7,22 @@
          url('../fonts/Cactus Regular.otf') format('embedded-opentype'),
 }
 
+@font-face {
+    font-family: 'Boogaloo-Regular';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../fonts/Boogaloo-Regular.ttf');
+    src: local(''),
+         url('../fonts/Boogaloo-Regular.ttf') format('.ttf'),
+}
+
 body {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin: 0;
     font-family: 'Cactus Regular', monospace;
-    background-color: rgb(54, 54, 54);
+    background-color: rgb(0, 0, 0);
     -moz-user-select: none;
     -khtml-user-select: none;
     user-select: none;
@@ -26,8 +35,9 @@ body {
 .crt {
     position: absolute;
     width: 100%;
-    filter: opacity(30%);
+    filter: opacity(10%);
     min-width: 720px;
+    min-height: 480px;
 }
 
 .t1 {
@@ -49,6 +59,7 @@ body {
 .main {
     z-index: 9;
     position: relative;
+    overflow: hidden;
 }
 
 canvas {
@@ -207,9 +218,66 @@ canvas {
     white-space: nowrap;
 }
 
+.walk {
+    display: flex;
+    visibility: hidden;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 99;
+    cursor: pointer;
+    display: flex;
+    width: fit-content;
+    filter: opacity(60%);
+}
+
+.actions {
+    display: flex;
+    visibility: hidden;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    z-index: 99;
+    cursor: pointer;
+    display: flex;
+    width: fit-content;
+    filter: opacity(60%);
+}
+
+.walk img {
+    width: 10vh;
+    height: auto;
+    padding: 2vw;
+    filter: invert(1);
+}
+
+.actions img {
+    width: 10vh;
+    height: auto;
+    padding: 2vw;
+    filter: invert(1);
+}
+
+.actions img:active {
+    filter: invert(0);
+}
+
+.walk img:active {
+    filter: invert(0);
+}
+
 /* Smartphones */
 
 @media only screen and (max-width: 720px) {
+
+    .walk {
+        visibility: visible;
+    }
+
+    .actions {
+        visibility: visible;
+    }
+
     canvas {
         width: 100%;
     }
@@ -223,8 +291,21 @@ canvas {
 }
 
 @media only screen and (max-width: 510px) {
+    canvas {
+        height: 100vh;
+        border-radius: unset;
+    }
+    .t1 {
+        display: none;
+    }
+    body {
+        background-image: none;
+    }
     .footer {
-        font-size: 0.55rem;
+        display: none;
+    }
+    .bottle {
+        display: none;
     }
 }
 
@@ -238,10 +319,26 @@ canvas {
     .res_alert {
         display: block;
     }
+    .bottle {
+        display: none;
+    }
 }
 
 @media only screen and (max-height: 480px) {
     canvas {
         height: 100vh;
+        border-radius: unset;
+    }
+    .t1 {
+        display: none;
+    }
+    body {
+        background-image: none;
+    }
+    .footer {
+        display: none;
+    }
+    .bottle {
+        display: none;
     }
 }

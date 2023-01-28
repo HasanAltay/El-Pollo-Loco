@@ -63,53 +63,83 @@ function init() {
 }
 
 
-window.addEventListener("keydown", (e) => {
-    if (e.keyCode == 39) {
-        keyboard.RIGHT = true;
-    }
-    if (e.keyCode == 37) {
-        keyboard.LEFT = true;
-    }
-    if (e.keyCode == 38) {
-        keyboard.UP = true;
-    }
-    if (e.keyCode == 40) {
-        keyboard.DOWN = true;
-    }
-    if (e.keyCode == 32) {
-        keyboard.SPACE = true;
-    }
-    if (e.keyCode == 68) {
-        keyboard.D = true;
-    }
-    if (e.keyCode == 77) {
-        keyboard.M = true;
-    }
-    // console.log(e)
-});
 
 
-window.addEventListener("keyup", (e) => {
-    if (e.keyCode == 39) {
-        keyboard.RIGHT = false;
-    }
-    if (e.keyCode == 37) {
-        keyboard.LEFT = false;
-    }
-    if (e.keyCode == 38) {
-        keyboard.UP = false;
-    }
-    if (e.keyCode == 40) {
-        keyboard.DOWN = false;
-    }
-    if (e.keyCode == 32) {
-        keyboard.SPACE = false;
-    }
-    if (e.keyCode == 68) {
-        keyboard.D = false;
-    }
-    if (e.keyCode == 77) {
-        keyboard.M = false;
-    }
-    // console.log(e)
-});
+
+
+
+// const keyCodeMap = {
+//     37: 'LEFT',
+//     38: 'UP',
+//     39: 'RIGHT',
+//     40: 'DOWN',
+//     32: 'SPACE',
+//     68: 'D',
+//     77: 'M'
+//   };
+  
+//   window.addEventListener("keydown", (e) => {
+//     const key = keyCodeMap[e.keyCode];
+//     if (key) {
+//       keyboard[key] = true;
+//     }
+//   });
+  
+//   window.addEventListener("keyup", (e) => {
+//     const key = keyCodeMap[e.keyCode];
+//     if (key) {
+//       keyboard[key] = false;
+//     }
+//   });
+
+
+// window.addEventListener("keydown", (e) => {
+//     if (e.keyCode == 39) {
+//         keyboard.RIGHT = true;
+//     }
+//     if (e.keyCode == 37) {
+//         keyboard.LEFT = true;
+//     }
+//     if (e.keyCode == 38) {
+//         keyboard.UP = true;
+//     }
+//     if (e.keyCode == 40) {
+//         keyboard.DOWN = true;
+//     }
+//     if (e.keyCode == 32) {
+//         keyboard.SPACE = true;
+//     }
+//     if (e.keyCode == 68) {
+//         keyboard.D = true;
+//     }
+//     if (e.keyCode == 77) {
+//         keyboard.M = true;
+//     }
+//     // console.log(e)
+// });
+
+
+// window.addEventListener("keyup", (e) => {
+//     if (e.keyCode == 39) {
+//         keyboard.RIGHT = false;
+//     }
+//     if (e.keyCode == 37) {
+//         keyboard.LEFT = false;
+//     }
+//     if (e.keyCode == 38) {
+//         keyboard.UP = false;
+//     }
+//     if (e.keyCode == 40) {
+//         keyboard.DOWN = false;
+//     }
+//     if (e.keyCode == 32) {
+//         keyboard.SPACE = false;
+//     }
+//     if (e.keyCode == 68) {
+//         keyboard.D = false;
+//     }
+//     if (e.keyCode == 77) {
+//         keyboard.M = false;
+//     }
+//     // console.log(e)
+// });

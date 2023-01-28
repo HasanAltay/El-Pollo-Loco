@@ -1,6 +1,4 @@
 class Endboss extends MovableObject {
-// world;
-// character;
 height = 400;
 width = 300;
 y = 55;
@@ -102,7 +100,6 @@ characterAnimations() {
       document.getElementById('game_over').style.display = 'block';
       document.getElementById('you_lost').style.display = 'none';
       document.getElementById('btn_play_again').style.display = 'block';
-      
     }
   }
 }

@@ -1,6 +1,6 @@
 class Chicken extends MovableObject {
-  width = 80;
-  height = 80;
+  width = 85;
+  height = 85;
   y = 345;
 
   IMAGES_WALKING = [
@@ -46,13 +46,3 @@ class Chicken extends MovableObject {
     this.walkingAnim.push(this.walking, this.movingLeft);
   }
 }
-
-
-
-
-  
-
-
-
-
-

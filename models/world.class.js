@@ -2,7 +2,7 @@ class World {
   character = new Character();
   chicken = new Chicken();
   endboss = new Endboss();
-  // coinCounter = new CoinCounter();
+  small_chicken = new SmallChicken();
   level = level1;
   canvas;
   ctx;
@@ -44,9 +44,6 @@ class World {
     this.chicken.chicken_dead_sound.volume = 0.1;
     this.chicken.chicken_dead_sound.playbackRate = 1.5;
     this.character.collecting_sound.playbackRate = 1.7;
-    // this.character.onCoinCollect = () => {
-    //   this.coinCounter.coinCount++;
-    // }
   }
 
 
@@ -82,13 +79,13 @@ class World {
     if (this.character.x > 3550) {
       this.level.endboss.characterCheckpoint = true;
       if (this.character.x > 3500) {
-        this.endboss_ambience_sound.pause();
+        // this.endboss_ambience_sound.currentTime = 0;
         this.endboss_ambience_sound.play();
-        this.music.pause();
+        this.music.currentTime = 0;
       }
       if (this.endboss.isDeadBoss()) {
-        this.endboss_ambience_sound.pause();
-        this.music.pause();
+        this.endboss_ambience_sound.currentTime = 0;
+        this.music.currentTime = 0;
         this.keyboard = false;
       }
     }
@@ -144,15 +141,17 @@ class World {
 
   //  Checks for collisions between character and coins, 
   //  plays sound, moves coin off-screen, adds to collected 
-  //  coins and logs total collected.
+  //  coins and logs total collected und uncollected.
   checkCollisionsCharacterWithCoins() {
-    this.level.coins.forEach((coin) => {
-      if (this.character.isCollidingCoin(coin) && !this.collectedCoins.includes(coin)) {
-        this.character.collecting_sound.pause();
+    const uncollectedCoins = this.level.coins.filter(coin => !this.collectedCoins.includes(coin));
+    uncollectedCoins.forEach((coin) => {
+      if (this.character.isCollidingCoin(coin)) {
+        this.character.collecting_sound.currentTime = 0;
         this.character.collecting_sound.play();
         coin.y = this.offScreenY;
         this.collectedCoins.push(coin);
         console.log('Collected Coins: ',this.collectedCoins.length);
+        console.log('Coins Left: ',uncollectedCoins.length);
       }
     });
   }
@@ -204,8 +203,12 @@ class World {
     if (this.character.x > 3550) {
       this.endbossBar.draw(this.ctx);
     }
-    // Draw the coin bar
+    // Draw the coin image
     this.addToMap(this.coinBar);
+    // Draw the number of coins collected
+    this.ctx.fillStyle = 'white';
+    this.ctx.font = '26px Cactus Regular';
+    this.ctx.fillText(`x ${this.collectedCoins.length}`, 299, 54);
     // Request another animation frame to continue drawing
     requestAnimationFrame(() => this.draw());
   }
@@ -251,7 +254,7 @@ class World {
   muteMusic() {
     if (this.keyboard.M && this.music_play == true) {    
       setTimeout(() => {
-        this.music.pause();
+        this.music.currentTime = 0;
         console.log('MUSIC DEACTIVATED!');
         this.music_play = false;
       }, 100);
