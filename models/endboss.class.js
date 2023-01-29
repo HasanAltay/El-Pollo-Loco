@@ -100,6 +100,7 @@ characterAnimations() {
       document.getElementById('game_over').style.display = 'block';
       document.getElementById('you_lost').style.display = 'none';
       document.getElementById('btn_play_again').style.display = 'block';
+      // this.world.endboss_ambience_sound.currentTime = 0;
     }
   }
 }

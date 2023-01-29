@@ -31,17 +31,11 @@ class MovableObject extends DrawableObject {
     }
   }
 
+
   aboveGroundBottle() {
     return this.y < this.groundPos;
   }
 
-  
-  // isColliding(mo) {
-  //   return this.x+25 + this.width-65 > mo.x &&
-  //         this.y+115 + this.height-128 > mo.y &&
-  //         this.x < mo.x &&
-  //         this.y < mo.y + mo.height;  
-  // }
 
   isColliding(mo) {
     let object1X = this.x + 25;
@@ -57,37 +51,56 @@ class MovableObject extends DrawableObject {
             object1Y + object1Height > object2Y &&
             object1X < object2X + object2Width &&
             object1Y < object2Y + object2Height);
-  }
+    }
+    
 
   checkCollision(mo) {
     if (this.isColliding(mo)) {
-      stroke(255, 0, 0);
-      noFill();
       let collisionX = max(this.x, mo.x);
       let collisionY = max(this.y, mo.y);
       let collisionWidth = min(this.x + this.width, mo.x + mo.width) - collisionX;
       let collisionHeight = min(this.y + this.height, mo.y + mo.height) - collisionY;
-      rect(collisionX, collisionY, collisionWidth, collisionHeight);
+
+      this.ctx.beginPath();
+      this.ctx.strokeStyle = 'red';
+      this.ctx.lineWidth = 2;
+      this.ctx.rect(collisionX, collisionY, collisionWidth, collisionHeight);
+      this.ctx.stroke();
     }
   }
 
 
-
-
-
-
   isCollidingBottle(mo) {
-    return this.x+25 + this.width-65 > mo.x &&
-          this.y+115 + this.height-128 > mo.y &&
-          this.x < mo.x &&
-          this.y < mo.y + mo.height;  
+    let object1X = this.x + 25;
+    let object1Y = this.y + 115;
+    let object1Width = this.width - 63;
+    let object1Height = this.height - 128;
+    let object2X = mo.x;
+    let object2Y = mo.y;
+    let object2Width = mo.width;
+    let object2Height = mo.height;
+
+    return (object1X + object1Width > object2X &&
+            object1Y + object1Height > object2Y &&
+            object1X < object2X + object2Width &&
+            object1Y < object2Y + object2Height);
   }
 
+
   isCollidingChicken(mo) {
-    return this.x+25 + this.width-65 > mo.x+40 &&
-          this.y+115 + this.height-128 > mo.y+20 &&
-          this.x < mo.x &&
-          this.y < mo.y + mo.height;  
+    let object1X = this.x + 25;
+    let object1Y = this.y + 115;
+    let object1Width = this.width - 63;
+    let object1Height = this.height - 128;
+    let object2X = mo.x + 40;
+    let object2Y = mo.y + 20;
+    let object2Width = mo.width;
+    let object2Height = mo.height;
+
+    return (object1X + object1Width > object2X &&
+            object1Y + object1Height > object2Y &&
+            object1X < object2X + object2Width &&
+            object1Y < object2Y + object2Height);
   }
 
   isCollidingCoin(mo) {

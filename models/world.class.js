@@ -58,7 +58,7 @@ class World {
 
     setInterval(() => {
       this.checkCollisionThrowBottle();
-    }, 0);
+    }, 5);
 
     setInterval(() => {
       this.checkCollisionsCharacterWithCoins();
@@ -79,7 +79,7 @@ class World {
     if (this.character.x > 3550) {
       this.level.endboss.characterCheckpoint = true;
       if (this.character.x > 3500) {
-        // this.endboss_ambience_sound.currentTime = 0;
+        this.endboss_ambience_sound.currentTime = 0;
         this.endboss_ambience_sound.play();
         this.music.currentTime = 0;
       }
@@ -180,20 +180,20 @@ class World {
     // Translate the canvas to the camera position
     this.ctx.translate(this.camera_x, 0);
 
-      // Draw the background objects
-      this.level.backgroundObjects.forEach(obj => obj.draw(this.ctx));
-      // Draw the clouds
-      this.level.clouds.forEach(cloud => cloud.draw(this.ctx));
-      // Draw the coins
-      this.level.coins.forEach(coin => coin.draw(this.ctx));
-      // Draw the character
-      this.addToMap(this.character);
-      // Draw the enemies
-      this.level.enemies.forEach(enemy => enemy.draw(this.ctx));
-      // Draw the throwable object
-      this.throwableObject.forEach(obj => obj.draw(this.ctx));
-      // Draw the endboss
-      this.level.endboss.forEach(endboss => endboss.draw(this.ctx));
+    // Draw the background objects
+    this.level.backgroundObjects.forEach(obj => obj.draw(this.ctx));
+    // Draw the clouds
+    this.level.clouds.forEach(cloud => cloud.draw(this.ctx));
+    // Draw the coins
+    this.level.coins.forEach(coin => coin.draw(this.ctx));
+    // Draw the character
+    this.addToMap(this.character);
+    // Draw the enemies
+    this.level.enemies.forEach(enemy => enemy.draw(this.ctx));
+    // Draw the throwable object
+    this.throwableObject.forEach(obj => obj.draw(this.ctx));
+    // Draw the endboss
+    this.level.endboss.forEach(endboss => endboss.draw(this.ctx));
 
     // Translate the canvas back to the original position
     this.ctx.translate(-this.camera_x, 0);
@@ -208,10 +208,12 @@ class World {
     // Draw the number of coins collected
     this.ctx.fillStyle = 'white';
     this.ctx.font = '26px Cactus Regular';
-    this.ctx.fillText(`x ${this.collectedCoins.length}`, 299, 54);
+    this.ctx.fillText(`x ${this.collectedCoins.length}`, 358, 54);
     // Request another animation frame to continue drawing
     requestAnimationFrame(() => this.draw());
   }
+
+
 
 
   addObjectsToMap(objects) {
@@ -267,9 +269,5 @@ class World {
       }, 100);
     }
   }
-
-
-
-
 
 }
