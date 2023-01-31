@@ -3,7 +3,7 @@ class Cloud extends MovableObject {
   width = 500;
   height = 280;
   clouds = [];
-  cloudImages = ['img/5_background/layers/4_clouds/1.png', 'img/5_background/layers/4_clouds/2.png'];
+  cloudImages = ['img/5_background/4_clouds/1.png', 'img/5_background/4_clouds/2.png'];
   currentImage = 0;
 
   constructor() {
