@@ -37,19 +37,19 @@
                     Play Again
                 </div>
                 <div class="btn_play_game btn" id="btn_play_game"
-                    onclick="init(); clearScreen()">
+                    onclick="playGame()">
                     Play Game
                 </div>
             </div>
-            <img class="game_over" id="game_over"
-                src="./img/9_intro_outro_screens/game_over/game over.png">
-            <img class="you_lost" id="you_lost"
-                src="./img/9_intro_outro_screens/game_over/you lost.png">
+
             <canvas id="canvas" width="720" height="480">
                 Your browser does not support canvas element.
             </canvas>
+            <img class="game_over" id="game_over"
+            src="./img/9_screens/congratulations.png">
+            <img class="you_lost" id="you_lost"
+            src="./img/9_screens/you lost.png">
         </div>
-
 
         <div class="walk">
             <img src="./img/10_mobile_keys/left.png" id="btn_left">
@@ -60,16 +60,16 @@
             <img src="./img/10_mobile_keys/jump.png" id="btn_jump">
         </div>
 
+        <div class="turn_phone">
+            <img src="img/turning-phone.png">
+            TURN<br>YOUR<br>PHONE<br>!
+        </div>
 
-        <div class="footer">
+        <footer class="footer">
             LEFT = Walk left | RIGHT = Walk right | SPACE = Jump | D = Throw
             salsa
             bottle
-        </div>
-        <h1 class="res_alert"><img
-                src="img/3_enemies_chicken/chicken_small/1_walk/1_w.png">You
-            need a resolution bigger than 280px!</h1>
-
+        </footer>
         <img class="bottle" src="./img/6_salsa_bottle/salsa_bottle.png">
     </body>
 </html>

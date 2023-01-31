@@ -71,14 +71,22 @@ class MovableObject extends DrawableObject {
 
 
   isCollidingBottle(mo) {
-    let object1X = this.x + 25;
-    let object1Y = this.y + 115;
-    let object1Width = this.width - 63;
-    let object1Height = this.height - 128;
+    let object1X = this.x; //+25
+    let object1Y = this.y; //+115
+    let object1Width = this.width; // -63
+    let object1Height = this.height; // -128
     let object2X = mo.x;
     let object2Y = mo.y;
     let object2Width = mo.width;
     let object2Height = mo.height;
+
+    // if (this.ctx) {
+    //   this.ctx.beginPath();
+    //   this.ctx.strokeStyle = 'red';
+    //   this.ctx.lineWidth = 2;
+    //   this.ctx.rect(object1X, object1Y, object1Width, object1Height);
+    //   this.ctx.stroke();
+    // }
 
     return (object1X + object1Width > object2X &&
             object1Y + object1Height > object2Y &&
@@ -132,14 +140,16 @@ class MovableObject extends DrawableObject {
   }
 
 
-  hitBoss() {
-    this.energy_boss -= 5;
+  hit_boss() {
+    this.energy_boss -= 10; console.log("hit_boss");
     if (this.energy_boss < 0) {
       this.energy_boss = 0;
-      console.log('BOSS IS DEAD');
+      // this.dead_sound.volume = 0.3;
+      // this.dead_sound.playbackRate = 1.5;
+      // this.dead_sound.play();
     } else {
       this.lastHitBoss = new Date().getTime();
-      console.log('BOSS IS HIT');
+      // this.hit_sound.play();
     }
   }
 
@@ -151,20 +161,8 @@ class MovableObject extends DrawableObject {
   }
 
 
-  isHurtBoss() {
-    let timepassed = new Date().getTime() - this.lastHitBoss; // Difference in ms
-    timepassed = timepassed / 1000; // Difference in s
-    return timepassed < 0.5;
-  }
-
-
   isDead() {
     return this.energy == 0;
-  }
-
-
-  isDeadBoss() {
-    return this.energy_boss == 0;
   }
 
 
@@ -194,17 +192,6 @@ class MovableObject extends DrawableObject {
     this.walkingLeft = false;
   }
 
-  // fällt nach Tod nach unten aus dem Frame
-  // fallOut() {
-  //   this.y += this.speed;
-  //   setInterval(() => {
-  //     this.loadImage('img/2_character_pepe/1_idle/idle/I-1.png');
-  //     this.y = 440;
-  //     this.height = 0;
-  //     this.width = 0;
-  //     this.speedY = 0;
-  //   }, 500); 
-  // }
 
   fallOut() {
     let fallingSpeed = this.speed;

@@ -1,6 +1,6 @@
 let level1;
-function initLevel() {
 
+function initLevel() {
 let air = 'img/5_background/layers/air.png';
 let first_layer_2 = 'img/5_background/layers/1_first_layer/2.png';
 let second_layer_2 = 'img/5_background/layers/2_second_layer/2.png';
@@ -8,9 +8,9 @@ let third_layer_2 = 'img/5_background/layers/3_third_layer/2.png';
 let first_layer_1 = 'img/5_background/layers/1_first_layer/1.png';
 let second_layer_1 = 'img/5_background/layers/2_second_layer/1.png';
 let third_layer_1 = 'img/5_background/layers/3_third_layer/1.png';
+let y_ajust_3_1 = 
 
 level1 = new Level (
-
   endboss = [
     new Endboss(),
   ],
@@ -32,6 +32,10 @@ level1 = new Level (
     new Coins(1800, 340),
     new Coins(2000, 200),
     new Coins(2200, 340),
+    new Coins(2500, 200),
+    new Coins(2800, 200),
+    new Coins(3000, 200),
+    new Coins(3200, 200),
   ],
 
   enemies = [
@@ -42,12 +46,10 @@ level1 = new Level (
     new SmallChicken(),
     new Chicken(),
     new Chicken(),
-    new Chicken(),
     new SmallChicken(),
     new Chicken(),
     new Chicken(),
     new SmallChicken(),
-    new Chicken(),
     new Chicken(),
     new Chicken(),
     new SmallChicken(),
@@ -89,13 +91,13 @@ level1 = new Level (
     new BackgroundObject(first_layer_2, 719, 0),
 
     new BackgroundObject(air, 719*2, 0),
-    new BackgroundObject(third_layer_1, 719*2, 0),
-    new BackgroundObject(second_layer_1, 719*2, 0),
+    new BackgroundObject(third_layer_1, 719*2, -70),
+    new BackgroundObject(second_layer_1, 719*2, -30),
     new BackgroundObject(first_layer_1, 719*2, 0),
 
     new BackgroundObject(air, 719*3, 0),
-    new BackgroundObject(third_layer_2, 719*3, 0),
-    new BackgroundObject(second_layer_2, 719*3, 0),
+    new BackgroundObject(third_layer_2, 719*3, -100),
+    new BackgroundObject(second_layer_2, 719*3, -50),
     new BackgroundObject(first_layer_2, 719*3, 0),
 
     new BackgroundObject(air, 719*4, 0),
@@ -113,12 +115,12 @@ level1 = new Level (
     new BackgroundObject(third_layer_1, 719*6, 0),
     new BackgroundObject(second_layer_1, 719*6, 0),
     new BackgroundObject(first_layer_1, 719*6, 0),
-    new BackgroundObject('img/hay.png', 719*6, -10),
+    new BackgroundObject('img/hay.png', 719*6, -10), // x = 4300
 
     new BackgroundObject(air, 719*7, 0),
-    new BackgroundObject(third_layer_1, 719*7, 0),
-    new BackgroundObject(second_layer_1, 719*7, 0),
-    new BackgroundObject(first_layer_1, 719*7, 0),
+    new BackgroundObject(third_layer_2, 719*7, 0),
+    new BackgroundObject(second_layer_2, 719*7, 0),
+    new BackgroundObject(first_layer_2, 719*7, 0),
 
     new BackgroundObject(air, 719*8, 0),
     new BackgroundObject(third_layer_1, 719*8, 0),
@@ -126,9 +128,30 @@ level1 = new Level (
     new BackgroundObject(first_layer_1, 719*8, 0),
 
     new BackgroundObject(air, 719*9, 0),
-    new BackgroundObject(third_layer_1, 719*9, 0),
-    new BackgroundObject(second_layer_1, 719*9, 0),
-    new BackgroundObject(first_layer_1, 719*9, 0),
+    new BackgroundObject(third_layer_2, 719*9, 0),
+    new BackgroundObject(second_layer_2, 719*9, 0),
+    new BackgroundObject(first_layer_2, 719*9, 0),
+
+    new BackgroundObject(air, 719*10, 0),
+    new BackgroundObject(third_layer_1, 719*10, 0),
+    new BackgroundObject(second_layer_1, 719*10, 0),
+    new BackgroundObject(first_layer_1, 719*10, 0),
+
+    new BackgroundObject(air, 719*11, 0),
+    new BackgroundObject(third_layer_2, 719*11, 0),
+    new BackgroundObject(second_layer_2, 719*11, 0),
+    new BackgroundObject(first_layer_2, 719*11, 0),
+
+    new BackgroundObject(air, 719*12, 0),             // x = 8300
+    new BackgroundObject(third_layer_1, 719*12, 0),
+    new BackgroundObject(second_layer_1, 719*12, 0),
+    new BackgroundObject(first_layer_1, 719*12, 0),
+
+    new BackgroundObject(air, 719*13, 0),
+    new BackgroundObject(third_layer_2, 719*13, 0),
+    new BackgroundObject(second_layer_2, 719*13, 0),
+    new BackgroundObject(first_layer_2, 719*13, 0),
+    new BackgroundObject('img/hay.png', 719*13, -10), // x = 9300
   ],
 );
 

@@ -64,15 +64,16 @@ class Character extends MovableObject {
 
   world;
   walking_sound = new Audio('audio/walking.mp3');
-  jumping_sound = new Audio('audio/jump.wav');
-  hit_sound = new Audio('audio/hit.wav');
-  dead_sound = new Audio('audio/dead.wav');
-  endboss_ambience_sound = new Audio('audio/boss.wav');
-  collecting_sound = new Audio('audio/coin2.mp3');
+  jumping_sound = new Audio('audio/jump.mp3');
+  hit_sound = new Audio('audio/hit.mp3');
+  dead_sound = new Audio('audio/dead.mp3');
+  // endboss_ambience_sound = new Audio('audio/boss.mp3');
+  collecting_sound = new Audio('audio/coin.mp3');
 
 
   constructor() {
-    super().loadImage('img/2_character_pepe/1_idle/idle/I-1.png');
+    super();
+    this.loadImage('img/2_character_pepe/1_idle/idle/I-1.png');
     this.loadImages(this.IMAGES_WALKING);
     this.loadImages(this.IMAGES_JUMPING);
     this.loadImages(this.IMAGES_DEAD);
@@ -83,6 +84,11 @@ class Character extends MovableObject {
     this.idle();
     this.startCharacterAnimations();
     this.animate();
+    this.walking_sound.preload = "auto";
+    this.jumping_sound.preload = "auto";
+    this.hit_sound.preload = "auto";
+    this.dead_sound.preload = "auto";
+    this.collecting_sound.preload = "auto";
   }
 
 
@@ -115,9 +121,10 @@ class Character extends MovableObject {
     if (dead == true) {
       document.getElementById('you_lost').style.display = 'block';
       document.getElementById('btn_play_again').style.display = 'block';
-      this.world.music.pause();
+      this.world.music.currentTime = 0;
       this.world.endboss_ambience_sound.currentTime = 0;
       this.world.keyboard = false;
+      this.world.stopAllMusic();
       setTimeout(function() {
         for (let i = 1; i < 9999; i++) window.clearInterval(i);
       }, 650)
@@ -160,29 +167,29 @@ class Character extends MovableObject {
   }
 
 
-  startCharacterAnimations() {
-    let animationInterval;
-    animationInterval = setInterval(() => {
-      if (this.isDead()) {
-        clearInterval(animationInterval);
-        this.playAnimation(this.IMAGES_DEAD);
-        this.fallOut();
-        this.dead = true;
-        setTimeout(() => {
-          this.youLost(this.dead);
-        }, 100);
-      } else if (this.isHurt()) {
-        this.playAnimation(this.IMAGES_HURT);
-      } else if (this.aboveGround()) {
-        this.playAnimation(this.IMAGES_JUMPING);
-      } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
-        this.playAnimation(this.IMAGES_WALKING);
-      }
-    }, 100);
-  }
+startCharacterAnimations() {
+  let animationInterval;
+  animationInterval = setInterval(() => {
+    if (this.isDead()) {
+      clearInterval(animationInterval);
+      this.playAnimation(this.IMAGES_DEAD);
+      this.fallOut();
+      this.dead = true;
+      setTimeout(() => {
+        this.youLost(this.dead);
+      }, 100);
+    } else if (this.isHurt()) {
+      this.playAnimation(this.IMAGES_HURT);
+    } else if (this.aboveGround()) {
+      this.playAnimation(this.IMAGES_JUMPING);
+    } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
+      this.playAnimation(this.IMAGES_WALKING);
+    }
+  }, 100);
+}
 
-  stopCharacterAnimations() {
-    clearInterval(animationInterval);
-  }
+stopCharacterAnimations() {
+  clearInterval(animationInterval);
+}
 
 }

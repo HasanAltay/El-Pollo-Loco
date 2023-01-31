@@ -4,7 +4,7 @@
     font-weight: 400;
     src: url('../fonts/Cactus Regular.otf');
     src: local(''),
-         url('../fonts/Cactus Regular.otf') format('embedded-opentype'),
+        url('../fonts/Cactus Regular.otf') format('embedded-opentype'),
 }
 
 @font-face {
@@ -13,7 +13,7 @@
     font-weight: 400;
     src: url('../fonts/Boogaloo-Regular.ttf');
     src: local(''),
-         url('../fonts/Boogaloo-Regular.ttf') format('.ttf'),
+        url('../fonts/Boogaloo-Regular.ttf') format('.ttf'),
 }
 
 body {
@@ -38,14 +38,16 @@ body {
     filter: opacity(10%);
     min-width: 720px;
     min-height: 480px;
+    object-fit: cover;
 }
 
 .t1 {
     display: flex;
-    color: #f0e676;
+    color: #E99700;
     text-shadow: 3px 3px 4px #000000;
     letter-spacing: 5px;
     white-space: nowrap;
+    font-size: 5vw;
 }
 
 .txtin40 {
@@ -60,18 +62,23 @@ body {
     z-index: 9;
     position: relative;
     overflow: hidden;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, 
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, 
+    rgba(0, 0, 0, 0.12) 0px 4px 6px, 
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, 
+    rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 
 canvas {
     display: block;
-    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, 
-                rgba(0, 0, 0, 0.3) 0px 7px 10px -3px;
-    background-image: 
-        url('../img/background.png');
+    background-image:
+        url('../img/9_screens/background.png');
     background-size: cover;
     width: 100%;
     height: 100%;
     border-radius: 5px;
+    object-fit: contain;
+    z-index: 4;
 }
 
 .d-flex {
@@ -105,8 +112,8 @@ canvas {
     text-align: center;
     background-color: rgb(87, 92, 40);
     box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
-                rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,
-                rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+        rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,
+        rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
     -moz-user-select: none;
     -khtml-user-select: none;
     user-select: none;
@@ -174,6 +181,7 @@ canvas {
     width: 100%;
     height: 100%;
     backdrop-filter: blur(2px);
+    z-index: 5;
 }
 
 .you_lost {
@@ -186,17 +194,40 @@ canvas {
     backdrop-filter: blur(2px);
 }
 
-.res_alert {
+.turn_phone {
     display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     position: absolute;
-    top: 50px;
-    left: 20px;
-    font-size: 1.6rem;
+    top: 80px;
+    font-size: 10vw;
     color: #f0e676;
-    text-shadow: 2px 2px 3px #000000;
     text-align: center;
     z-index: 2;
-    letter-spacing: 4px;
+    letter-spacing: 3px;
+    width: 100%;
+    line-height: 150%;
+}
+
+.turn_phone img {
+    margin-bottom: 50px;
+    animation: forwards;
+    animation-name: turn_phone;
+    animation-duration: 1000ms;
+    animation-fill-mode: forwards;
+    animation-direction: alternate;
+    animation-iteration-count: 4;
+}
+
+@keyframes turn_phone {
+    0% {
+        transform: rotate(-20deg);
+    }
+
+    100% {
+        transform: rotate(-110deg);
+    }
 }
 
 .fullscreen {
@@ -204,12 +235,12 @@ canvas {
 }
 
 .button_place {
-    position: absolute; 
-    left: 0; 
-    right: 0; 
+    position: absolute;
+    left: 0;
+    right: 0;
     bottom: 0;
-    margin-left: auto; 
-    margin-right: auto; 
+    margin-left: auto;
+    margin-right: auto;
     width: 22%;
     min-width: 160px;
     max-width: 200px;
@@ -292,18 +323,22 @@ canvas {
 
 @media only screen and (max-width: 510px) {
     canvas {
-        height: 100vh;
+        /* height: 100vh; */
         border-radius: unset;
     }
+
     .t1 {
         display: none;
     }
+
     body {
         background-image: none;
     }
+
     .footer {
         display: none;
     }
+
     .bottle {
         display: none;
     }
@@ -311,16 +346,27 @@ canvas {
 
 @media only screen and (max-width: 280px) {
     canvas {
-        display: none;  
+        display: none;
     }
+
     .btn {
         display: none
     }
-    .res_alert {
-        display: block;
+
+    .turn_phone {
+        display: flex;
     }
+
     .bottle {
         display: none;
+    }
+
+    .actions {
+        visibility: hidden;
+    }
+
+    .walk {
+        visibility: hidden;
     }
 }
 
@@ -329,15 +375,19 @@ canvas {
         height: 100vh;
         border-radius: unset;
     }
+
     .t1 {
         display: none;
     }
+
     body {
         background-image: none;
     }
+
     .footer {
         display: none;
     }
+
     .bottle {
         display: none;
     }

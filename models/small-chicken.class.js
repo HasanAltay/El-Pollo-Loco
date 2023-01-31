@@ -15,16 +15,17 @@ class SmallChicken extends MovableObject {
 
   world;
   currentImg = 0;
-  chicken_dead_sound = new Audio('audio/chicken_dead.wav');
+  chicken_dead_sound = new Audio('audio/chicken_dead.mp3');
   chicken_is_dead = false;
-  walkingAnim = [];
+  small_chicken_intervals = [];
 
 
   constructor() {
-    super().loadImage('img/3_enemies_chicken/chicken_small/1_walk/1_w.png');
+    super();
+    this.loadImage('img/3_enemies_chicken/chicken_small/1_walk/1_w.png');
     this.loadImages(this.IMAGES_WALKING);
     this.loadImages(this.IMAGES_DYING);
-    this.x = 330 + Math.random() * 5000; // Zahl zw. 330 und 500
+    this.x = 330 + Math.random() * 8300;
     this.speed = 0.4 + Math.random() * 0.25;
     this.animate();
     this.animateJump();
@@ -39,11 +40,12 @@ class SmallChicken extends MovableObject {
     this.walking = setInterval(() => {
       this.playAnimation(this.IMAGES_WALKING);
     }, 110);
-    this.walkingAnim.push(this.walking, this.movingLeft);
-
-    setInterval(() => {
+    
+    this.jump = setInterval(() => {
       this.animateJump();
     }, Math.floor(Math.random() * (5000 - 3000 + 1)) + 3000);
+
+    this.small_chicken_intervals.push(this.walking, this.movingLeft, this.jump);
   }
 
 
