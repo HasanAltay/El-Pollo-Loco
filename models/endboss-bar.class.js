@@ -14,7 +14,7 @@ class EndbossBar extends DrawableObject {
   constructor() {
     super();
     this.loadImages(this.IMAGES_HEALTH_BOSS);
-    this.x = 477;
+    this.x = 607;
     this.y = 23;
     this.width = 218;
     this.height = 43;

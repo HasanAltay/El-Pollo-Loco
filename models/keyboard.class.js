@@ -1,6 +1,7 @@
 class Keyboard {
 
   constructor() {
+
     this.LEFT = false;
     this.RIGHT = false;
     this.UP = false;
@@ -10,80 +11,96 @@ class Keyboard {
     this.M = false;
 
 
-    window.addEventListener("keydown", (e) => {
-      if (e.keyCode === 39) {
-        this.RIGHT = true;
-      } else if (e.keyCode === 37) {
-        this.LEFT = true;
-      } else if (e.keyCode === 38) {
-        this.UP = true;
-      } else if (e.keyCode === 40) {
-        this.DOWN = true;
-      } else if (e.keyCode === 32) {
-        this.SPACE = true;
-      } else if (e.keyCode === 68) {
-        this.D = true;
-      } else if (e.keyCode === 77) {
-        this.M = true;
+    window.addEventListener("load", () => {
+      this.initialize();
+    });
+
+
+    window.addEventListener("keydown", event => {
+      switch (event.key) {
+        case "ArrowRight":
+          this.RIGHT = true;
+          break;
+        case "ArrowLeft":
+          this.LEFT = true;
+          break;
+        case "ArrowUp":
+          this.UP = true;
+          break;
+        case "ArrowDown":
+          this.DOWN = true;
+          break;
+        case " ":
+          this.SPACE = true;
+          break;
+        case "d":
+          this.D = true;
+          break;
+        case "m":
+          this.M = true;
+          break;
       }
     });
 
-    
-    window.addEventListener("keyup", (e) => {
-      if (e.keyCode === 39) {
-        this.RIGHT = false;
-      } else if (e.keyCode === 37) {
-        this.LEFT = false;
-      } else if (e.keyCode === 38) {
-        this.UP = false;
-      } else if (e.keyCode === 40) {
-        this.DOWN = false;
-      } else if (e.keyCode === 32) {
-        this.SPACE = false;
-      } else if (e.keyCode === 68) {
-        this.D = false;
-      } else if (e.keyCode === 77) {
-        this.M = false;
+
+    window.addEventListener("keyup", event => {
+      switch (event.key) {
+        case "ArrowRight":
+          this.RIGHT = false;
+          break;
+        case "ArrowLeft":
+          this.LEFT = false;
+          break;
+        case "ArrowUp":
+          this.UP = false;
+          break;
+        case "ArrowDown":
+          this.DOWN = false;
+          break;
+        case " ":
+          this.SPACE = false;
+          break;
+        case "d":
+          this.D = false;
+          break;
+        case "m":
+          this.M = false;
+          break;
       }
     });
   }
 
 
-    initialize() {
-      const btnLeft = document.getElementById("btn_left");
-      const btnRight = document.getElementById("btn_right");
-      const btnThrow = document.getElementById("btn_throw");
-      const btnJump = document.getElementById("btn_jump");
-  
-      btnLeft.addEventListener("touchstart", () => {
-        this.LEFT = true;
-      });
-      btnLeft.addEventListener("touchend", () => {
-        this.LEFT = false;
-      });
-      btnRight.addEventListener("touchstart", () => {
-        this.RIGHT = true;
-      });
-      btnRight.addEventListener("touchend", () => {
-        this.RIGHT = false;
-      });
-      btnThrow.addEventListener("touchstart", () => {
-        this.SPACE = true;
-      });
-      btnThrow.addEventListener("touchend", () => {
-        this.SPACE = false;
-      });
-      btnJump.addEventListener("touchstart", () => {
-        this.UP = true;
-      });
-      btnJump.addEventListener("touchend", () => {
-        this.UP = false;
-      });
-    }
+  initialize() {
+    const btnLeft = document.getElementById("btn_left");
+    const btnRight = document.getElementById("btn_right");
+    const btnThrow = document.getElementById("btn_throw");
+    const btnJump = document.getElementById("btn_jump");
+
+    btnLeft.addEventListener("touchstart", () => {
+      this.LEFT = true;
+    });
+    btnLeft.addEventListener("touchend", () => {
+      this.LEFT = false;
+    });
+    btnRight.addEventListener("touchstart", () => {
+      this.RIGHT = true;
+    });
+    btnRight.addEventListener("touchend", () => {
+      this.RIGHT = false;
+    });
+    btnThrow.addEventListener("touchstart", () => {
+      this.D = true;
+    });
+    btnThrow.addEventListener("touchend", () => {
+      this.D = false;
+    });
+    btnJump.addEventListener("touchstart", () => {
+      this.SPACE = true;
+    });
+    btnJump.addEventListener("touchend", () => {
+      this.SPACE = false;
+    });
   }
 
-
-  window.addEventListener("load", () => {
-    let keyboard = new Keyboard();
-    keyboard.initialize();
-  });
+}

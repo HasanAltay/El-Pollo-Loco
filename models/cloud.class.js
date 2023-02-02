@@ -1,5 +1,6 @@
 class Cloud extends MovableObject {
   y = 40;
+  x = 0;
   width = 500;
   height = 280;
   clouds = [];
@@ -15,9 +16,9 @@ class Cloud extends MovableObject {
   }
 
   generateRandomPosition() {
-    let x = -800 + Math.random() * 6000;
+    let x = -1000 + Math.random() * 12000;
     while (this.checkOverlap(x)) {
-      x = -800 + Math.random() * 6000;
+      x = -1000 + Math.random() * 12000;
     }
     this.x = x;
   }

@@ -1,7 +1,7 @@
 class Character extends MovableObject {
   width = 120;
   height = 240;
-  y = 190;
+  y = 195;
   x = -500;
   speed = 5;
   afkTimer = 0;
@@ -63,12 +63,11 @@ class Character extends MovableObject {
   ];
 
   world;
-  walking_sound = new Audio('audio/walking.mp3');
-  jumping_sound = new Audio('audio/jump.mp3');
-  hit_sound = new Audio('audio/hit.mp3');
-  dead_sound = new Audio('audio/dead.mp3');
-  // endboss_ambience_sound = new Audio('audio/boss.mp3');
-  collecting_sound = new Audio('audio/coin.mp3');
+  // walking_sound = new Audio('audio/walking.mp3');
+  // jumping_sound = new Audio('audio/jump.mp3');
+  // hit_sound = new Audio('audio/hurt.mp3');
+  // dead_sound = new Audio('audio/dead.mp3');
+  // collecting_sound = new Audio('audio/coin.mp3');
 
 
   constructor() {
@@ -84,18 +83,18 @@ class Character extends MovableObject {
     this.idle();
     this.startCharacterAnimations();
     this.animate();
-    this.walking_sound.preload = "auto";
-    this.jumping_sound.preload = "auto";
-    this.hit_sound.preload = "auto";
-    this.dead_sound.preload = "auto";
-    this.collecting_sound.preload = "auto";
+    // this.walking_sound.preload = "auto";
+    // this.jumping_sound.preload = "auto";
+    // this.hit_sound.preload = "auto";
+    // this.dead_sound.preload = "auto";
+    // this.collecting_sound.preload = "auto";
   }
 
 
   animate() {
     this.dead = false;
     setInterval(() => {
-      this.characterMovementSound();
+      // this.characterMovementSound();
       this.characterMovementKeys();
     }, 1000 / 50);
   }
@@ -121,28 +120,26 @@ class Character extends MovableObject {
     if (dead == true) {
       document.getElementById('you_lost').style.display = 'block';
       document.getElementById('btn_play_again').style.display = 'block';
-      this.world.music.currentTime = 0;
-      this.world.endboss_ambience_sound.currentTime = 0;
       this.world.keyboard = false;
-      this.world.stopAllMusic();
+      this.world.muteAllAudio();
       setTimeout(function() {
         for (let i = 1; i < 9999; i++) window.clearInterval(i);
-      }, 650)
+      }, 1000)
     }
   }
 
 
   characterMovementSound() {
-    this.walking_sound.playbackRate = 2.2;
-    this.walking_sound.volume = 1;
-    this.jumping_sound.playbackRate = 0.8;
+    // this.walking_sound.playbackRate = 2.2;
+    // this.walking_sound.volume = 1;
+    // this.jumping_sound.playbackRate = 0.8;
   }
 
 
   characterMovementKeys() {
     if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
       this.moveRight();
-      this.walking_sound.play();
+      this.world.walking_sound.play();
       this.walkingLeft = false;
       this.afkTimer = 0;
     }
@@ -150,15 +147,15 @@ class Character extends MovableObject {
       this.turn = true;
       this.walkingLeft = true;
       this.moveLeft();
-      this.walking_sound.play();
+      this.world.walking_sound.play();
       this.afkTimer = 0;
     }
     if (this.world.keyboard.SPACE && !this.aboveGround()) {
       this.jump();
-      this.walking_sound.pause();
-      this.jumping_sound.play();
+      this.world.walking_sound.pause();
+      this.world.jumping_sound.play();
       this.afkTimer = 0;
-      this.music_play = true;
+      // this.world.music_play = true;
     }
     if (this.world.keyboard.D) {
       this.afkTimer = 0;

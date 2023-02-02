@@ -80,14 +80,6 @@ class MovableObject extends DrawableObject {
     let object2Width = mo.width;
     let object2Height = mo.height;
 
-    // if (this.ctx) {
-    //   this.ctx.beginPath();
-    //   this.ctx.strokeStyle = 'red';
-    //   this.ctx.lineWidth = 2;
-    //   this.ctx.rect(object1X, object1Y, object1Width, object1Height);
-    //   this.ctx.stroke();
-    // }
-
     return (object1X + object1Width > object2X &&
             object1Y + object1Height > object2Y &&
             object1X < object2X + object2Width &&
@@ -130,26 +122,12 @@ class MovableObject extends DrawableObject {
     this.energy -= 10;
     if (this.energy < 0) {
       this.energy = 0;
-      this.dead_sound.volume = 0.3;
-      this.dead_sound.playbackRate = 1.5;
-      this.dead_sound.play();
+      this.world.dead_sound.currentTime = 0;
+      this.world.dead_sound.play();
     } else {
       this.lastHit = new Date().getTime();
-      this.hit_sound.play();
-    }
-  }
-
-
-  hit_boss() {
-    this.energy_boss -= 10; console.log("hit_boss");
-    if (this.energy_boss < 0) {
-      this.energy_boss = 0;
-      // this.dead_sound.volume = 0.3;
-      // this.dead_sound.playbackRate = 1.5;
-      // this.dead_sound.play();
-    } else {
-      this.lastHitBoss = new Date().getTime();
-      // this.hit_sound.play();
+      this.world.hurt_audio.currentTime = 0;
+      this.world.hurt_audio.play();
     }
   }
 

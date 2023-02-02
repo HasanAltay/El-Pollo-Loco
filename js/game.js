@@ -15,6 +15,27 @@ function screenSize() {
     }      
 }
 
+// to mute the browser tab. doesnt work right now!
+let audioContext = null;
+let gainNode = null;
+let audioEnabled = true;
+
+function toggleAudio() {
+  if (!audioContext) {
+    audioContext = new (window.AudioContext || window.webkitAudioContext || window.mozAudioContext)();
+    gainNode = audioContext.createGain();
+    gainNode.connect(audioContext.destination);
+  }
+
+  if (audioEnabled) {
+    gainNode.gain.value = 0;
+    audioEnabled = false;
+  } else {
+    gainNode.gain.value = 1;
+    audioEnabled = true;
+  }
+}
+
 
 function enterFullscreen(element) {
     if(element.requestFullscreen) {
@@ -40,13 +61,23 @@ function playAgain() {
     clearAllInterval();
     clearScreen();
     init();
+    resetAudio();
 }
 
 
 function playGame() {
     clearAllInterval();
     clearScreen();
-    init();
+    init();    
+    resetAudio();
+}
+
+
+function resetAudio() {
+    world.music.currentTime = 0;
+    world.endboss_ambience_sound.currentTime = 0;
+    world.ambience_lvl1.currentTime = 0;
+    world.success_audio.currentTime = 0;
 }
 
 
@@ -60,6 +91,7 @@ function clearScreen() {
     document.getElementById('you_lost').style.display = 'none';
     document.getElementById('btn_play_game').style.display = 'none';
     document.getElementById('btn_play_again').style.display = 'none';
+    document.getElementById('canvas').style.backgroundImage = 'unset';
 }
 
 
@@ -68,85 +100,3 @@ function init() {
     initLevel();
     world = new World(canvas, keyboard);
 }
-
-
-
-
-
-
-
-// const keyCodeMap = {
-//     37: 'LEFT',
-//     38: 'UP',
-//     39: 'RIGHT',
-//     40: 'DOWN',
-//     32: 'SPACE',
-//     68: 'D',
-//     77: 'M'
-//   };
-  
-//   window.addEventListener("keydown", (e) => {
-//     const key = keyCodeMap[e.keyCode];
-//     if (key) {
-//       keyboard[key] = true;
-//     }
-//   });
-  
-//   window.addEventListener("keyup", (e) => {
-//     const key = keyCodeMap[e.keyCode];
-//     if (key) {
-//       keyboard[key] = false;
-//     }
-//   });
-
-
-// window.addEventListener("keydown", (e) => {
-//     if (e.keyCode == 39) {
-//         keyboard.RIGHT = true;
-//     }
-//     if (e.keyCode == 37) {
-//         keyboard.LEFT = true;
-//     }
-//     if (e.keyCode == 38) {
-//         keyboard.UP = true;
-//     }
-//     if (e.keyCode == 40) {
-//         keyboard.DOWN = true;
-//     }
-//     if (e.keyCode == 32) {
-//         keyboard.SPACE = true;
-//     }
-//     if (e.keyCode == 68) {
-//         keyboard.D = true;
-//     }
-//     if (e.keyCode == 77) {
-//         keyboard.M = true;
-//     }
-//     // console.log(e)
-// });
-
-
-// window.addEventListener("keyup", (e) => {
-//     if (e.keyCode == 39) {
-//         keyboard.RIGHT = false;
-//     }
-//     if (e.keyCode == 37) {
-//         keyboard.LEFT = false;
-//     }
-//     if (e.keyCode == 38) {
-//         keyboard.UP = false;
-//     }
-//     if (e.keyCode == 40) {
-//         keyboard.DOWN = false;
-//     }
-//     if (e.keyCode == 32) {
-//         keyboard.SPACE = false;
-//     }
-//     if (e.keyCode == 68) {
-//         keyboard.D = false;
-//     }
-//     if (e.keyCode == 77) {
-//         keyboard.M = false;
-//     }
-//     // console.log(e)
-// });

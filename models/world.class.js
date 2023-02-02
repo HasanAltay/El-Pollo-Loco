@@ -14,7 +14,7 @@ class World {
   throwableObject = [];
   collectedCoins = [];
   WorldIntervals = [];
-  music_play = true;
+  AUDIO_MUTE = false;
   darkness = 1.1;
   killedChickens = 0;
   killedSmallChickens = 0;
@@ -26,55 +26,91 @@ class World {
   ambience_lvl1 = new Audio('audio/ambience.mp3');
   music = new Audio('audio/la_bikina_remix.mp3');
   success_audio = new Audio('audio/success.mp3');
+  boss_hit_audio = new Audio('audio/hit.mp3');
+  throw_sound = new Audio('audio/throw.mp3');
+  bottle_smash_sound = new Audio('audio/breaking_glass.mp3');
+  walking_sound = new Audio('audio/walking.mp3');
+  jumping_sound = new Audio('audio/jump.mp3');
+  hurt_audio = new Audio('audio/hurt.mp3');
+  dead_sound = new Audio('audio/dead.mp3');
+  collecting_sound = new Audio('audio/coin.mp3');
 
-  // chicken_dead_sound = new Audio('audio/chicken_dead.mp3');
-  // throw_sound = new Audio('audio/throw.mp3');
-  // bottle_smash_sound = new Audio('audio/breaking_glass.mp3');
-
-  // walking_sound = new Audio('audio/walking.mp3');
-  // jumping_sound = new Audio('audio/jump.mp3');
-  // hit_sound = new Audio('audio/hit.mp3');
-  // dead_sound = new Audio('audio/dead.mp3');
-  // endboss_ambience_sound = new Audio('audio/boss.mp3');
-  // collecting_sound = new Audio('audio/coin.mp3');
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext('2d');
     this.canvas = canvas;
     this.keyboard = keyboard;
+    this.resetMusic();
     this.draw();
     this.setWorld();
+    this.preloadAudio();
+    this.setAudio();
     this.run();
   }
 
-  setWorld() {
-    this.endboss_ambience_sound.preload = "auto";
-    this.ambience_lvl1.preload = "auto";
-    this.music.preload = "auto";
-    this.success_audio.preload = "auto";
-    this.character.world = this;
-    this.chicken.world = this;
-    this.endboss.world = this;
+  preloadAudio() {
+    // this.endboss_ambience_sound.preload = "auto";
+    // this.ambience_lvl1.preload = "auto";
+    // this.music.preload = "auto";
+    // this.success_audio.preload = "auto";
+    // this.boss_hit_audio.preload = "auto";
+    // this.throw_sound.preload = "auto";
+    // this.bottle_smash_sound.preload = "auto";
+    // this.walking_sound.preload = "auto";
+    // this.jumping_sound.preload = "auto";
+    // this.hurt_audio.preload = "auto";
+    // this.dead_sound.preload = "auto";
+    // this.collecting_sound.preload = "auto";
     this.ambience_lvl1.play();
     this.music.play();
+  }
+
+  resetMusic() {
+    this.music.pause();
+    this.music.currentTime = 0;
+    this.endboss_ambience_sound.pause();
+    this.endboss_ambience_sound.currentTime = 0;
+    this.ambience_lvl1.pause();
+    this.ambience_lvl1.currentTime = 0;
+    this.success_audio.pause();
+    this.success_audio.currentTime = 0;
+  }
+
+  setAudio() {
+    this.walking_sound.playbackRate = 2.2;
+    this.walking_sound.volume = 1;
+    this.jumping_sound.playbackRate = 0.8;
+    this.hurt_audio.playbackRate = 1.4;
     this.music.loop = true;
-    this.music.volume = 0.5;
+    this.music.volume = 0.4;
+    this.success_audio.volume = 0.5;
+    this.success_audio.playbackRate = 1.2;
     this.ambience_lvl1.loop = true;
     this.endboss_ambience_sound.volume = 0.3;
     this.chicken.chicken_dead_sound.volume = 0.1;
     this.chicken.chicken_dead_sound.playbackRate = 1.5;
-    this.character.collecting_sound.playbackRate = 1.7;
+    this.collecting_sound.playbackRate = 1.7;
+    this.boss_hit_audio.playbackRate = 2;
+    this.dead_sound.volume = 0.3;
+    this.dead_sound.playbackRate = 1.5;
   }
 
+  setWorld() {
+    this.character.world = this;
+    this.chicken.world = this;
+    this.endboss.world = this;
+  }
 
   run() {
     this.interval1 = setInterval(() => {
       this.checkCollisions();
-    }, 200);
+      this.checkCollisionsWithBoss()
+    }, 330);
 
     this.interval2 = setInterval(() => {
       this.checkThrowObjects();
       this.checkDistanceBoss();
+      this.bossHit()
     }, 350);
 
     this.interval3 = setInterval(() => {
@@ -83,7 +119,6 @@ class World {
 
     this.interval4 = setInterval(() => {
       this.checkCollisionsCharacterWithCoins();
-      this.bossHit()
     }, 100);
 
     this.interval5 = setInterval(() => {
@@ -96,7 +131,9 @@ class World {
     }, 2000);
 
     this.interval7 = setInterval(() => {
-      this.muteMusic();
+      // this.pauseAllAudio();
+      this.setAllAudio();
+      // this.playAllAudio();
     }, 100);
 
     this.interval8 = setInterval(() => {
@@ -104,10 +141,11 @@ class World {
     },100);
 
     this.interval9 = setInterval(() => {
-      console.log('Pepe´s Position x=', this.character.x);
+      console.log('Character Position x = ',this.character.x);
     },10000);
 
-    this.WorldIntervals.push(this.interval1, this.interval2, this.interval3, this.interval4, this.interval5, this.interval6, this.interval7);
+    this.WorldIntervals.push(this.interval1, this.interval2, 
+      this.interval3, this.interval4, this.interval5, this.interval6,this.interval8, this.interval9);
   }
 
 
@@ -164,6 +202,8 @@ class World {
       console.log('Endboss Life = ', this.endboss.energy);
       this.endbossBar.setPercentage(this.endboss.energy);
       this.level.endboss.forEach(e => e.playAnimation(this.endboss.IMAGES_HURT));
+      this.boss_hit_audio.currentTime = 0;
+      this.boss_hit_audio.play();
       setTimeout(() => {
         this.boss_hit = false;
       }, 700);
@@ -179,19 +219,20 @@ class World {
 
 
   jumpAttack() {
-    if (this.endboss.energy <= 95 && this.endboss.energy >= 0) {
+    if (this.endboss.energy <= 99 && this.endboss.energy >= 0) {
       this.level.endboss.forEach(endboss => {
-
         this.jump01 = setTimeout(() => {
-          clearInterval(this.jump02);
-          endboss.x = this.endboss.x + 70;
-        }, 3000);
-
+          endboss.x = endboss.x - 30;
+        }, 1000);
+        this.jump01a = setTimeout(() => {
+          endboss.x = endboss.x - 60;
+        }, 1500);
+        this.jump01b = setTimeout(() => {
+          endboss.x = endboss.x - 90;
+        }, 2000);
         this.jump02 = setTimeout(() => {
-          clearInterval(this.jump01);
-          endboss.x = this.endboss.x - 60;
-        }, 6000);
-
+          endboss.x = endboss.x + 60;
+        }, 2500);
       });
     }
   }
@@ -199,38 +240,25 @@ class World {
 
   checkBossAlive() {
     if (this.endboss.energy <= 0) {
-      setTimeout(() => {
-        clearAllInterval(this.WorldIntervals.length);
-      }, 120);
-      
       this.endboss.energy = 0;
       this.level.endboss.forEach(e => e.playAnimation(this.endboss.IMAGES_DYING));
       this.music.currentTime = 0;
-      this.endboss_ambience_sound.pause();
       this.success_audio.play();
       this.keyboard = false;
-
       this.endboss.deadIsTrue();
-
-      
-
-      // setTimeout(() => {
-      //   document.getElementById('game_over').style.display = 'block';
-      //   document.getElementById('you_lost').style.display = 'none';
-      //   document.getElementById('btn_play_again').style.display = 'block';
-      // }, 2000);
+      setTimeout(() => {
+        clearAllInterval(this.WorldIntervals.length);
+      }, 160);
     }
   }
 
 
   checkDistanceBoss() {
     this.distance = Math.abs(this.endboss.x - this.character.x);
-    if (this.distance < 500) {
+    if (this.distance < 400) {
       this.boss_near = true;
       this.level.endboss.forEach(e => e.playAnimation(this.endboss.IMAGES_ALERT));
       console.log('Boss Chicken spotted you!');
-    } else if (this.distance > 500) {
-      this.boss_near = false;
     }
   }
 
@@ -238,9 +266,9 @@ class World {
   endbossMusicChange() {
     if (this.boss_near) {
       this.music.pause();
-      this.music.currentTime = 0;
+      // this.music.currentTime = 0;
+      // this.endboss_ambience_sound.currentTime = 0;
       this.endboss_ambience_sound.play();
-
     }
   }
 
@@ -285,8 +313,8 @@ class World {
     const uncollectedCoins = this.level.coins.filter(coin => !this.collectedCoins.includes(coin));
     uncollectedCoins.forEach((coin) => {
       if (this.character.isCollidingCoin(coin)) {
-        this.character.collecting_sound.currentTime = 0;
-        this.character.collecting_sound.play();
+        this.collecting_sound.currentTime = 0;
+        this.collecting_sound.play();
         coin.y = this.offScreenY;
         this.collectedCoins.push(coin);
         console.log('Collected Coins: ', this.collectedCoins.length);
@@ -351,7 +379,7 @@ class World {
     // Draw the number of coins collected
     this.ctx.fillStyle = 'white';
     this.ctx.font = '26px Cactus Regular';
-    this.ctx.fillText(`x ${this.collectedCoins.length}`, 358, 54);
+    this.ctx.fillText(`x ${this.collectedCoins.length} / 30` , 408, 54);
 
     // Draw Blend in from Black Screen
     this.darkness -= 0.005;
@@ -408,28 +436,87 @@ class World {
   }
 
 
-  stopAllMusic() {
+  muteAllAudio() {
+    this.music.pause();
+    this.music.currentTime = 0;
+    this.endboss_ambience_sound.pause();
+    this.endboss_ambience_sound.currentTime = 0;
+    this.ambience_lvl1.pause();
+    this.ambience_lvl1.currentTime = 0;
+    console.log('Audio Stopped!');
+  }
+
+
+  pauseAllAudio() {
+    this.music.currentTime = 0;
     this.endboss_ambience_sound.currentTime = 0;
     this.ambience_lvl1.currentTime = 0;
+    this.success_audio.currentTime = 0;
+    this.boss_hit_audio.currentTime = 0;
+    this.throw_sound.currentTime = 0;
+    this.bottle_smash_sound.currentTime = 0;
+    this.walking_sound.currentTime = 0;
+    this.jumping_sound.currentTime = 0;
+    this.hurt_audio.currentTime = 0;
+    this.dead_sound.currentTime = 0;
+    this.collecting_sound.currentTime = 0;
+    console.log('Audio Muted!');
+  }
+
+
+  // playAllAudio() {
+  //   if (this.AUDIO_MUTE == false) {
+
+  //     this.music.currentTime = 1;
+  //     this.endboss_ambience_sound.currentTime = 1;
+  //     this.ambience_lvl1.currentTime = 1;
+  //     this.success_audio.currentTime = 1;
+  //     this.boss_hit_audio.currentTime = 1;
+  //     this.throw_sound.currentTime = 1;
+  //     this.bottle_smash_sound.currentTime = 1;
+  //     this.walking_sound.currentTime = 1;
+  //     this.jumping_sound.currentTime = 1;
+  //     this.hurt_audio.currentTime = 1;
+  //     this.dead_sound.currentTime = 1;
+  //     this.collecting_sound.currentTime = 1;
+
+  //     this.AUDIO_MUTE = false;
+  //     console.log('Audio Unmuted!');
+  //   }
+  // } 
+
+
+  setAllAudio() {
+    if (this.keyboard.M && this.AUDIO_MUTE == false) {
+      this.AUDIO_MUTE = true
+      this.state = 0;
+      console.log('unmute', this.AUDIO_MUTE)
+      this.audioCurrentTime(this.state);
+
+    }
+
+    // else if (this.keyboard.M && this.AUDIO_MUTE == true) {
+    //   this.AUDIO_MUTE = false
+    //   console.log('mute', this.AUDIO_MUTE)
+    //   this.audioCurrentTime(this.AUDIO_MUTE);
+    // }
+  }
+
+
+  audioCurrentTime(currentState) {
     this.music.currentTime = 0;
+    this.endboss_ambience_sound.currentTime = currentState;
+    this.ambience_lvl1.currentTime = currentState;
+    this.success_audio.currentTime = currentState;
+    this.boss_hit_audio.currentTime = currentState;
+    this.throw_sound.currentTime = currentState;
+    this.bottle_smash_sound.currentTime = currentState;
+    this.walking_sound.currentTime = currentState;
+    this.jumping_sound.currentTime = currentState;
+    this.hurt_audio.currentTime = currentState;
+    this.dead_sound.currentTime = currentState;
+    this.collecting_sound.currentTime = currentState;
   }
 
-
-  muteMusic() {
-    if (this.keyboard.M && this.music_play == true) {
-      setTimeout(() => {
-        this.music.currentTime = 0;
-        console.log('MUSIC DEACTIVATED!');
-        this.music_play = false;
-      }, 100);
-    }
-    if (this.keyboard.M && this.music_play == false) {
-      setTimeout(() => {
-        console.log('MUSIC ACTIVATED!');
-        this.music.play();
-        this.music_play = true;
-      }, 100);
-    }
-  }
 
 }

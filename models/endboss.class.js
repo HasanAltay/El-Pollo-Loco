@@ -5,7 +5,7 @@ class Endboss extends MovableObject {
   x = 0;
   energy = 100;
   speed = 1;
-
+  dead = false;
 
   IMAGES_ALERT = [
     'img/4_enemie_boss_chicken/2_alert/G5.png',
@@ -40,6 +40,7 @@ class Endboss extends MovableObject {
     'img/4_enemie_boss_chicken/4_hurt/G21.png',
     'img/4_enemie_boss_chicken/4_hurt/G22.png',
     'img/4_enemie_boss_chicken/4_hurt/G23.png',
+    'img/4_enemie_boss_chicken/4_hurt/G24.png',
   ];
 
   IMAGES_DYING = [
@@ -66,34 +67,29 @@ class Endboss extends MovableObject {
     this.loadImages(this.IMAGES_ATTACK);
     this.loadImages(this.IMAGES_HURT);
     this.loadImages(this.IMAGES_DYING);
-    this.x = 600;  //4200
+    this.x = 9600;
     this.gameOver();
-    this.dead = false;
   }
 
 
   deadIsTrue() {
-    let dead = true;
-    setTimeout(() => {
-      this.gameOver(dead);
-    }, 40000);
-    console.log('Boss is Dead!');
-    this.gameOver(dead);
+    this.dead = true;
+    this.gameOver(this.dead);
   }
 
 
   gameOver(dead) {
-    if (dead == true) {
-
+    if (dead) {
+      console.log('Boss is Dead!!!');
       this.world.music.currentTime = 0;
       this.world.endboss_ambience_sound.currentTime = 0;
       this.world.keyboard = false;
-      this.world.stopAllMusic();
+      this.world.muteAllAudio();
       document.getElementById('game_over').style.display = 'block';
       document.getElementById('btn_play_again').style.display = 'block';
       setTimeout(function() {
         for (let i = 1; i < 9999; i++) window.clearInterval(i);
-      }, 650)
+      }, 500)
     }
   }
 

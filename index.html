@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
         <title>El Pollo Loco</title>
         <link rel="icon" href="./img/11_html_img/favicon.png">
         <link rel="stylesheet" href="./css/style.css">
@@ -30,9 +30,7 @@
     <body>
         <h1 class="t1">El Pollo Loco</h1>
         <div id="fullscreen" ondblclick="screenSize()" class="main">
-            
-            <img class="crt" src="./img/11_html_img/crt.png" alt="crt monitor filter">
-            
+            <img class="crt" src="./img/11_html_img/crt_lines.png" alt="crt monitor filter">
             <div id="button_place" class="button_place">
                 <div class="btn_play_again btn" id="btn_play_again"
                     onclick="playAgain()">
@@ -44,7 +42,7 @@
                 </div>
             </div>
 
-            <canvas id="canvas" width="720" height="480">
+            <canvas id="canvas" width="854" height="480">
                 Your browser does not support canvas element.
             </canvas>
             
@@ -56,18 +54,27 @@
 
         <div class="settings">
             <div class="settings_btns">
-                <img src="./img/11_html_img/fullscreen.png" alt="toggle fullscreen">
-                <img src="./img/11_html_img/mute.png" alt="mute audio">
+                <img src="./img/11_html_img/fullscreen.png" alt="toggle fullscreen" onclick="screenSize()">
+                <img src="./img/11_html_img/mute.png" alt="mute audio" onclick="toggleAudio()">
             </div>
         </div>
 
         <div class="walk">
-            <img src="./img/10_mobile_keys/left.png" id="btn_left" alt="left button">
-            <img src="./img/10_mobile_keys/right.png" id="btn_right" alt="right button">
+            <button id="btn_left">
+                <img src="./img/10_mobile_keys/left.png">
+            </button>
+            <button id="btn_right">
+                <img src="./img/10_mobile_keys/right.png">   
+            </button>
         </div>
+
         <div class="actions">
-            <img src="./img/10_mobile_keys/throw.png" id="btn_throw" alt="throw button">
-            <img src="./img/10_mobile_keys/jump.png" id="btn_jump" alt="jump button">
+            <button id="btn_throw">
+                <img src="./img/10_mobile_keys/throw.png">
+            </button>
+            <button id="btn_jump">
+                <img src="./img/10_mobile_keys/jump.png"> 
+            </button>  
         </div>
 
         <div class="turn_phone">
@@ -77,8 +84,7 @@
 
         <footer class="footer">
             LEFT = Walk left | RIGHT = Walk right | SPACE = Jump | D = Throw
-            salsa
-            bottle
+            Salsa-Bottle
         </footer>
         <img class="bottle" src="./img/6_salsa_bottle/salsa_bottle.png" alt="salsa bottle">
     </body>

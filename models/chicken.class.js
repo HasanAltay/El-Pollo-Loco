@@ -25,8 +25,8 @@ class Chicken extends MovableObject {
     this.loadImage('img/3_enemies_chicken/chicken_normal/1_walk/1_w.png');
     this.loadImages(this.IMAGES_WALKING);
     this.loadImages(this.IMAGES_DYING);
-    this.x = 330 + Math.random() * 8300; // Zahl zw. 330 und 8300
-    this.speed = 0.4 + Math.random() * 0.25;
+    this.x = 330 + Math.random() * (9000 - 350);
+    this.speed = 0.4 + Math.random() * (0.65 - 0.4);
     this.animate();
   }
   
