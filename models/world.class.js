@@ -469,26 +469,26 @@ class World {
   }
 
 
-  // playAllAudio() {
-  //   if (this.AUDIO_MUTE == false) {
+  playAllAudio() {
+    if (this.AUDIO_MUTE == false) {
 
-  //     this.music.currentTime = 1;
-  //     this.endboss_ambience_sound.currentTime = 1;
-  //     this.ambience_lvl1.currentTime = 1;
-  //     this.success_audio.currentTime = 1;
-  //     this.boss_hit_audio.currentTime = 1;
-  //     this.throw_sound.currentTime = 1;
-  //     this.bottle_smash_sound.currentTime = 1;
-  //     this.walking_sound.currentTime = 1;
-  //     this.jumping_sound.currentTime = 1;
-  //     this.hurt_audio.currentTime = 1;
-  //     this.dead_sound.currentTime = 1;
-  //     this.collecting_sound.currentTime = 1;
+      this.music.currentTime = 1;
+      this.endboss_ambience_sound.currentTime = 1;
+      this.ambience_lvl1.currentTime = 1;
+      this.success_audio.currentTime = 1;
+      this.boss_hit_audio.currentTime = 1;
+      this.throw_sound.currentTime = 1;
+      this.bottle_smash_sound.currentTime = 1;
+      this.walking_sound.currentTime = 1;
+      this.jumping_sound.currentTime = 1;
+      this.hurt_audio.currentTime = 1;
+      this.dead_sound.currentTime = 1;
+      this.collecting_sound.currentTime = 1;
 
-  //     this.AUDIO_MUTE = false;
-  //     console.log('Audio Unmuted!');
-  //   }
-  // } 
+      this.AUDIO_MUTE = false;
+      console.log('Audio Unmuted!');
+    }
+  } 
 
 
   setAllAudio() {
@@ -500,11 +500,11 @@ class World {
 
     }
 
-    // else if (this.keyboard.M && this.AUDIO_MUTE == true) {
-    //   this.AUDIO_MUTE = false
-    //   console.log('mute', this.AUDIO_MUTE)
-    //   this.audioCurrentTime(this.AUDIO_MUTE);
-    // }
+    else if (this.keyboard.M && this.AUDIO_MUTE == true) {
+      this.AUDIO_MUTE = false
+      console.log('mute', this.AUDIO_MUTE)
+      this.audioCurrentTime(this.AUDIO_MUTE);
+    }
   }
 
 

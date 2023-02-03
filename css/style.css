@@ -45,9 +45,9 @@ body {
     display: flex;
     color: #E99700;
     text-shadow: 3px 3px 4px #000000;
-    letter-spacing: 5px;
+    letter-spacing: 2px;
     white-space: nowrap;
-    font-size: 5vw;
+    font-size: 8vw;
 }
 
 .txtin40 {
