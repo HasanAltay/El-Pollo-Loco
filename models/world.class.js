@@ -43,24 +43,12 @@ class World {
     this.resetMusic();
     this.draw();
     this.setWorld();
-    this.preloadAudio();
-    this.setAudio();
+    this.initMusic();
+    this.setAudios();
     this.run();
   }
 
-  preloadAudio() {
-    // this.endboss_ambience_sound.preload = "auto";
-    // this.ambience_lvl1.preload = "auto";
-    // this.music.preload = "auto";
-    // this.success_audio.preload = "auto";
-    // this.boss_hit_audio.preload = "auto";
-    // this.throw_sound.preload = "auto";
-    // this.bottle_smash_sound.preload = "auto";
-    // this.walking_sound.preload = "auto";
-    // this.jumping_sound.preload = "auto";
-    // this.hurt_audio.preload = "auto";
-    // this.dead_sound.preload = "auto";
-    // this.collecting_sound.preload = "auto";
+  initMusic() {
     this.ambience_lvl1.play();
     this.music.play();
   }
@@ -76,7 +64,7 @@ class World {
     this.success_audio.currentTime = 0;
   }
 
-  setAudio() {
+  setAudios() {
     this.walking_sound.playbackRate = 2.2;
     this.walking_sound.volume = 1;
     this.jumping_sound.playbackRate = 0.8;
@@ -158,31 +146,30 @@ class World {
         if (bottle.isCollidingBottle(enemy)) {
           this.chicken.chicken_dead_sound.play();
           clearInterval(this.chicken.chicken_intervals.values());
-          clearInterval(this.small_chicken.small_chicken_intervals.values());
 
           if (enemy instanceof Chicken) {
-            this.boing = setInterval(() => {
+            this.rip_01 = setInterval(() => {
               enemy.playAnimation(this.chicken.IMAGES_DYING)
             }, 200)
             setTimeout(() => {
-              clearInterval(this.boing);
+              
               enemy.y = this.offScreenY;
+              clearInterval(this.rip_01);
+              clearInterval(this.chicken.chicken_intervals.values());
             }, 450)
 
           } else if (enemy instanceof SmallChicken) {
-            this.boing_sm = setInterval(() => {
+            clearInterval(this.small_chicken.small_chicken_intervals.values());
+
+            this.rip_02 = setInterval(() => {
               enemy.playAnimation(this.small_chicken.IMAGES_DYING);
               setTimeout(() => {
-                clearInterval(this.boing_sm); console.log("cleared1");
                 enemy.y = this.offScreenY;
-              }, 100)
-
-            }, 200)
-            setTimeout(() => {
-              // clearInterval(this.boing_sm);
-              enemy.y = this.offScreenY;
-            }, 300)
-
+                clearInterval(this.rip_02);
+                clearInterval(this.small_chicken.small_chicken_intervals.values());
+              }, 100);
+            }, 200);
+            
           }
         }
       });
@@ -394,13 +381,9 @@ class World {
     requestAnimationFrame(() => this.draw());
 
     // Draw the level text
-    // this.ctx.font = '26px Cactus Regular';
-    // this.ctx.fillStyle = 'white';
-    // this.measureText = this.ctx.fillText(`LEVEL 1: Kill the Chicken Boss!`, 200, 130);
-    // Set a timeout to make the level text disappear after 4 seconds
-    // setTimeout(() => {
-    //   this.ctx.clearRect(200, 130, this.ctx.measureText(`LEVEL 1: Kill the Chicken Boss!`).width, 26);
-    // }, 4000);
+    this.ctx.font = '33px Cactus Regular';
+    this.measureText = this.ctx.fillText(`Go!`, 200, 340);
+
   }
 
 

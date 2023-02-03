@@ -11,6 +11,10 @@ class SmallChicken extends MovableObject {
 
   IMAGES_DYING = [
     'img/3_enemies_chicken/chicken_small/2_dead/dead.png',
+    'img/3_enemies_chicken/chicken_small/2_dead/dead.png',
+    'img/3_enemies_chicken/chicken_small/2_dead/dead.png',
+    'img/3_enemies_chicken/chicken_small/2_dead/dead.png',
+    'img/3_enemies_chicken/chicken_small/2_dead/dead.png',
   ];
 
   world;
@@ -55,14 +59,15 @@ class SmallChicken extends MovableObject {
     let v = -6;
     let gravity = 0.1;
 
-    let interval = setInterval(() => {
+    this.fly = setInterval(() => {
+      this.small_chicken_intervals.push(this.fly);
       // Update velocity with gravity
       v += gravity;
       // Update y position with velocity
       y += v;
       // Check if the chicken has landed
       if (y >= 375) {
-        clearInterval(interval);
+        clearInterval(this.fly);
         this.y = 375;
       } else {
         this.y = y;

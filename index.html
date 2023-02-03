@@ -3,7 +3,8 @@
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0,
+            user-scalable=no">
         <title>El Pollo Loco</title>
         <link rel="icon" href="./img/11_html_img/favicon.png">
         <link rel="stylesheet" href="./css/style.css">
@@ -30,7 +31,8 @@
     <body>
         <h1 class="t1">El Pollo Loco</h1>
         <div id="fullscreen" ondblclick="screenSize()" class="main">
-            <img class="crt" src="./img/11_html_img/crt.png" alt="crt monitor filter">
+            <img class="crt" src="./img/11_html_img/crt.png"
+                alt="crt monitor filter" ontouchstart="event.preventDefault()">
             <div id="button_place" class="button_place">
                 <div class="btn_play_again btn" id="btn_play_again"
                     onclick="playAgain()">
@@ -51,36 +53,41 @@
                     <img src="./img/10_mobile_keys/left.png">
                 </button>
                 <button id="btn_right">
-                    <img src="./img/10_mobile_keys/right.png">   
+                    <img src="./img/10_mobile_keys/right.png">
                 </button>
             </div>
-    
+
             <div class="actions">
                 <button id="btn_throw">
                     <img src="./img/10_mobile_keys/throw.png">
                 </button>
                 <button id="btn_jump">
-                    <img src="./img/10_mobile_keys/jump.png"> 
-                </button>  
+                    <img src="./img/10_mobile_keys/jump.png">
+                </button>
             </div>
-            
+
             <img class="game_over" id="game_over"
-            src="./img/9_screens/congratulations.png" alt="you won screen">
+                src="./img/9_screens/congratulations.png" alt="you won screen"
+                ontouchstart="event.preventDefault()">
             <img class="you_lost" id="you_lost"
-            src="./img/9_screens/you lost.png" alt="you lost screen">
+                src="./img/9_screens/you lost.png" alt="you lost screen"
+                ontouchstart="event.preventDefault()">
         </div>
 
         <div class="settings">
             <div class="settings_btns">
-                <img src="./img/11_html_img/fullscreen.png" alt="toggle fullscreen" onclick="screenSize()">
-                <img src="./img/11_html_img/mute.png" alt="mute audio" onclick="toggleAudio()">
+                <img src="./img/11_html_img/fullscreen.png" alt="toggle
+                    fullscreen" onclick="screenSize()"
+                    ontouchstart="event.preventDefault()">
+                <img src="./img/11_html_img/mute.png" alt="mute audio"
+                    onclick="toggleAudio()"
+                    ontouchstart="event.preventDefault()">
             </div>
         </div>
 
-
-
         <div class="turn_phone">
-            <img src="img/11_html_img/turning-phone.png" alt="turn your phone">
+            <img src="img/11_html_img/turning-phone.png" alt="turn your phone"
+                ontouchstart="event.preventDefault()">
             TURN<br>YOUR<br>PHONE<br>!
         </div>
 
@@ -88,6 +95,7 @@
             LEFT = Walk left | RIGHT = Walk right | SPACE = Jump | D = Throw
             Salsa-Bottle
         </footer>
-        <img class="bottle" src="./img/6_salsa_bottle/salsa_bottle.png" alt="salsa bottle">
+        <img class="bottle" src="./img/6_salsa_bottle/salsa_bottle.png"
+            alt="salsa bottle" ontouchstart="event.preventDefault()">
     </body>
 </html>

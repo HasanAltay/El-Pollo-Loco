@@ -63,11 +63,6 @@ class Character extends MovableObject {
   ];
 
   world;
-  // walking_sound = new Audio('audio/walking.mp3');
-  // jumping_sound = new Audio('audio/jump.mp3');
-  // hit_sound = new Audio('audio/hurt.mp3');
-  // dead_sound = new Audio('audio/dead.mp3');
-  // collecting_sound = new Audio('audio/coin.mp3');
 
 
   constructor() {
@@ -83,18 +78,12 @@ class Character extends MovableObject {
     this.idle();
     this.startCharacterAnimations();
     this.animate();
-    // this.walking_sound.preload = "auto";
-    // this.jumping_sound.preload = "auto";
-    // this.hit_sound.preload = "auto";
-    // this.dead_sound.preload = "auto";
-    // this.collecting_sound.preload = "auto";
   }
 
 
   animate() {
     this.dead = false;
     setInterval(() => {
-      // this.characterMovementSound();
       this.characterMovementKeys();
     }, 1000 / 50);
   }
@@ -126,13 +115,6 @@ class Character extends MovableObject {
         for (let i = 1; i < 9999; i++) window.clearInterval(i);
       }, 1000)
     }
-  }
-
-
-  characterMovementSound() {
-    // this.walking_sound.playbackRate = 2.2;
-    // this.walking_sound.volume = 1;
-    // this.jumping_sound.playbackRate = 0.8;
   }
 
 

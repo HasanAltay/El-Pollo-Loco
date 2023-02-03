@@ -54,14 +54,13 @@ class MovableObject extends DrawableObject {
     }
     
 
-  checkCollision(mo) {
+  checkCollisionForStroke(mo) {
     if (this.isColliding(mo)) {
       let collisionX = max(this.x, mo.x);
       let collisionY = max(this.y, mo.y);
       let collisionWidth = min(this.x + this.width, mo.x + mo.width) - collisionX;
       let collisionHeight = min(this.y + this.height, mo.y + mo.height) - collisionY;
 
-      
       this.ctx.beginPath();
       this.ctx.strokeStyle = 'red';
       this.ctx.lineWidth = 2;
@@ -192,14 +191,28 @@ class MovableObject extends DrawableObject {
   }
 
 
+  // fallOut() {
+  //   let fallingSpeed = this.speed;
+  //   let fallingInterval = setInterval(() => {
+  //     if (this.y >= 440) {
+  //       this.loadImage('img/2_character_pepe/1_idle/idle/I-1.png');
+  //       this.y = 440;
+  //       this.height = 0;
+  //       this.width = 0;
+  //       clearInterval(fallingInterval);
+  //     } else {
+  //       this.y += fallingSpeed;
+  //       fallingSpeed += this.acceleration;
+  //     }
+  //   }, 40);
+  // }
+
+
   fallOut() {
     let fallingSpeed = this.speed;
     let fallingInterval = setInterval(() => {
-      if (this.y >= 440) {
-        this.loadImage('img/2_character_pepe/1_idle/idle/I-1.png');
-        this.y = 440;
-        this.height = 0;
-        this.width = 0;
+      if (this.y >= window.innerHeight) {
+        this.y = this.offScreenY;
         clearInterval(fallingInterval);
       } else {
         this.y += fallingSpeed;
