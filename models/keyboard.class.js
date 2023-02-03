@@ -1,7 +1,6 @@
 class Keyboard {
 
   constructor() {
-
     this.LEFT = false;
     this.RIGHT = false;
     this.UP = false;
@@ -9,12 +8,6 @@ class Keyboard {
     this.SPACE = false;
     this.D = false;
     this.M = false;
-
-
-    window.addEventListener("load", () => {
-      this.initialize();
-    });
-
 
     window.addEventListener("keydown", event => {
       switch (event.key) {
@@ -42,7 +35,6 @@ class Keyboard {
       }
     });
 
-
     window.addEventListener("keyup", event => {
       switch (event.key) {
         case "ArrowRight":
@@ -69,38 +61,5 @@ class Keyboard {
       }
     });
   }
-
-
-  initialize() {
-    const btnLeft = document.getElementById("btn_left");
-    const btnRight = document.getElementById("btn_right");
-    const btnThrow = document.getElementById("btn_throw");
-    const btnJump = document.getElementById("btn_jump");
-
-    btnLeft.addEventListener("touchstart", () => {
-      this.LEFT = true;
-    });
-    btnLeft.addEventListener("touchend", () => {
-      this.LEFT = false;
-    });
-    btnRight.addEventListener("touchstart", () => {
-      this.RIGHT = true;
-    });
-    btnRight.addEventListener("touchend", () => {
-      this.RIGHT = false;
-    });
-    btnThrow.addEventListener("touchstart", () => {
-      this.D = true;
-    });
-    btnThrow.addEventListener("touchend", () => {
-      this.D = false;
-    });
-    btnJump.addEventListener("touchstart", () => {
-      this.SPACE = true;
-    });
-    btnJump.addEventListener("touchend", () => {
-      this.SPACE = false;
-    });
-  }
-
+  
 }

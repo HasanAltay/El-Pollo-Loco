@@ -2,6 +2,7 @@ let canvas;
 let world;
 let keyboard = new Keyboard();
 let fullscr = false;
+let lastMoved;
 
 
 function screenSize() {
@@ -16,25 +17,25 @@ function screenSize() {
 }
 
 // to mute the browser tab. doesnt work right now!
-let audioContext = null;
-let gainNode = null;
-let audioEnabled = true;
+// let audioContext = null;
+// let gainNode = null;
+// let audioEnabled = true;
 
-function toggleAudio() {
-  if (!audioContext) {
-    audioContext = new (window.AudioContext || window.webkitAudioContext || window.mozAudioContext)();
-    gainNode = audioContext.createGain();
-    gainNode.connect(audioContext.destination);
-  }
+// function toggleAudio() {
+//   if (!audioContext) {
+//     audioContext = new (window.AudioContext || window.webkitAudioContext || window.mozAudioContext)();
+//     gainNode = audioContext.createGain();
+//     gainNode.connect(audioContext.destination);
+//   }
 
-  if (audioEnabled) {
-    gainNode.gain.value = 0;
-    audioEnabled = false;
-  } else {
-    gainNode.gain.value = 1;
-    audioEnabled = true;
-  }
-}
+//   if (audioEnabled) {
+//     gainNode.gain.value = 0;
+//     audioEnabled = false;
+//   } else {
+//     gainNode.gain.value = 1;
+//     audioEnabled = true;
+//   }
+// }
 
 
 function enterFullscreen(element) {
@@ -99,4 +100,55 @@ function init() {
     canvas = document.getElementById('canvas');
     initLevel();
     world = new World(canvas, keyboard);
+    touchButtons();
+    lastMoved = new Date().getTime();
 }
+
+
+function touchButtons() {
+    const btnLeft = document.getElementById("btn_left");
+    const btnRight = document.getElementById("btn_right");
+    const btnThrow = document.getElementById("btn_throw");
+    const btnJump = document.getElementById("btn_jump");
+
+    btnLeft.addEventListener('touchstart', (e) => {
+      e.preventDefault();
+      keyboard.LEFT = true;
+      lastMoved = new Date().getTime();
+    });
+    btnLeft.addEventListener('touchend', (e) => {
+      e.preventDefault();
+      keyboard.LEFT = false;
+      lastMoved = new Date().getTime();
+    });
+    btnRight.addEventListener('touchstart', (e) => {
+      e.preventDefault();
+      keyboard.RIGHT = true;
+      lastMoved = new Date().getTime();
+    });
+    btnRight.addEventListener('touchend', (e) => {
+      e.preventDefault();
+      keyboard.RIGHT = false;
+      lastMoved = new Date().getTime();
+    });
+    btnThrow.addEventListener('touchstart', (e) => {
+      e.preventDefault();
+      keyboard.D = true;
+      lastMoved = new Date().getTime();
+    });
+    btnThrow.addEventListener('touchend', (e) => {
+      e.preventDefault();
+      keyboard.D = false;
+      lastMoved = new Date().getTime();
+    });
+    btnJump.addEventListener('touchstart', (e) => {
+      e.preventDefault();
+      keyboard.SPACE = true;
+      lastMoved = new Date().getTime();
+    });
+    btnJump.addEventListener('touchend', (e) => {
+      e.preventDefault();
+      keyboard.SPACE = false;
+      lastMoved = new Date().getTime();
+    });
+  }

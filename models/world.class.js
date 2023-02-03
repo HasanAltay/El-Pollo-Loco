@@ -171,10 +171,15 @@ class World {
 
           } else if (enemy instanceof SmallChicken) {
             this.boing_sm = setInterval(() => {
-              enemy.playAnimation(this.small_chicken.IMAGES_DYING)
+              enemy.playAnimation(this.small_chicken.IMAGES_DYING);
+              setTimeout(() => {
+                clearInterval(this.boing_sm); console.log("cleared1");
+                enemy.y = this.offScreenY;
+              }, 100)
+
             }, 200)
             setTimeout(() => {
-              clearInterval(this.boing_sm);
+              // clearInterval(this.boing_sm);
               enemy.y = this.offScreenY;
             }, 300)
 

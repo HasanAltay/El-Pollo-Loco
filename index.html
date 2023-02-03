@@ -30,7 +30,7 @@
     <body>
         <h1 class="t1">El Pollo Loco</h1>
         <div id="fullscreen" ondblclick="screenSize()" class="main">
-            <img class="crt" src="./img/11_html_img/crt_lines.png" alt="crt monitor filter">
+            <img class="crt" src="./img/11_html_img/crt.png" alt="crt monitor filter">
             <div id="button_place" class="button_place">
                 <div class="btn_play_again btn" id="btn_play_again"
                     onclick="playAgain()">
@@ -45,6 +45,24 @@
             <canvas id="canvas" width="854" height="480">
                 Your browser does not support canvas element.
             </canvas>
+
+            <div class="walk">
+                <button id="btn_left">
+                    <img src="./img/10_mobile_keys/left.png">
+                </button>
+                <button id="btn_right">
+                    <img src="./img/10_mobile_keys/right.png">   
+                </button>
+            </div>
+    
+            <div class="actions">
+                <button id="btn_throw">
+                    <img src="./img/10_mobile_keys/throw.png">
+                </button>
+                <button id="btn_jump">
+                    <img src="./img/10_mobile_keys/jump.png"> 
+                </button>  
+            </div>
             
             <img class="game_over" id="game_over"
             src="./img/9_screens/congratulations.png" alt="you won screen">
@@ -59,23 +77,7 @@
             </div>
         </div>
 
-        <div class="walk">
-            <button id="btn_left">
-                <img src="./img/10_mobile_keys/left.png">
-            </button>
-            <button id="btn_right">
-                <img src="./img/10_mobile_keys/right.png">   
-            </button>
-        </div>
 
-        <div class="actions">
-            <button id="btn_throw">
-                <img src="./img/10_mobile_keys/throw.png">
-            </button>
-            <button id="btn_jump">
-                <img src="./img/10_mobile_keys/jump.png"> 
-            </button>  
-        </div>
 
         <div class="turn_phone">
             <img src="img/11_html_img/turning-phone.png" alt="turn your phone">
