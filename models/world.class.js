@@ -260,7 +260,7 @@ class World {
 
   checkDistanceBoss() {
     this.distance = Math.abs(this.endboss.x - this.character.x);
-    if (this.distance < 400) {
+    if (this.distance < 600) {
       this.boss_near = true;
       this.level.endboss.forEach(e => e.playAnimation(this.endboss.IMAGES_ALERT));
       console.log('Boss Chicken spotted you!');
@@ -497,7 +497,6 @@ class World {
       this.state = 0;
       console.log('unmute', this.AUDIO_MUTE)
       this.audioCurrentTime(this.state);
-
     }
 
     else if (this.keyboard.M && this.AUDIO_MUTE == true) {

@@ -51,7 +51,7 @@ drawFrameBottle(ctx) {
   ctx.lineWidth = 0;
   ctx.strokeStyle = 'yellow';
   ctx.rect(this.x +12, this.y +12, this.width -22, this.height -22);
-  ctx.stroke();
+  // ctx.stroke();
   }
 }
 
@@ -61,12 +61,6 @@ drawFrameChicken(ctx) {
   ctx.lineWidth = 0;
   ctx.strokeStyle = 'white';
   ctx.rect(this.x, this.y, this.width, this.height);
-  ctx.stroke();
-
-  // ctx.beginPath();
-  // ctx.strokeStyle = 'red';
-  // ctx.lineWidth = 2;
-  // ctx.rect(collisionX, collisionY, collisionWidth, collisionHeight);
   // ctx.stroke();
   }
 }

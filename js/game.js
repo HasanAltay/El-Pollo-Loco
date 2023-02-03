@@ -1,19 +1,23 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
-let fullscr = false;
+let fullscreen = false;
 let lastMoved;
 
 
 function screenSize() {
-    if (fullscr == true) {
-        exitFullscreen();
-        fullscr = false;
-    }
-    else if (fullscr == false) {
-        enterFullscreen(document.getElementById("fullscreen"));
-        fullscr = true;    
-    }      
+  if (fullscreen) {
+      if (document.fullscreenElement) {
+          document.exitFullscreen();
+      }
+      fullscreen = false;
+  } else {
+      let element = document.getElementById("fullscreen");
+      if (element.requestFullscreen) {
+          element.requestFullscreen();
+      }
+      fullscreen = true;    
+  }      
 }
 
 // to mute the browser tab. doesnt work right now!
