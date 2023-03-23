@@ -4,6 +4,20 @@ let keyboard = new Keyboard();
 let fullscreen = false;
 let lastMoved;
 
+// Überprüfen, ob das Gerät ein Touchscreen hat
+const isTouchDevice = "ontouchstart" in window || navigator.maxTouchPoints > 0;
+
+// Wenn es sich um ein Touchscreen-Gerät handelt, fügen Sie den Eventlistener hinzu
+if (isTouchDevice) {
+    // Wählen Sie die Elemente aus
+    const action = document.querySelector(".action");
+    const walk = document.querySelector(".walk");
+
+    // Setzen Sie den Style von visibility auf visible
+    action.style.visibility = "visible";
+    walk.style.visibility = "visible";
+}
+
 function screenSize() {
     if (fullscreen) {
         if (document.fullscreenElement) {

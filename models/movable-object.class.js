@@ -33,6 +33,16 @@ class MovableObject extends DrawableObject {
         return this.y < this.groundPos;
     }
 
+    isJumpingOn(enemy) {
+        // calculate the coordinates of the character's feet and the enemy's top
+        let charFeetY = this.y + this.height;
+        let enemyTopY = enemy.y;
+        console.log(enemy);
+        // check if the character is above the enemy's top and within a certain distance
+        return charFeetY < enemyTopY && charFeetY >= enemyTopY - this.speedY / 2 &&
+          Math.abs(this.x - enemy.x) <= enemy.width / 2;
+    }
+
     isColliding(mo) {
         let object1X = this.x + 25;
         let object1Y = this.y + 115;
@@ -191,22 +201,6 @@ class MovableObject extends DrawableObject {
         this.turn = false;
         this.walkingLeft = false;
     }
-
-    // fallOut() {
-    //   let fallingSpeed = this.speed;
-    //   let fallingInterval = setInterval(() => {
-    //     if (this.y >= 440) {
-    //       this.loadImage('img/2_character_pepe/1_idle/idle/I-1.png');
-    //       this.y = 440;
-    //       this.height = 0;
-    //       this.width = 0;
-    //       clearInterval(fallingInterval);
-    //     } else {
-    //       this.y += fallingSpeed;
-    //       fallingSpeed += this.acceleration;
-    //     }
-    //   }, 40);
-    // }
 
     fallOut() {
         let fallingSpeed = this.speed;

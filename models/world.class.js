@@ -144,6 +144,7 @@ class World {
 
         this.interval3 = setInterval(() => {
             this.checkCollisionThrowBottle();
+            // this.characterJumpKill();
         }, 5);
 
         this.interval4 = setInterval(() => {
@@ -156,7 +157,7 @@ class World {
         }, 750);
 
         this.interval6 = setInterval(() => {
-            this.jumpAttack();
+            this.bossJumpAttack();
         }, 2000);
 
         this.interval7 = setInterval(() => {
@@ -239,6 +240,48 @@ class World {
         });
     }
 
+    // check if the character is jumping on top of the enemy
+    characterJumpKill() {
+
+        this.level.enemies.forEach(enemy => {
+            if (this.character.isJumpingOn(enemy)) {
+                // console.log(enemy);
+                this.chicken.chicken_dead_sound.play();
+                clearInterval(this.chicken.chicken_intervals.values());
+
+                if (enemy instanceof Chicken) {
+                    this.rip_01 = setInterval(() => {
+                        enemy.playAnimation(this.chicken.IMAGES_DYING);
+                    }, 200);
+                    setTimeout(() => {
+                        enemy.y = this.offScreenY;
+                        clearInterval(this.rip_01);
+                        clearInterval(
+                            this.chicken.chicken_intervals.values()
+                        );
+                    }, 450);
+                } else if (enemy instanceof SmallChicken) {
+                    clearInterval(
+                        this.small_chicken.small_chicken_intervals.values()
+                    );
+
+                    this.rip_02 = setInterval(() => {
+                        enemy.playAnimation(
+                            this.small_chicken.IMAGES_DYING
+                        );
+                        setTimeout(() => {
+                            enemy.y = this.offScreenY;
+                            clearInterval(this.rip_02);
+                            clearInterval(
+                                this.small_chicken.small_chicken_intervals.values()
+                            );
+                        }, 100);
+                    }, 200);
+                }
+            }
+        });
+    }
+
     bossHit() {
         if (this.boss_hit) {
             this.endboss.energy -= 5;
@@ -263,7 +306,7 @@ class World {
         }
     }
 
-    jumpAttack() {
+    bossJumpAttack() {
         if (this.endboss.energy <= 99 && this.endboss.energy >= 0) {
             this.level.endboss.forEach(endboss => {
                 this.jump01 = setTimeout(() => {
@@ -294,6 +337,7 @@ class World {
             this.endboss.deadIsTrue();
             setTimeout(() => {
                 clearAllInterval(this.WorldIntervals.length);
+                this.level.endboss.y = this.offScreenY;
             }, 160);
         }
     }
@@ -332,8 +376,8 @@ class World {
 
     // character hit enemy then lose health
     checkCollisions() {
-        this.level.enemies.forEach((enemy, endboss) => {
-            if (this.character.isColliding(enemy, endboss)) {
+        this.level.enemies.forEach((enemy) => {
+            if (this.character.isColliding(enemy)) {
                 this.character.hit();
                 this.statusBar.setPercentage(this.character.energy);
                 console.log(
