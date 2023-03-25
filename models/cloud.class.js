@@ -1,45 +1,43 @@
 class Cloud extends MovableObject {
     y = 40;
     x = 0;
-    width = 500;
-    height = 280;
+    width = 400;
+    height = 100;
     clouds = [];
     cloudImages = [
-        "img/5_background/4_clouds/1.png",
-        "img/5_background/4_clouds/2.png",
+        "img/5_background/clouds_1.png",
+        "img/5_background/clouds_2.png",
     ];
     currentImage = 0;
 
     constructor() {
         super().loadImage(this.cloudImages[this.currentImage]);
         this.currentImage = (this.currentImage + 1) % this.cloudImages.length;
-        this.generateRandomPosition();
+        this.generatePosition();
         this.animate();
         this.clouds.push(this);
     }
 
-    generateRandomPosition() {
-        let x = -1000 + Math.random() * 12000;
-        while (this.checkOverlap(x)) {
-            x = -1000 + Math.random() * 12000;
-        }
-        this.x = x;
-    }
-
-    checkOverlap(x) {
+    generatePosition() {
+        let x = Math.random() * 9000;
+        let overlap = false;
         for (let i = 0; i < this.clouds.length; i++) {
             let cloud = this.clouds[i];
-            if (cloud === this) continue;
-            if (x > cloud.x - this.width && x < cloud.x + cloud.width) {
-                return true;
+            if (x > cloud.x - this.width && x < cloud.x + cloud.width + 200) {
+                overlap = true;
+                break;
             }
         }
-        return false;
+        if (overlap) {
+            this.generatePosition();
+        } else {
+            this.x = x;
+        }
     }
 
     animate() {
         setInterval(() => {
             this.moveLeft();
-        }, 1000 / 18);
+        }, 1000 / 40);
     }
 }

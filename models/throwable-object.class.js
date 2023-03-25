@@ -20,7 +20,7 @@ class ThrowableObject extends MovableObject {
     ];
     throw_sound = new Audio("audio/throw.mp3");
     bottle_smash_sound = new Audio("audio/breaking_glass.mp3");
-    groundPos = 355;
+    groundPos = 430;
 
     constructor(x, y) {
         super();
@@ -50,7 +50,7 @@ class ThrowableObject extends MovableObject {
                 this.x += 32;
                 this.playAnimation(this.IMAGES_BOTTLE);
             } else {
-                this.y = 370;
+                this.y = 430;
                 this.playAnimation(this.IMAGES_BOTTLE_SPLASH);
                 this.bottle_smash_sound.currentTime = 0;
                 this.bottle_smash_sound.play();

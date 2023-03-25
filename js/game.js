@@ -3,20 +3,27 @@ let world;
 let keyboard = new Keyboard();
 let fullscreen = false;
 let lastMoved;
+let touchStartTime = 0;
+const doubleTouchThreshold = 500; // in milliseconds
 
-// Überprüfen, ob das Gerät ein Touchscreen hat
-const isTouchDevice = "ontouchstart" in window || navigator.maxTouchPoints > 0;
+window.addEventListener("load", function()  {
+    const isTouchDevice = "ontouchstart" in window || navigator.maxTouchPoints > 0;
+  
+    if (isTouchDevice) {
+      let action = document.getElementById("actions");
+      let walk = document.getElementById("walk");
+      action.style.visibility = "visible";
+      walk.style.visibility = "visible";
+      touchButtons();
+    }
+});
 
-// Wenn es sich um ein Touchscreen-Gerät handelt, fügen Sie den Eventlistener hinzu
-if (isTouchDevice) {
-    // Wählen Sie die Elemente aus
-    const action = document.querySelector(".action");
-    const walk = document.querySelector(".walk");
-
-    // Setzen Sie den Style von visibility auf visible
-    action.style.visibility = "visible";
-    walk.style.visibility = "visible";
-}
+function isTouchDevice() {
+    const userAgent = navigator.userAgent.toLowerCase();
+    const isMobile = /iphone|ipod|ipad|android|blackberry|webos|windows phone|iemobile|opera mini/i.test(userAgent);
+    const isTablet = /ipad|android|windows (?!phone)/i.test(userAgent);
+    return isMobile || isTablet;
+  }
 
 function screenSize() {
     if (fullscreen) {
@@ -99,6 +106,20 @@ function touchButtons() {
     const btnRight = document.getElementById("btn_right");
     const btnThrow = document.getElementById("btn_throw");
     const btnJump = document.getElementById("btn_jump");
+    let lastTouched = 0;
+    let timeout;
+
+    function handleDoubleTap() {
+        clearTimeout(timeout);
+        lastTouched = 0;
+        screenSize();
+    }
+
+    function handleSingleTap() {
+        timeout = setTimeout(() => {
+            lastTouched = 0;
+        }, 250);
+    }
 
     btnLeft.addEventListener("touchstart", e => {
         e.preventDefault();
@@ -140,4 +161,12 @@ function touchButtons() {
         keyboard.SPACE = false;
         lastMoved = new Date().getTime();
     });
+
+    const now = new Date().getTime();
+    if (now - lastTouched < 250) {
+        handleDoubleTap();
+    } else {
+        handleSingleTap();
+    }
+    lastTouched = now;
 }

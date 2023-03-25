@@ -32,7 +32,7 @@
     </head>
 
     <body>
-        <h1 class="t1">El Pollo Loco</h1>
+        <span class="t1">El Pollo Loco</span>
         <div id="fullscreen" ondblclick="screenSize()" class="main">
             <img
                 class="crt"
@@ -57,11 +57,11 @@
                 </div>
             </div>
 
-            <canvas id="canvas" width="854" height="480">
+            <canvas id="canvas" width="960" height="540">
                 Your browser does not support canvas element.
             </canvas>
 
-            <div class="walk">
+            <div class="walk" id="walk">
                 <button id="btn_left">
                     <img src="./img/10_mobile_keys/left.png" />
                 </button>
@@ -70,7 +70,7 @@
                 </button>
             </div>
 
-            <div class="actions">
+            <div class="actions" id="actions">
                 <button id="btn_throw">
                     <img src="./img/10_mobile_keys/throw.png" />
                 </button>
@@ -98,16 +98,16 @@
         <div class="settings">
             <div class="settings_btns">
                 <img
+                    src="./img/11_html_img/mute.png"
+                    alt="mute audio"
+                    onclick="toggleAudio()"
+                    ontouchstart="event.preventDefault()"
+                />
+                <img
                     src="./img/11_html_img/fullscreen.png"
                     alt="toggle
                     fullscreen"
                     onclick="screenSize()"
-                    ontouchstart="event.preventDefault()"
-                />
-                <img
-                    src="./img/11_html_img/mute.png"
-                    alt="mute audio"
-                    onclick="toggleAudio()"
                     ontouchstart="event.preventDefault()"
                 />
             </div>
@@ -126,11 +126,22 @@
             LEFT = Walk left | RIGHT = Walk right | SPACE = Jump | D = Throw
             Salsa-Bottle
         </footer>
-        <img
-            class="bottle"
-            src="./img/6_salsa_bottle/salsa_bottle.png"
-            alt="salsa bottle"
-            ontouchstart="event.preventDefault()"
-        />
+
+        <!-- preloading game images -->
+        <div class="preload_hide">
+            <img src="./img/5_background/desert_1.png" alt="game image" />
+            <img src="./img/5_background/desert_2.png" alt="game image" />
+            <img src="./img/5_background/cacti.png" alt="game image" />
+            <img src="./img/5_background/mountains.png" alt="game image" />
+            <img src="./img/5_background/air.png" alt="game image" />
+            <img src="./img/5_background/bottle_boxes.png" alt="game image" />
+            <img src="./img/5_background/house.png" alt="game image" />
+            <img src="./img/5_background/pickup_car.png" alt="game image" />
+            <img src="./img/5_background/clouds_1.png" alt="game image" />
+            <img src="./img/5_background/clouds_2.png" alt="game image" />
+            <img src="./img/5_background/pickup_bottle.png" alt="game image" />
+            <img src="./img/5_background/hay_car.png" alt="game image" />
+            <img src="./img/5_background/hay.png" alt="game image" />
+        </div>
     </body>
 </html>

@@ -1,7 +1,7 @@
 class SmallChicken extends MovableObject {
     width = 55;
     height = 55;
-    y = 375;
+    y = 400;
 
     IMAGES_WALKING = [
         "img/3_enemies_chicken/chicken_small/1_walk/1_w.png",
@@ -28,8 +28,8 @@ class SmallChicken extends MovableObject {
         this.loadImage("img/3_enemies_chicken/chicken_small/1_walk/1_w.png");
         this.loadImages(this.IMAGES_WALKING);
         this.loadImages(this.IMAGES_DYING);
-        this.x = 330 + Math.random() * (9000 - 350);
-        this.speed = 0.4 + Math.random() * (0.65 - 0.4);
+        this.x = 1000 + Math.random() * (8000);
+        this.speed = 0.5 + Math.random() * (0.65 - 0.4);
         this.animate();
         this.animateJump();
     }
@@ -67,13 +67,15 @@ class SmallChicken extends MovableObject {
             // Update y position with velocity
             y += v;
             // Check if the chicken has landed
-            if (y >= 375) {
+            if (y >= 400) {
                 clearInterval(this.fly);
-                this.y = 375;
+                this.y = 400;
             } else {
                 this.y = y;
                 this.x += this.speed;
             }
         }, 10);
     }
+
+    
 }

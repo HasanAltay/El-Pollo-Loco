@@ -2,183 +2,87 @@ let level1;
 
 function initLevel() {
     let air = "img/5_background/air.png";
-    let first_layer_2 = "img/5_background/1_first_layer/2.png";
-    let second_layer_2 = "img/5_background/2_second_layer/layer_2.png";
-    let third_layer_2 = "img/5_background/3_third_layer/layer_3.png";
-    let first_layer_1 = "img/5_background/1_first_layer/1.png";
-    let second_layer_1 = "img/5_background/2_second_layer/layer_2.png";
-    let third_layer_1 = "img/5_background/3_third_layer/layer_3.png";
-    let house = "img/5_background/5_objects/house.png";
-    let hay_car = "img/5_background/5_objects/hay_car.png";
-    let hay = "img/5_background/5_objects/hay.png";
-    let bottle_boxes = "img/5_background/5_objects/bottle_boxes.png";
-    let pickup_bottle = "img/5_background/5_objects/pickup_bottle.png";
-    let y2_adjust = -80;
-    let y3_adjust = -80;
+    let second_layer = "img/5_background/cacti.png";
+    let third_layer = "img/5_background/mountains.png";
+    let first_layer_1 = "img/5_background/desert_1.png";
+    let first_layer_2 = "img/5_background/desert_2.png";
+    let house = "img/5_background/house.png";
+    let hay_car = "img/5_background/hay_car.png";
+    let hay = "img/5_background/hay.png";
+    let bottle_boxes = "img/5_background/bottle_boxes.png";
+    let pickup_bottle = "img/5_background/pickup_bottle.png";
+    let cacti_y_adjust = -95;
+    let mountains_y_adjust = -30;
 
     level1 = new Level(
         (endboss = [new Endboss()]),
-
-        (coins = [
-            new Coins(-100, 340),
-            new Coins(-300, 340),
-            new Coins(-555, 210),
-            new Coins(0, 200),
-            new Coins(100, 340),
-            new Coins(200, 340),
-            new Coins(250, 340),
-            new Coins(330, 200),
-            new Coins(400, 340),
-            new Coins(1000, 340),
-            new Coins(1160, 340),
-            new Coins(1160, 200),
-            new Coins(1500, 340),
-            new Coins(1800, 340),
-            new Coins(2000, 200),
-            new Coins(2200, 340),
-            new Coins(2500, 340),
-            new Coins(2800, 340),
-            new Coins(3000, 340),
-            new Coins(3200, 200),
-            new Coins(5500, 340),
-            new Coins(5800, 340),
-            new Coins(5900, 340),
-            new Coins(6500, 340),
-            new Coins(6800, 340),
-            new Coins(7800, 340),
-            new Coins(7900, 340),
-            new Coins(8000, 340),
-            new Coins(8000, 200),
-            new Coins(8000, 240),
-        ]),
-
-        (enemies = [
-            new Chicken(),
-            new Chicken(),
-            new SmallChicken(),
-            new Chicken(),
-            new SmallChicken(),
-            new Chicken(),
-            new Chicken(),
-            new SmallChicken(),
-            new Chicken(),
-            new Chicken(),
-            new SmallChicken(),
-            new Chicken(),
-            new Chicken(),
-            new SmallChicken(),
-            new SmallChicken(),
-            new SmallChicken(),
-            new Chicken(),
-            new Chicken(),
-            new SmallChicken(),
-            new SmallChicken(),
-            new Chicken(),
-            new Chicken(),
-            new SmallChicken(),
-        ]),
-
-        (clouds = [
-            new Cloud(),
-            new Cloud(),
-            new Cloud(),
-            new Cloud(),
-            new Cloud(),
-            new Cloud(),
-            new Cloud(),
-            new Cloud(),
-            new Cloud(),
-            new Cloud(),
-            new Cloud(),
-            new Cloud(),
-            new Cloud(),
-            new Cloud(),
-            new Cloud(),
-            new Cloud(),
-            new Cloud(),
-        ]),
-
-        (backgroundObjects = [
-            new BackgroundObject(air, -719, 0),
-            new BackgroundObject(third_layer_2, -719, y3_adjust),
-            new BackgroundObject(second_layer_2, -719, y2_adjust),
-            new BackgroundObject(first_layer_2, -719, 0),
-            new BackgroundObject(house, -700, -21),
-            new BackgroundObject(bottle_boxes, -1200, 0),
-
-            new BackgroundObject(air, 0, 0),
-            new BackgroundObject(third_layer_1, 0, y3_adjust),
-            new BackgroundObject(second_layer_1, 0, y2_adjust),
-            new BackgroundObject(first_layer_1, 0, 0),
-            new BackgroundObject(pickup_bottle, -100, -16),
-
-            new BackgroundObject(air, 719, 0),
-            new BackgroundObject(third_layer_2, 719, y3_adjust),
-            new BackgroundObject(second_layer_2, 719, y2_adjust),
-            new BackgroundObject(first_layer_2, 719, 0),
-
-            new BackgroundObject(air, 719 * 2, 0),
-            new BackgroundObject(third_layer_1, 719 * 2, y3_adjust),
-            new BackgroundObject(second_layer_1, 719 * 2, y2_adjust),
-            new BackgroundObject(first_layer_1, 719 * 2, 0),
-
-            new BackgroundObject(air, 719 * 3, 0),
-            new BackgroundObject(third_layer_2, 719 * 3, y3_adjust),
-            new BackgroundObject(second_layer_2, 719 * 3, y2_adjust),
-            new BackgroundObject(first_layer_2, 719 * 3, 0),
-
-            new BackgroundObject(air, 719 * 4, 0),
-            new BackgroundObject(third_layer_1, 719 * 4, y3_adjust),
-            new BackgroundObject(second_layer_1, 719 * 4, y2_adjust),
-            new BackgroundObject(first_layer_1, 719 * 4, 0),
-            new BackgroundObject(hay_car, 719 * 4, -20),
-
-            new BackgroundObject(air, 719 * 5, 0),
-            new BackgroundObject(third_layer_2, 719 * 5, y3_adjust),
-            new BackgroundObject(second_layer_2, 719 * 5, y2_adjust),
-            new BackgroundObject(first_layer_2, 719 * 5, 0),
-
-            new BackgroundObject(air, 719 * 6, 0),
-            new BackgroundObject(third_layer_1, 719 * 6, y3_adjust),
-            new BackgroundObject(second_layer_1, 719 * 6, y2_adjust),
-            new BackgroundObject(first_layer_1, 719 * 6, 0),
+        (coins = []),
+        (enemies = []),
+        (clouds = []),
+        (backgroundSky = []),
+        (backgroundMountains = []),
+        (backgroundCacti = []),
+        (backgroundObjects = []),
+        (backgroundItems = [
+            new BackgroundObject(house, 490, -21),
+            new BackgroundObject(bottle_boxes, -440, 0),
+            new BackgroundObject(pickup_bottle, 1170, -16),
+            new BackgroundObject(hay_car, 719 * 4, 0),
             new BackgroundObject(hay, 719 * 6, -10), // x = 4300
-
-            new BackgroundObject(air, 719 * 7, 0),
-            new BackgroundObject(third_layer_2, 719 * 7, y3_adjust),
-            new BackgroundObject(second_layer_2, 719 * 7, y2_adjust),
-            new BackgroundObject(first_layer_2, 719 * 7, 0),
-
-            new BackgroundObject(air, 719 * 8, 0),
-            new BackgroundObject(third_layer_1, 719 * 8, y3_adjust),
-            new BackgroundObject(second_layer_1, 719 * 8, y2_adjust),
-            new BackgroundObject(first_layer_1, 719 * 8, 0),
-
-            new BackgroundObject(air, 719 * 9, 0),
-            new BackgroundObject(third_layer_2, 719 * 9, y3_adjust),
-            new BackgroundObject(second_layer_2, 719 * 9, y2_adjust),
-            new BackgroundObject(first_layer_2, 719 * 9, 0),
-
-            new BackgroundObject(air, 719 * 10, 0),
-            new BackgroundObject(third_layer_1, 719 * 10, y3_adjust),
-            new BackgroundObject(second_layer_1, 719 * 10, y2_adjust),
-            new BackgroundObject(first_layer_1, 719 * 10, 0),
-
-            new BackgroundObject(air, 719 * 11, 0),
-            new BackgroundObject(third_layer_2, 719 * 11, y3_adjust),
-            new BackgroundObject(second_layer_2, 719 * 11, y2_adjust),
-            new BackgroundObject(first_layer_2, 719 * 11, 0),
-
-            new BackgroundObject(air, 719 * 12, 0), // x = 8300
-            new BackgroundObject(third_layer_1, 719 * 12, y3_adjust),
-            new BackgroundObject(second_layer_1, 719 * 12, y2_adjust),
-            new BackgroundObject(first_layer_1, 719 * 12, 0),
-
-            new BackgroundObject(air, 719 * 13, 0),
-            new BackgroundObject(third_layer_2, 719 * 13, y3_adjust),
-            new BackgroundObject(second_layer_2, 719 * 13, y2_adjust),
-            new BackgroundObject(first_layer_2, 719 * 13, 0),
             new BackgroundObject(hay, 719 * 13, -10), // x = 9300
-        ])
+        ]),
     );
+
+    for (let i = 0; i < 14; i++) {
+        backgroundSky.push(
+            new BackgroundObject(air, (960-1) * i, 0),
+        );
+
+        backgroundMountains.push(
+            new BackgroundObject(third_layer, (960-1) * i, mountains_y_adjust),
+        );
+
+        backgroundCacti.push(
+            new BackgroundObject(second_layer, (960-1) * i, cacti_y_adjust),
+        );
+
+        let first_layer = (i % 2 === 0) ? first_layer_1 : first_layer_2;
+        backgroundObjects.push(
+            new BackgroundObject(first_layer, (960-1) * i, 0),
+        );
+
+        clouds.push(
+            new Cloud(),
+        );
+
+        // random enemies.
+        const randomEnemy = Math.random() < 0.5 ? new Chicken() : new SmallChicken();
+        enemies.push(randomEnemy);
+    }
+
+    const coinDistance = 30; // minimum distance between coins
+    const totalCoins = 30; // total number of coins
+    for (let i = 0; i < totalCoins; i++) {
+        let isOverlap = true;
+        let randomX, randomY;
+    
+        // generate random coordinates until a non-overlapping one is found
+        while (isOverlap) {
+            isOverlap = false;
+            randomX = Math.floor(Math.random() * 7400) + 600;
+            randomY = Math.random() < 0.5 ? 360 : 220;
+    
+            // check if the new coin overlaps with any of the existing coins
+            for (let j = 0; j < coins.length; j++) {
+                let existingCoin = coins[j];
+                let distance = Math.sqrt(Math.pow(existingCoin.x - randomX, 2) + Math.pow(existingCoin.y - randomY, 2));
+                if (distance < coinDistance) {
+                    isOverlap = true;
+                    break;
+                }
+            }
+        }
+        // add the non-overlapping coin to the coins array
+        coins.push(new Coins(randomX, randomY));
+    }
 }

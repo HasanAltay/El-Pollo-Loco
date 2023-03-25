@@ -47,25 +47,51 @@ class World {
         this.run();
     }
 
-        draw() {
+    draw() {
         // Clear the canvas
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         // Translate the canvas to the camera position
         this.ctx.translate(this.camera_x, 0);
-        // Draw the background objects
+        // sky
+        this.ctx.save();
+        this.ctx.translate(-this.camera_x, 0);
+        this.level.backgroundSky.forEach(obj => obj.draw(this.ctx));
+        this.ctx.restore();
+        // parallax mountain background
+        this.ctx.save();
+        this.ctx.translate(-this.camera_x * 0.2, 0);
+        this.level.backgroundMountains.forEach(obj => obj.draw(this.ctx));
+        this.ctx.restore();
+        // parallax cacti background
+        this.ctx.save();
+        this.ctx.translate(-this.camera_x * 0.1, 0);
+        this.level.backgroundCacti.forEach(obj => obj.draw(this.ctx));
+        this.ctx.restore();
+        // background desert walking ground
+        this.ctx.save();
+        this.ctx.translate(-this.camera_x * 0.01, 0);
         this.level.backgroundObjects.forEach(obj => obj.draw(this.ctx));
+        this.ctx.restore();
+        // draw items like house, cars and haystacks
+        this.ctx.save();
+        this.ctx.translate(-this.camera_x * 0.0, 0);
+        this.level.backgroundItems.forEach(obj => obj.draw(this.ctx));
+        this.ctx.restore();
         // Draw the clouds
+        this.ctx.save();
+        this.ctx.translate(-this.camera_x * 0.5, 0);
         this.level.clouds.forEach(cloud => cloud.draw(this.ctx));
+        this.ctx.restore();
         // Draw the coins
-        this.level.coins.forEach(coin => coin.draw(this.ctx));
+        this.addObjectsToMap(this.level.coins);
         // Draw the character
         this.addToMap(this.character);
         // Draw the enemies
-        this.level.enemies.forEach(enemy => enemy.draw(this.ctx));
+        this.addObjectsToMap(this.level.enemies);
         // Draw the endboss
-        this.level.endboss.forEach(endboss => endboss.draw(this.ctx));
+        this.addObjectsToMap(this.level.endboss);
         // Draw the throwable object
-        this.throwableObject.forEach(obj => obj.draw(this.ctx));
+        this.addObjectsToMap(this.throwableObject);
         // Translate the canvas back to the original position
         this.ctx.translate(-this.camera_x, 0);
         // Draw the status bar
@@ -79,8 +105,7 @@ class World {
         // Draw the number of coins collected
         this.ctx.fillStyle = "white";
         this.ctx.font = "26px Cactus Regular";
-        this.ctx.fillText(`x ${this.collectedCoins.length} / 30`, 408, 54);
-
+        this.ctx.fillText(`x ${this.collectedCoins.length} / 30`, 468, 54);
         // Draw Blend in from Black Screen
         this.darkness -= 0.005;
         this.ctx.fillStyle = "rgba(0, 0, 0, " + this.darkness + ")";
@@ -242,42 +267,41 @@ class World {
 
     // check if the character is jumping on top of the enemy
     characterJumpKill() {
-
         this.level.enemies.forEach(enemy => {
-            if (this.character.isJumpingOn(enemy)) {
-                // console.log(enemy);
-                this.chicken.chicken_dead_sound.play();
-                clearInterval(this.chicken.chicken_intervals.values());
+            if (this.character.isJumpingOn(enemy instanceof Chicken)) {
+                console.log("kill");
+                // this.chicken.chicken_dead_sound.play();
+                // clearInterval(this.chicken.chicken_intervals.values());
 
-                if (enemy instanceof Chicken) {
-                    this.rip_01 = setInterval(() => {
-                        enemy.playAnimation(this.chicken.IMAGES_DYING);
-                    }, 200);
-                    setTimeout(() => {
-                        enemy.y = this.offScreenY;
-                        clearInterval(this.rip_01);
-                        clearInterval(
-                            this.chicken.chicken_intervals.values()
-                        );
-                    }, 450);
-                } else if (enemy instanceof SmallChicken) {
-                    clearInterval(
-                        this.small_chicken.small_chicken_intervals.values()
-                    );
+                // if (enemy instanceof Chicken) {
+                //     this.rip_01 = setInterval(() => {
+                //         enemy.playAnimation(this.chicken.IMAGES_DYING);
+                //     }, 200);
+                //     setTimeout(() => {
+                //         enemy.y = this.offScreenY;
+                //         clearInterval(this.rip_01);
+                //         clearInterval(
+                //             this.chicken.chicken_intervals.values()
+                //         );
+                //     }, 450);
+                // } else if (enemy instanceof SmallChicken) {
+                //     clearInterval(
+                //         this.small_chicken.small_chicken_intervals.values()
+                //     );
 
-                    this.rip_02 = setInterval(() => {
-                        enemy.playAnimation(
-                            this.small_chicken.IMAGES_DYING
-                        );
-                        setTimeout(() => {
-                            enemy.y = this.offScreenY;
-                            clearInterval(this.rip_02);
-                            clearInterval(
-                                this.small_chicken.small_chicken_intervals.values()
-                            );
-                        }, 100);
-                    }, 200);
-                }
+                //     this.rip_02 = setInterval(() => {
+                //         enemy.playAnimation(
+                //             this.small_chicken.IMAGES_DYING
+                //         );
+                //         setTimeout(() => {
+                //             enemy.y = this.offScreenY;
+                //             clearInterval(this.rip_02);
+                //             clearInterval(
+                //                 this.small_chicken.small_chicken_intervals.values()
+                //             );
+                //         }, 100);
+                //     }, 200);
+                // }
             }
         });
     }
@@ -376,7 +400,7 @@ class World {
 
     // character hit enemy then lose health
     checkCollisions() {
-        this.level.enemies.forEach((enemy) => {
+        this.level.enemies.forEach(enemy => {
             if (this.character.isColliding(enemy)) {
                 this.character.hit();
                 this.statusBar.setPercentage(this.character.energy);

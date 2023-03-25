@@ -25,7 +25,7 @@ class MovableObject extends DrawableObject {
         if (this instanceof ThrowableObject) {
             return true;
         } else {
-            return this.y < 180;
+            return this.y < 220;
         }
     }
 
@@ -37,17 +37,26 @@ class MovableObject extends DrawableObject {
         // calculate the coordinates of the character's feet and the enemy's top
         let charFeetY = this.y + this.height;
         let enemyTopY = enemy.y;
-        console.log(enemy);
+        // console.log(enemy);
+        console.log('kill')
         // check if the character is above the enemy's top and within a certain distance
-        return charFeetY < enemyTopY && charFeetY >= enemyTopY - this.speedY / 2 &&
-          Math.abs(this.x - enemy.x) <= enemy.width / 2;
-    }
-
+        if (
+          charFeetY < enemyTopY &&
+          charFeetY >= enemyTopY - this.speedY / 2 &&
+          Math.abs(this.x - enemy.x) <= enemy.width / 2
+        ) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+      
     isColliding(mo) {
         let object1X = this.x + 25;
         let object1Y = this.y + 115;
-        let object1Width = this.width - 65;
+        let object1Width = this.width - 63;
         let object1Height = this.height - 128;
+
         let object2X = mo.x;
         let object2Y = mo.y;
         let object2Width = mo.width;
@@ -84,10 +93,10 @@ class MovableObject extends DrawableObject {
     }
 
     isCollidingBottle(mo) {
-        let object1X = this.x; //+25
-        let object1Y = this.y; //+115
-        let object1Width = this.width; // -63
-        let object1Height = this.height; // -128
+        let object1X = this.x;
+        let object1Y = this.y;
+        let object1Width = this.width;
+        let object1Height = this.height;
         let object2X = mo.x + 7;
         let object2Y = mo.y + 7;
         let object2Width = mo.width - 7;
@@ -194,6 +203,11 @@ class MovableObject extends DrawableObject {
     moveLeft() {
         this.x -= this.speed;
         this.walkingLeft = true;
+
+        if (this.x <= 20) {
+            // Remove the object from the game
+            this.x = 8000;
+        }
     }
 
     moveRight() {

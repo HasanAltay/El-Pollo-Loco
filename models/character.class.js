@@ -1,11 +1,12 @@
 class Character extends MovableObject {
     width = 120;
     height = 240;
-    y = 195;
-    x = -500;
+    y = 220;
+    x = 800;
     speed = 5;
     afkTimer = 0;
     pepe = "img/2_character_pepe/";
+    character_onscreen_position = 240;
 
     IMAGES_IDLE = [
         this.pepe + "1_idle/idle/I-1.png",
@@ -114,14 +115,14 @@ class Character extends MovableObject {
     characterMovementKeys() {
         if (
             this.world.keyboard.RIGHT &&
-            this.x < this.world.level.level_end_x
+            this.x < this.world.level.level_end
         ) {
             this.moveRight();
             this.world.walking_sound.play();
             this.walkingLeft = false;
             this.afkTimer = 0;
         }
-        if (this.world.keyboard.LEFT && this.x > -625) {
+        if (this.world.keyboard.LEFT && this.x > this.world.level.level_start) {
             this.turn = true;
             this.walkingLeft = true;
             this.moveLeft();
@@ -138,7 +139,7 @@ class Character extends MovableObject {
         if (this.world.keyboard.D) {
             this.afkTimer = 0;
         }
-        this.world.camera_x = -this.x + 90;
+        this.world.camera_x = -this.x + this.character_onscreen_position;
     }
 
     startCharacterAnimations() {

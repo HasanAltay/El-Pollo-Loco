@@ -1,19 +1,14 @@
+/* Cactus Regular - latin */
 @font-face {
+    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
     font-family: 'Cactus Regular';
     font-style: normal;
     font-weight: 400;
-    src: url('../fonts/Cactus Regular.otf');
-    src: local(''),
-        url('../fonts/Cactus Regular.otf') format('embedded-opentype'),
-}
-
-@font-face {
-    font-family: 'Boogaloo-Regular';
-    font-style: normal;
-    font-weight: 400;
-    src: url('../fonts/Boogaloo-Regular.ttf');
-    src: local(''),
-        url('../fonts/Boogaloo-Regular.ttf') format('.ttf'),
+    src: url('../fonts/Cactus Regular.eot'); /* IE9 Compat Modes */
+    src: url('../fonts/Cactus Regular.woff2') format('woff2'), /* Super Modern Browsers */
+         url('../fonts/Cactus Regular.woff') format('woff'), /* Modern Browsers */
+         url('../fonts/Cactus Regular.ttf') format('truetype'), /* Safari, Android, iOS */
+         url('../fonts/Cactus Regular.svg#Cactus Regular') format('svg'); /* Legacy iOS */
 }
 
 body {
@@ -36,8 +31,8 @@ body {
     position: absolute;
     width: 100%;
     filter: opacity(10%);
-    min-width: 720px;
-    min-height: 480px;
+    min-width: 960px;
+    min-height: 540px;
     object-fit: cover;
 }
 
@@ -48,6 +43,7 @@ body {
     letter-spacing: 2px;
     white-space: nowrap;
     font-size: 8vw;
+    padding-top: 20px;
 }
 
 .txtin40 {
@@ -85,7 +81,7 @@ canvas {
     position: static;
     display: flex;
     color: white;
-    max-width: 800px;
+    max-width: 900px;
     width: 100%;
     align-items: center;
     justify-content: right;
@@ -99,12 +95,16 @@ canvas {
 }
 
 .settings_btns img {
-    width: 24px;
+    width: 32px;
     padding: 5px;
     margin-left: 10px;
     margin-right: 10px;
     margin-top: 5px;
     cursor: pointer;
+}
+
+.settings_btns img:hover {
+    filter: opacity(50%);
 }
 
 .settings_btns img:active {
@@ -179,7 +179,7 @@ canvas {
 
 .footer {
     position: fixed;
-    height: 50px;
+    height: 70px;
     bottom: 0px;
     left: 0px;
     right: 0px;
@@ -190,7 +190,7 @@ canvas {
     font-family: 'Cactus Regular', monospace;
     font-weight: 100;
     font-style: italic;
-    font-size: 1rem;
+    font-size: 1.3rem;
     color: #f0e676;
     letter-spacing: 2px;
     text-shadow: 2px 2px 3px #000000;
@@ -318,6 +318,10 @@ button {
 
 .walk img:active {
     filter: invert(0);
+}
+
+.preload_hide {
+    display: none;
 }
 
 @media only screen and (min-width: 1400px) {

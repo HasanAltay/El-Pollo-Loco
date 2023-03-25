@@ -35,7 +35,7 @@ class DrawableObject {
     drawFrame(ctx) {
         if (this instanceof Character) {
             ctx.beginPath();
-            ctx.lineWidth = 0;
+            ctx.lineWidth = 2;
             ctx.strokeStyle = "white";
             ctx.rect(
                 this.x + 25,
@@ -50,7 +50,7 @@ class DrawableObject {
     drawFrameBottle(ctx) {
         if (this instanceof ThrowableObject) {
             ctx.beginPath();
-            ctx.lineWidth = 0;
+            ctx.lineWidth = 1;
             ctx.strokeStyle = "yellow";
             ctx.rect(
                 this.x + 12,
@@ -65,9 +65,14 @@ class DrawableObject {
     drawFrameChicken(ctx) {
         if (this instanceof Chicken) {
             ctx.beginPath();
-            ctx.lineWidth = 0;
+            ctx.lineWidth = 2;
             ctx.strokeStyle = "white";
-            ctx.rect(this.x, this.y, this.width, this.height);
+            ctx.rect(
+                this.x + 12,
+                this.y + 12,
+                this.width - 22,
+                this.height - 22
+            );
             // ctx.stroke();
         }
     }
@@ -75,9 +80,14 @@ class DrawableObject {
     drawFrameCoin(ctx) {
         if (this instanceof Coins) {
             ctx.beginPath();
-            ctx.lineWidth = 0;
-            ctx.strokeStyle = "white";
-            ctx.rect(this.x + 4, this.y + 4, this.width - 8, this.height - 8);
+            ctx.lineWidth = 2;
+            ctx.strokeStyle = "orange";
+            ctx.rect(
+                this.x, 
+                this.y, 
+                this.width,
+                this.height
+            );
             // ctx.stroke();
         }
     }
@@ -85,9 +95,14 @@ class DrawableObject {
     drawFrameEndboss(ctx) {
         if (this instanceof Endboss) {
             ctx.beginPath();
-            ctx.lineWidth = 0;
-            ctx.strokeStyle = "white";
-            ctx.rect(this.x, this.y, this.width, this.height);
+            ctx.lineWidth = 2;
+            ctx.strokeStyle = "red";
+            ctx.rect(
+                this.x, 
+                this.y, 
+                this.width, 
+                this.height
+            );
             // ctx.stroke();
         }
     }
