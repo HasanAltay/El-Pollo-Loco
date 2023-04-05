@@ -134,7 +134,6 @@ class Character extends MovableObject {
             this.world.walking_sound.pause();
             this.world.jumping_sound.play();
             this.afkTimer = 0;
-            // this.world.music_play = true;
         }
         if (this.world.keyboard.D) {
             this.afkTimer = 0;

@@ -10,6 +10,24 @@ class Keyboard {
 
         window.addEventListener("keydown", event => {
             switch (event.key) {
+                // Other cases...
+                case "m":
+                    this.M = true;
+                    break;
+            }
+        });
+        
+        window.addEventListener("keyup", event => {
+            switch (event.key) {
+                // Other cases...
+                case "m":
+                    this.M = false;
+                    break;
+            }
+        });
+        
+        window.addEventListener("keydown", event => {
+            switch (event.key) {
                 case "ArrowRight":
                     this.RIGHT = true;
                     break;

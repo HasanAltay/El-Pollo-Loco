@@ -6,24 +6,28 @@ let lastMoved;
 let touchStartTime = 0;
 const doubleTouchThreshold = 500; // in milliseconds
 
-window.addEventListener("load", function()  {
-    const isTouchDevice = "ontouchstart" in window || navigator.maxTouchPoints > 0;
-  
+window.addEventListener("load", function () {
+    const isTouchDevice =
+        "ontouchstart" in window || navigator.maxTouchPoints > 0;
+
     if (isTouchDevice) {
-      let action = document.getElementById("actions");
-      let walk = document.getElementById("walk");
-      action.style.visibility = "visible";
-      walk.style.visibility = "visible";
-      touchButtons();
+        let action = document.getElementById("actions");
+        let walk = document.getElementById("walk");
+        action.style.visibility = "visible";
+        walk.style.visibility = "visible";
+        touchButtons();
     }
 });
 
 function isTouchDevice() {
     const userAgent = navigator.userAgent.toLowerCase();
-    const isMobile = /iphone|ipod|ipad|android|blackberry|webos|windows phone|iemobile|opera mini/i.test(userAgent);
+    const isMobile =
+        /iphone|ipod|ipad|android|blackberry|webos|windows phone|iemobile|opera mini/i.test(
+            userAgent
+        );
     const isTablet = /ipad|android|windows (?!phone)/i.test(userAgent);
     return isMobile || isTablet;
-  }
+}
 
 function screenSize() {
     if (fullscreen) {
@@ -61,6 +65,7 @@ function exitFullscreen() {
 }
 
 function playAgain() {
+    event.preventDefault();
     clearAllInterval();
     clearScreen();
     init();
@@ -68,6 +73,7 @@ function playAgain() {
 }
 
 function playGame() {
+    event.preventDefault();
     clearAllInterval();
     clearScreen();
     init();
@@ -77,8 +83,25 @@ function playGame() {
 function resetAudio() {
     world.music.currentTime = 0;
     world.endboss_ambience_sound.currentTime = 0;
+    world.ambience_lvl1.pause();
     world.ambience_lvl1.currentTime = 0;
+    world.success_audio.pause();
     world.success_audio.currentTime = 0;
+}
+
+function toggleAudio() {
+    const img = document.getElementById("audio_icon");
+    try {
+        if (world.AUDIO_MUTE) {
+            world.unmuteAllAudio();
+            world.AUDIO_MUTE = false;
+            img.src = "./img/11_html_img/mute.png";
+        } else if (world.AUDIO_MUTE == false) {
+            world.muteAllAudio();
+            world.AUDIO_MUTE = true;
+            img.src = "./img/11_html_img/unmute.png";
+        }
+    } catch (error) {}
 }
 
 function clearAllInterval() {

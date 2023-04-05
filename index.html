@@ -34,12 +34,12 @@
     <body>
         <span class="t1">El Pollo Loco</span>
         <div id="fullscreen" ondblclick="screenSize()" class="main">
-            <img
+            <!-- <img
                 class="crt"
                 src="./img/11_html_img/crt.png"
                 alt="crt monitor filter"
                 ontouchstart="event.preventDefault()"
-            />
+            /> -->
             <div id="button_place" class="button_place">
                 <div
                     class="btn_play_again btn"
@@ -99,9 +99,10 @@
             <div class="settings_btns">
                 <img
                     src="./img/11_html_img/mute.png"
-                    alt="mute audio"
+                    alt="toggle audio"
                     onclick="toggleAudio()"
                     ontouchstart="event.preventDefault()"
+                    id="audio_icon"
                 />
                 <img
                     src="./img/11_html_img/fullscreen.png"
