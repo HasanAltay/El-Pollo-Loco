@@ -183,7 +183,7 @@ class World {
         }, 100);
 
         this.interval5 = setInterval(() => {
-            this.endbossMusicChange();
+            // this.endbossMusicChange();
             this.checkCollisionBottleEndboss();
             // console.log(this.music.currentTime);
         }, 750);
@@ -360,7 +360,7 @@ class World {
             this.level.endboss.forEach(e =>
                 e.playAnimation(this.endboss.IMAGES_DYING)
             );
-            this.music.currentTime = 0;
+            // this.music.currentTime = 0;
             this.success_audio.play();
             this.keyboard = false;
             this.endboss.deadIsTrue();
@@ -379,17 +379,17 @@ class World {
                 e.playAnimation(this.endboss.IMAGES_ALERT)
             );
             console.log("Boss Chicken spotted you!");
-        }
-    }
-
-    endbossMusicChange() {
-        if (this.boss_near) {
             this.music.pause();
-            // this.music.currentTime = 0;
-            // this.endboss_ambience_sound.currentTime = 0;
             this.endboss_ambience_sound.play();
         }
     }
+
+    // endbossMusicChange() {
+    //     if (this.boss_near) {
+    //         this.music.pause();
+    //         this.endboss_ambience_sound.play();
+    //     }
+    // }
 
     // press D and throw bottle
     checkThrowObjects() {
@@ -409,7 +409,7 @@ class World {
         }
     }
 
-    // character hit enemy then lose health
+    // character hit enemy then loose health
     checkCollisions() {
         this.level.enemies.forEach(enemy => {
             if (this.character.isColliding(enemy)) {
@@ -436,9 +436,6 @@ class World {
         });
     }
 
-    //  Checks for collisions between character and coins,
-    //  plays sound, moves coin off-screen, adds to collected
-    //  coins and logs total collected und uncollected.
     checkCollisionsCharacterWithCoins() {
         const uncollectedCoins = this.level.coins.filter(
             coin => !this.collectedCoins.includes(coin)
@@ -571,18 +568,4 @@ class World {
         }
     }
 
-    // audioCurrentTime(currentState) {
-    //     this.music.currentTime = 0;
-    //     this.endboss_ambience_sound.currentTime = currentState;
-    //     this.ambience_lvl1.currentTime = currentState;
-    //     this.success_audio.currentTime = currentState;
-    //     this.boss_hit_audio.currentTime = currentState;
-    //     this.throw_sound.currentTime = currentState;
-    //     this.bottle_smash_sound.currentTime = currentState;
-    //     this.walking_sound.currentTime = currentState;
-    //     this.jumping_sound.currentTime = currentState;
-    //     this.hurt_audio.currentTime = currentState;
-    //     this.dead_sound.currentTime = currentState;
-    //     this.collecting_sound.currentTime = currentState;
-    // }
 }

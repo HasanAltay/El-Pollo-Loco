@@ -1,14 +1,20 @@
 /* Cactus Regular - latin */
 @font-face {
-    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    font-display: swap;
+    /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
     font-family: 'Cactus Regular';
     font-style: normal;
     font-weight: 400;
-    src: url('../fonts/Cactus Regular.eot'); /* IE9 Compat Modes */
-    src: url('../fonts/Cactus Regular.woff2') format('woff2'), /* Super Modern Browsers */
-         url('../fonts/Cactus Regular.woff') format('woff'), /* Modern Browsers */
-         url('../fonts/Cactus Regular.ttf') format('truetype'), /* Safari, Android, iOS */
-         url('../fonts/Cactus Regular.svg#Cactus Regular') format('svg'); /* Legacy iOS */
+    src: url('../fonts/Cactus Regular.eot');
+    /* IE9 Compat Modes */
+    src: url('../fonts/Cactus Regular.woff2') format('woff2'),
+        /* Super Modern Browsers */
+        url('../fonts/Cactus Regular.woff') format('woff'),
+        /* Modern Browsers */
+        url('../fonts/Cactus Regular.ttf') format('truetype'),
+        /* Safari, Android, iOS */
+        url('../fonts/Cactus Regular.svg#Cactus Regular') format('svg');
+    /* Legacy iOS */
 }
 
 body {
@@ -58,6 +64,7 @@ body {
     z-index: 9;
     position: relative;
     overflow: hidden;
+    border-radius: 10px;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
         rgba(0, 0, 0, 0.12) 0px -12px 30px,
         rgba(0, 0, 0, 0.12) 0px 4px 6px,
@@ -72,7 +79,9 @@ canvas {
     background-size: cover;
     width: 100%;
     height: 100%;
-    border-radius: 5px;
+    min-height: 200px;
+    min-width: 300px;
+    border-radius: 10px;
     object-fit: contain;
     z-index: 4;
 }
@@ -80,35 +89,43 @@ canvas {
 .settings {
     position: static;
     display: flex;
-    color: white;
     max-width: 900px;
-    width: 100%;
+    width: 100vh;
     align-items: center;
     justify-content: right;
     z-index: 1;
 }
 
 .settings_btns {
-    /* background-color: #000000;  */
-    width: fit-content;
+    width: 160px;
+    display: flex;
+    justify-content: space-around;
     border-radius: 0px 0px 10px 10px;
+    background-color: #E99700;
+    padding: 10px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+        rgba(0, 0, 0, 0.12) 0px -12px 30px,
+        rgba(0, 0, 0, 0.12) 0px 4px 6px,
+        rgba(0, 0, 0, 0.17) 0px 12px 13px,
+        rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 
 .settings_btns img {
     width: 32px;
-    padding: 5px;
-    margin-left: 10px;
-    margin-right: 10px;
-    margin-top: 5px;
     cursor: pointer;
+    border-radius: 5px;
+    padding: 3px;
+    transition: all 125ms ease-in-out;
 }
 
 .settings_btns img:hover {
-    filter: opacity(50%);
+    background-color: #f0e676a4;
+    transition: all 125ms ease-in-out;
 }
 
 .settings_btns img:active {
     transform: scale(0.9);
+    transition: all 125ms ease-in-out;
 }
 
 .d-flex {
@@ -126,6 +143,88 @@ canvas {
     align-items: center;
     z-index: 4;
     width: 720px;
+}
+
+.how_to_play {
+    position: absolute;
+    visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: right;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.863);
+    width: 100%;
+    max-width: 500px;
+    z-index: 10;
+    border-radius: 10px;
+    padding: 10px 10px 10px 50px;
+    font-size: 23px;
+    line-height: 120%;
+    letter-spacing: 1px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+        rgba(0, 0, 0, 0.12) 0px -12px 30px,
+        rgba(0, 0, 0, 0.12) 0px 4px 6px,
+        rgba(0, 0, 0, 0.17) 0px 12px 13px,
+        rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    color: burlywood;
+}
+
+.how_to_play span {
+    margin-right: 50px;
+}
+
+.close_btn {
+    width: 30px;
+}
+
+.how_to_play table {
+    margin-right: 50px;
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: center;
+    text-align: right;
+    color: burlywood;
+}
+
+.how_to_play h2 {
+    color: #E99700;
+}
+
+.how_to_play table img {
+    height: 28px;
+    width: auto;
+    display: flex;
+    align-items: center;
+    margin: 0px 10px 0px 10px;
+}
+
+.how_to_play div {
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: right;
+}
+
+.how_to_play button {
+    color: #E99700;
+    font-size: 28px;
+}
+
+.how_to_play button:active {
+    transform: scale(.9);
+}
+
+.keyboard {
+    background-color: white;
+    padding: 1px;
+    border-radius: 5px;
+}
+
+.how_to_play a {
+    font-size: 14px;
+    color: rgba(222, 184, 135, 0.521);
 }
 
 .button_place {
@@ -196,6 +295,7 @@ canvas {
     text-shadow: 2px 2px 3px #000000;
     text-align: center;
     z-index: 2;
+    margin-top: 50px;
 }
 
 .bottle {
@@ -443,6 +543,7 @@ button {
     .settings {
         display: none;
     }
+
     .footer {
         display: none;
     }

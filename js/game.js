@@ -124,6 +124,14 @@ function init() {
     lastMoved = new Date().getTime();
 }
 
+function closeHowToPlay() {
+    document.getElementById('how_to_play').style.visibility = "hidden";
+}
+
+function showHowToPlay() {
+    document.getElementById('how_to_play').style.visibility = "visible";
+}
+
 function touchButtons() {
     const btnLeft = document.getElementById("btn_left");
     const btnRight = document.getElementById("btn_right");
