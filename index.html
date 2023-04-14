@@ -91,6 +91,26 @@
                 Your browser does not support canvas element.
             </canvas>
 
+                <div class="settings_fullscreen" id="settings_fullscreen">
+                    <img
+                        src="./img/11_html_img/mute.png"
+                        alt="toggle audio"
+                        onclick="toggleAudio()"
+                        ontouchstart="event.preventDefault()"
+                        id="audio_icon"
+                        title="Mute/Unmute Audio"
+                    />
+                    <img
+                        src="./img/11_html_img/fullscreen.png"
+                        alt="toggle
+                        fullscreen"
+                        onclick="screenSize()"
+                        ontouchstart="event.preventDefault()"
+                        title="Exit Fullscreen"
+                    />
+                </div>
+
+
             <div class="walk" id="walk">
                 <button id="btn_left">
                     <img src="./img/10_mobile_keys/left.png" />

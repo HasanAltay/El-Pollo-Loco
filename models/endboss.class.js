@@ -68,26 +68,5 @@ class Endboss extends MovableObject {
         this.loadImages(this.IMAGES_HURT);
         this.loadImages(this.IMAGES_DYING);
         this.x = 9600;
-        this.gameOver();
-    }
-
-    deadIsTrue() {
-        this.dead = true;
-        this.gameOver(this.dead);
-    }
-
-    gameOver(dead) {
-        if (dead) {
-            console.log("Boss is Dead!!!");
-            this.world.music.currentTime = 0;
-            this.world.endboss_ambience_sound.currentTime = 0;
-            this.world.keyboard = false;
-            this.world.muteAllAudio();
-            document.getElementById("game_over").style.display = "block";
-            document.getElementById("btn_play_again").style.display = "block";
-            setTimeout(function () {
-                for (let i = 1; i < 9999; i++) window.clearInterval(i);
-            }, 500);
-        }
     }
 }

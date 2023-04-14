@@ -13,7 +13,7 @@ class World {
     coinBar = new CoinBar();
     throwableObject = [];
     collectedCoins = [];
-    WorldIntervals = [];
+    world_intervals = [];
     AUDIO_MUTE = false;
     darkness = 1.1;
     killedChickens = 0;
@@ -204,7 +204,7 @@ class World {
             console.log("Character Position x = ", this.character.x);
         }, 10000);
 
-        this.WorldIntervals.push(
+        this.world_intervals.push(
             this.interval1,
             this.interval2,
             this.interval3,
@@ -360,15 +360,30 @@ class World {
             this.level.endboss.forEach(e =>
                 e.playAnimation(this.endboss.IMAGES_DYING)
             );
-            // this.music.currentTime = 0;
-            this.success_audio.play();
-            this.keyboard = false;
-            this.endboss.deadIsTrue();
+            
             setTimeout(() => {
-                clearAllInterval(this.WorldIntervals.length);
-                this.level.endboss.y = this.offScreenY;
+                // Clear all intervals in the array
+                this.world_intervals.forEach(interval => clearInterval(interval));
+                this.world_intervals = [];
+                // Remove Endboss from Screen
+                this.endboss.y = this.offScreenY;
             }, 160);
+
+            this.gameOver();
         }
+    }
+
+    gameOver() {
+        // console.log("Endboss is Dead! Game Over!");
+        this.muteAllAudio();
+        this.keyboard = false;
+        this.success_audio.muted = false;
+        this.success_audio.play();
+        document.getElementById("game_over").style.display = "block";
+        document.getElementById("btn_play_again").style.display = "block";
+        setTimeout(function () {
+            for (let i = 1; i < 9999; i++) window.clearInterval(i);
+        }, 500);
     }
 
     checkDistanceBoss() {
@@ -383,13 +398,6 @@ class World {
             this.endboss_ambience_sound.play();
         }
     }
-
-    // endbossMusicChange() {
-    //     if (this.boss_near) {
-    //         this.music.pause();
-    //         this.endboss_ambience_sound.play();
-    //     }
-    // }
 
     // press D and throw bottle
     checkThrowObjects() {
@@ -415,10 +423,10 @@ class World {
             if (this.character.isColliding(enemy)) {
                 this.character.hit();
                 this.statusBar.setPercentage(this.character.energy);
-                console.log(
-                    "Collision with Enemy, Life:",
-                    this.character.energy
-                );
+                // console.log(
+                //     "Collision with Enemy, Life:",
+                //     this.character.energy
+                // );
             }
         });
     }
@@ -428,10 +436,10 @@ class World {
             if (this.character.isColliding(endboss)) {
                 this.character.hit();
                 this.statusBar.setPercentage(this.character.energy);
-                console.log(
-                    "Collision with Boss, Life:",
-                    this.character.energy
-                );
+                // console.log(
+                //     "Collision with Boss, Life:",
+                //     this.character.energy
+                // );
             }
         });
     }
@@ -513,12 +521,12 @@ class World {
             if (this.AUDIO_MUTE) {
                 // Audio is currently muted, unmute it
                 this.AUDIO_MUTE = false;
-                console.log("unmute", this.AUDIO_MUTE);
+                // console.log("unmute", this.AUDIO_MUTE);
                 this.muteAllAudio();
             } else {
                 // Audio is currently unmuted, mute it
                 this.AUDIO_MUTE = true;
-                console.log("mute", this.AUDIO_MUTE);
+                // console.log("mute", this.AUDIO_MUTE);
                 this.unmuteAllAudio();
             }
         }

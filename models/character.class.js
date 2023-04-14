@@ -100,16 +100,17 @@ class Character extends MovableObject {
         }, 500);
     }
 
-    youLost(dead) {
-        if (dead == true) {
-            document.getElementById("you_lost").style.display = "block";
-            document.getElementById("btn_play_again").style.display = "block";
-            this.world.keyboard = false;
-            this.world.muteAllAudio();
-            setTimeout(function () {
-                for (let i = 1; i < 9999; i++) window.clearInterval(i);
-            }, 1000);
-        }
+    youLost() {
+        // console.log('You Lost!');
+        document.getElementById("you_lost").style.display = "block";
+        document.getElementById("btn_play_again").style.display = "block";
+        this.world.muteAllAudio();
+        this.world.keyboard = false;
+        this.world.dead_sound.muted = false;
+        this.world.dead_sound.play();
+        setTimeout(function () {
+            for (let i = 1; i < 9999; i++) window.clearInterval(i);
+        }, 1000);
     }
 
     characterMovementKeys() {
@@ -148,9 +149,8 @@ class Character extends MovableObject {
                 clearInterval(animationInterval);
                 this.playAnimation(this.IMAGES_DEAD);
                 this.fallOut();
-                this.dead = true;
                 setTimeout(() => {
-                    this.youLost(this.dead);
+                    this.youLost();
                 }, 100);
             } else if (this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURT);

@@ -35,12 +35,14 @@ function screenSize() {
             document.exitFullscreen();
         }
         fullscreen = false;
+        hideElementsOnFullscreen();
     } else {
         let element = document.getElementById("fullscreen");
         if (element.requestFullscreen) {
             element.requestFullscreen();
         }
         fullscreen = true;
+        showElementsOnFullscreen();
     }
 }
 
@@ -62,6 +64,14 @@ function exitFullscreen() {
     } else if (document.webkitExitFullscreen) {
         document.webkitExitFullscreen();
     }
+}
+
+function showElementsOnFullscreen() {
+    document.getElementById('settings_fullscreen').style.visibility = 'visible';
+}
+
+function hideElementsOnFullscreen() {
+    document.getElementById('settings_fullscreen').style.visibility = 'hidden';
 }
 
 function playAgain() {
