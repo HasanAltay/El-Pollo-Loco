@@ -100,16 +100,19 @@ function resetAudio() {
 }
 
 function toggleAudio() {
-    const img = document.getElementById("audio_icon");
+    const img1 = document.getElementById("audio_icon1");
+    const img2 = document.getElementById("audio_icon2");
     try {
         if (world.AUDIO_MUTE) {
             world.unmuteAllAudio();
             world.AUDIO_MUTE = false;
-            img.src = "./img/11_html_img/mute.png";
+            img1.src = "./img/11_html_img/mute.png";
+            img2.src = "./img/11_html_img/mute.png";
         } else if (world.AUDIO_MUTE == false) {
             world.muteAllAudio();
             world.AUDIO_MUTE = true;
-            img.src = "./img/11_html_img/unmute.png";
+            img1.src = "./img/11_html_img/unmute.png";
+            img2.src = "./img/11_html_img/unmute.png";
         }
     } catch (error) {}
 }
