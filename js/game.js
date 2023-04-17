@@ -74,6 +74,14 @@ function hideElementsOnFullscreen() {
     document.getElementById('settings_fullscreen').style.visibility = 'hidden';
 }
 
+function closeHowToPlay() {
+    document.getElementById('how_to_play').style.visibility = "hidden";
+}
+
+function showHowToPlay() {
+    document.getElementById('how_to_play').style.visibility = "visible";
+}
+
 function playAgain() {
     event.preventDefault();
     clearAllInterval();
@@ -84,7 +92,7 @@ function playAgain() {
 
 function playGame() {
     event.preventDefault();
-    clearAllInterval();
+    // clearAllInterval();
     clearScreen();
     init();
     resetAudio();
@@ -114,7 +122,13 @@ function toggleAudio() {
             img1.src = "./img/11_html_img/unmute.png";
             img2.src = "./img/11_html_img/unmute.png";
         }
-    } catch (error) {}
+    } catch (error) {
+        if (error.name === 'NotAllowedError' || error.name === 'NotSupportedError') {
+            console.log('Error: ' + error.name + ': ' + error.message);
+        } else {
+            console.log(error);
+        }
+    }
 }
 
 function clearAllInterval() {
@@ -137,19 +151,33 @@ function init() {
     lastMoved = new Date().getTime();
 }
 
-function closeHowToPlay() {
-    document.getElementById('how_to_play').style.visibility = "hidden";
-}
-
-function showHowToPlay() {
-    document.getElementById('how_to_play').style.visibility = "visible";
-}
-
 function touchButtons() {
     const btnLeft = document.getElementById("btn_left");
     const btnRight = document.getElementById("btn_right");
     const btnThrow = document.getElementById("btn_throw");
     const btnJump = document.getElementById("btn_jump");
+
+    const audio_icon1 = document.getElementById("audio_icon1");
+    const audio_icon2 = document.getElementById("audio_icon2");
+    const fullscreen_icon1= document.getElementById("fullscreen_icon1");
+    const fullscreen_icon2 = document.getElementById("fullscreen_icon2");
+    const how_to_play_btn1 = document.getElementById("how_to_play_btn1");
+
+    audio_icon2.addEventListener("click", toggleAudio);
+    audio_icon2.addEventListener("touchstart", toggleAudio);
+
+    fullscreen_icon1.addEventListener("click", screenSize);
+    fullscreen_icon1.addEventListener("touchstart", screenSize);
+
+    fullscreen_icon2.addEventListener("click", screenSize);
+    fullscreen_icon2.addEventListener("touchstart", screenSize);
+
+    how_to_play_btn1.addEventListener("click", showHowToPlay);
+    how_to_play_btn1.addEventListener("touchstart", showHowToPlay);
+
+    audio_icon1.addEventListener("click", toggleAudio);
+    audio_icon1.addEventListener("touchstart", toggleAudio);
+
     let lastTouched = 0;
     let timeout;
 

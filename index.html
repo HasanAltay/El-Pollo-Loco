@@ -57,18 +57,12 @@
         <script src="./models/coin-bar.class.js"></script>
         <script src="./models/endboss-bar.class.js"></script>
         <script src="./level/level1.js"></script>
-        <script src="./js/game.js" defer></script>
+        <script src="./js/game.js"></script>
     </head>
 
     <body>
         <span class="t1">El Pollo Loco</span>
         <div id="fullscreen" ondblclick="screenSize()" class="main">
-            <!-- <img
-                class="crt"
-                src="./img/11_html_img/crt.png"
-                alt="crt monitor filter"
-                ontouchstart="event.preventDefault()"
-            /> -->
             <div id="button_place" class="button_place">
                 <button
                     class="btn_play_again btn"
@@ -91,25 +85,37 @@
                 Your browser does not support canvas element.
             </canvas>
 
-                <div class="settings_fullscreen" id="settings_fullscreen">
-                    <img
-                        src="./img/11_html_img/mute.png"
-                        alt="toggle audio"
-                        onclick="toggleAudio()"
-                        ontouchstart="event.preventDefault()"
-                        id="audio_icon2"
-                        title="Mute/Unmute Audio"
-                    />
-                    <img
-                        src="./img/11_html_img/fullscreen.png"
-                        alt="toggle
-                        fullscreen"
-                        onclick="screenSize()"
-                        ontouchstart="event.preventDefault()"
-                        title="Exit Fullscreen"
-                    />
-                </div>
+            <div class="settings_fullscreen" id="settings_fullscreen">
 
+                <!-- <button id="how_to_play_btn2">
+                    <img src="./img/11_html_img/request.png"
+                    alt="how to play?"
+                    onclick="showHowToPlay()"
+                    ontouchstart="event.preventDefault()"
+                    title="How To Play?">
+                </button> -->
+
+                <button id="audio_icon2">
+                <img
+                    src="./img/11_html_img/mute.png"
+                    alt="toggle audio"
+                    onclick="toggleAudio()"
+                    ontouchstart="event.preventDefault()"
+                    
+                    title="Mute/Unmute Audio"
+                /></button>
+
+                <button id="fullscreen_icon2">
+                <img
+                    src="./img/11_html_img/fullscreen.png"
+                    alt="toggle
+                        fullscreen"
+                    onclick="screenSize()"
+                    ontouchstart="event.preventDefault()"
+                    title="Exit Fullscreen"
+                /></button>
+
+            </div>
 
             <div class="walk" id="walk">
                 <button id="btn_left">
@@ -128,7 +134,7 @@
                     <img src="./img/10_mobile_keys/jump.png" />
                 </button>
             </div>
-
+            
             <img
                 class="game_over"
                 id="game_over"
@@ -147,29 +153,35 @@
 
         <div class="settings">
             <div class="settings_btns">
-                <img
-                    src="./img/11_html_img/request.png"
+
+                <button id="how_to_play_btn1">
+                    <img src="./img/11_html_img/request.png"
                     alt="how to play?"
                     onclick="showHowToPlay()"
                     ontouchstart="event.preventDefault()"
-                    title="How To Play?"
-                />
+                    title="How To Play?">
+                </button>
+
+                <button id="audio_icon1">
                 <img
                     src="./img/11_html_img/mute.png"
                     alt="toggle audio"
                     onclick="toggleAudio()"
                     ontouchstart="event.preventDefault()"
-                    id="audio_icon1"
+                    
                     title="Mute/Unmute Audio"
-                />
+                /></button>
+
+                <button id="fullscreen_icon1">
                 <img
                     src="./img/11_html_img/fullscreen.png"
                     alt="toggle
                     fullscreen"
                     onclick="screenSize()"
                     ontouchstart="event.preventDefault()"
-                    title="Go Fullscreen"
-                />
+                    title="Go Fullscreen" 
+                /></button>
+
             </div>
         </div>
 
@@ -185,100 +197,138 @@
         <div class="how_to_play" id="how_to_play">
             <div>
                 <button onclick="closeHowToPlay()">
-                    <img src="./img/11_html_img/close.png" alt="Close" class="close_btn">
+                    <img
+                        src="./img/11_html_img/close.png"
+                        alt="Close"
+                        class="close_btn"
+                    />
                 </button>
             </div>
-            <h2>How to Play</h2>
-            <span>
-            Get ready to run, jump, and salsa your way through an epic adventure
-            with Pepe! As you make your way through the game, watch out for
-            those feisty chickens that will stop at nothing to take you down.
-            Whether you're dodging dangerous chickens or taking them out with a
-            well-timed salsa bottle, the action never stops. And don't forget to
-            keep an eye out for those sneaky little chicks that will jump out of
-            nowhere and trip you up. But it's all worth it for the ultimate
-            showdown with the boss chicken. Give him a taste of your spiciest
-            salsa and show him who's boss.
-            </span>
-            <h2>Controls</h2>
+        
+            <div class="how_to_play_child">
+                <div>
+                    <h2>How to Play</h2>
+                    <span>
+                        Get ready to run, jump, and salsa your way through an epic
+                        adventure with Pepe! As you make your way through the game,
+                        watch out for those feisty chickens that will stop at nothing to
+                        take you down. Whether you're dodging dangerous chickens or
+                        taking them out with a well-timed salsa bottle, the action never
+                        stops. And don't forget to keep an eye out for those sneaky
+                        little chicks that will jump out of nowhere and trip you up. But
+                        it's all worth it for the ultimate showdown with the boss
+                        chicken. Give him a taste of your spiciest salsa and show him
+                        who's boss.
+                    </span>
+                </div>
+                <div>
+                    <h2>Controls</h2>
 
-            <table>
-                <tr>
-                    <td>WALK LEFT</td>
-                    <td><img src="./img/10_mobile_keys/left.png" alt="Left"></td>
-                    <td>or</td>
-                    <td>
-                        <img
-                            src="./img/11_html_img/left_key.png"
-                            class="keyboard"
-                            alt="Left"
-                        />
-                    </td>
-                </tr>
-                <tr>
-                    <td>WALK RIGHT</td>
-                    <td><img src="./img/10_mobile_keys/right.png" alt="Right"></td>
-                    <td>or</td>
-                    <td>
-                        <img
-                            src="./img/11_html_img/right_key.png"
-                            class="keyboard"
-                            alt="Right"
-                        />
-                    </td>
-                </tr>
-                <tr>
-                    <td>JUMP</td>
-                    <td><img src="./img/10_mobile_keys/jump.png" alt="Jump"></td>
-                    <td>or</td>
-                    <td>
-                        <img
-                            src="./img/11_html_img/space_key.png"
-                            class="keyboard"
-                            alt="Jump"
-                        />
-                    </td>
-                </tr>
-                <tr>
-                    <td>THROW BOTTLE</td>
-                    <td><img src="./img/10_mobile_keys/throw.png" alt="Throw"></td>
-                    <td>or</td>
-                    <td>
-                        <img
-                            src="./img/11_html_img/d_key.png"
-                            class="keyboard"
-                            alt="Throw"
-                        />
-                    </td>
-                </tr>
-                <tr>
-                    <td>TOGGLE AUDIO</td>
-                    <td><img src="./img/11_html_img/mute.png" alt="Mute/Unmute"></td>
-                    <td>or</td>
-                    <td>
-                        <img
-                            src="./img/11_html_img/m_key.png"
-                            class="keyboard"
-                            alt="Mute/Unmute"
-                        />
-                    </td>
-                </tr>
-                <tr>
-                    <td>FULLSCREEN</td>
-                    <td><img src="./img/11_html_img/fullscreen.png" alt="Fullscreen"></td>
-                    <td>or</td>
-                    <td>
-                        <img
-                            src="./img/11_html_img/double-click.png"
-                            title="Double-Click"
-                            alt="Mute/Unmute"
-                        />
-                    </td>
-                </tr>
-            </table>
-            <a href="https://www.flaticon.com/free-icons/close" title="close icons">Close icons created by Pixel perfect - Flaticon</a>
-            <a href="https://www.flaticon.com/free-icons/keyboard" title="keyboard icons">Keyboard icons created by Freepik - Flaticon</a>
-        </div>
+                    <table>
+                        <tr>
+                            <td>WALK LEFT</td>
+                            <td>
+                                <img src="./img/10_mobile_keys/left.png" alt="Left" />
+                            </td>
+                            <td>or</td>
+                            <td>
+                                <img
+                                    src="./img/11_html_img/left_key.png"
+                                    class="keyboard"
+                                    alt="Left"
+                                />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>WALK RIGHT</td>
+                            <td>
+                                <img src="./img/10_mobile_keys/right.png" alt="Right" />
+                            </td>
+                            <td>or</td>
+                            <td>
+                                <img
+                                    src="./img/11_html_img/right_key.png"
+                                    class="keyboard"
+                                    alt="Right"
+                                />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>JUMP</td>
+                            <td>
+                                <img src="./img/10_mobile_keys/jump.png" alt="Jump" />
+                            </td>
+                            <td>or</td>
+                            <td>
+                                <img
+                                    src="./img/11_html_img/space_key.png"
+                                    class="keyboard"
+                                    alt="Jump"
+                                />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>THROW BOTTLE</td>
+                            <td>
+                                <img src="./img/10_mobile_keys/throw.png" alt="Throw" />
+                            </td>
+                            <td>or</td>
+                            <td>
+                                <img
+                                    src="./img/11_html_img/d_key.png"
+                                    class="keyboard"
+                                    alt="Throw"
+                                />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>TOGGLE AUDIO</td>
+                            <td>
+                                <img
+                                    src="./img/11_html_img/mute.png"
+                                    alt="Mute/Unmute"
+                                />
+                            </td>
+                            <td>or</td>
+                            <td>
+                                <img
+                                    src="./img/11_html_img/m_key.png"
+                                    class="keyboard"
+                                    alt="Mute/Unmute"
+                                />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>FULLSCREEN</td>
+                            <td>
+                                <img
+                                    src="./img/11_html_img/fullscreen.png"
+                                    alt="Fullscreen"
+                                />
+                            </td>
+                            <td>or</td>
+                            <td>
+                                <img
+                                    src="./img/11_html_img/double-click.png"
+                                    title="Double-Click"
+                                    alt="Mute/Unmute"
+                                />
+                            </td>
+                        </tr>
+                    </table>
+                    <a
+                        href="https://www.flaticon.com/free-icons/close"
+                        title="close icons"
+                        >Close icons created by Pixel perfect - Flaticon</a
+                    >
+                    <a
+                        href="https://www.flaticon.com/free-icons/keyboard"
+                        title="keyboard icons"
+                        >Keyboard icons created by Freepik - Flaticon</a
+                    >
+                </div>
+            </div>
+    </div>
 
         <footer class="footer">
             LEFT = Walk left | RIGHT = Walk right | SPACE = Jump | D = Throw

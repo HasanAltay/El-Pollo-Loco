@@ -44,8 +44,6 @@ class ThrowableObject extends MovableObject {
             } else {
                 this.y = 430;
                 this.playAnimation(this.IMAGES_BOTTLE_SPLASH);
-                // this.bottle_smash_sound.currentTime = 0;
-                // this.bottle_smash_sound.play();
                 clearInterval(this.playInterval);
             }
         }, 70);

@@ -200,9 +200,9 @@ class World {
             this.checkBossAlive();
         }, 100);
 
-        this.interval9 = setInterval(() => {
-            console.log("Character Position x = ", this.character.x);
-        }, 10000);
+        // this.interval9 = setInterval(() => {
+        //     console.log("Character Position x = ", this.character.x);
+        // }, 10000);
 
         this.world_intervals.push(
             this.interval1,
@@ -212,7 +212,7 @@ class World {
             this.interval5,
             this.interval6,
             this.interval8,
-            this.interval9
+            // this.interval9
         );
     }
 
@@ -314,7 +314,7 @@ class World {
     bossHit() {
         if (this.boss_hit) {
             this.endboss.energy -= 5;
-            console.log("Endboss Life = ", this.endboss.energy);
+            // console.log("Endboss Life = ", this.endboss.energy);
             this.endbossBar.setPercentage(this.endboss.energy);
             this.level.endboss.forEach(e =>
                 e.playAnimation(this.endboss.IMAGES_HURT)
@@ -454,8 +454,8 @@ class World {
                 this.collecting_sound.play();
                 coin.y = this.offScreenY;
                 this.collectedCoins.push(coin);
-                console.log("Collected Coins: ", this.collectedCoins.length);
-                console.log("Coins Left: ", uncollectedCoins.length);
+                // console.log("Collected Coins: ", this.collectedCoins.length);
+                // console.log("Coins Left: ", uncollectedCoins.length);
             }
         });
     }

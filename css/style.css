@@ -33,15 +33,6 @@ body {
     background-position: center;
 }
 
-.crt {
-    position: absolute;
-    width: 100%;
-    filter: opacity(10%);
-    min-width: 960px;
-    min-height: 540px;
-    object-fit: cover;
-}
-
 .t1 {
     display: flex;
     color: #E99700;
@@ -90,7 +81,7 @@ canvas {
     position: static;
     display: flex;
     max-width: 900px;
-    width: 100vh;
+    width: calc(100% - 30px);
     align-items: center;
     justify-content: right;
     z-index: 1;
@@ -140,24 +131,36 @@ canvas {
     width: 720px;
 }
 
+.how_to_play_child {
+    display: flex;
+    align-items: flex-start;
+}
+
+.how_to_play_child div {
+    display: flex;
+    flex-direction: column;
+    max-width: 300px;
+    min-width: 300px;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
 .how_to_play {
     position: absolute;
     visibility: hidden;
     display: flex;
     flex-direction: column;
-    justify-content: right;
-    border: 3px solid #DC4B34;
+    border: 3px solid #E99700;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: rgba(0, 0, 0, 0.932);
-    width: 100%;
-    max-width: 500px;
+    background-color: black;
+    max-width: 700px;
     z-index: 10;
-    border-radius: 10px;
-    padding: 10px 10px 10px 50px;
-    font-size: 21px;
-    line-height: 120%;
+    border-radius: 30px;
+    padding: 10px;
+    font-size: 18px;
     letter-spacing: 1px;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
         rgba(0, 0, 0, 0.12) 0px -12px 30px,
@@ -168,21 +171,21 @@ canvas {
 }
 
 .how_to_play span {
-    margin-right: 50px;
+    margin-right: 0px;
 }
 
 .close_btn {
-    width: 30px;
+    width: 24px;
 }
 
 .how_to_play table {
-    margin-right: 50px;
+    margin-right: 10px;
     margin-bottom: 30px;
     display: flex;
     justify-content: center;
-    text-align: right;
+    align-items: center;
     color: burlywood;
-    line-height: 200%;
+    line-height: 160%;
 }
 
 .how_to_play h2 {
@@ -200,14 +203,12 @@ canvas {
 .how_to_play div {
     width: 100%;
     display: flex;
-    align-items: flex-end;
-    justify-content: right;
 }
 
 .how_to_play button {
     color: #E99700;
     font-size: 28px;
-    padding: 10px;
+    padding: 10px 0px 0px 10px;
 }
 
 .how_to_play button:active {
@@ -433,6 +434,8 @@ button {
     -moz-user-select: none;
     -khtml-user-select: none;
     user-select: none;
+    display: flex;
+    flex-direction: column-reverse;
 }
 
 .settings_fullscreen img {
@@ -471,15 +474,53 @@ button {
 
 @media only screen and (max-width: 667px) {
 
-
     .footer {
         font-size: 0.7rem;
     }
 }
 
 @media only screen and (max-width: 896px) and (max-height: 414px) {
-    .crt {
-        display: none;
+
+    .how_to_play {
+        position: absolute;
+        visibility: hidden;
+        display: flex;
+        flex-direction: column;
+        border: unset;
+        top: 0;
+        left: 0;
+        height: auto;
+        transform: unset;
+        background-color: black;
+        max-width: unset;
+        width: 100%;
+        z-index: 10;
+        border-radius: unset;
+        padding: 10px;
+        font-size: 18px;
+        letter-spacing: 1px;
+        box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+            rgba(0, 0, 0, 0.12) 0px -12px 30px,
+            rgba(0, 0, 0, 0.12) 0px 4px 6px,
+            rgba(0, 0, 0, 0.17) 0px 12px 13px,
+            rgba(0, 0, 0, 0.09) 0px -3px 5px;
+        color: burlywood;
+    }
+
+    .how_to_play_child {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-around;
+    }
+    
+    .how_to_play_child div {
+        display: flex;
+        flex-direction: column;
+        max-width: unset;
+        min-width: 300px;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
     }
 
     .walk {
@@ -492,9 +533,11 @@ button {
 
     canvas {
         width: 100%;
+        border-radius: unset;
     }
 
     .settings {
+        display: none;
         width: unset;
         max-width: unset;
         position: absolute;
@@ -503,7 +546,7 @@ button {
         z-index: 99;
     }
 
-    canvas {
+    .main {
         border-radius: unset;
     }
 
@@ -534,6 +577,7 @@ button {
 }
 
 @media only screen and (max-width: 500px) {
+
     canvas {
         display: none;
     }
