@@ -67,19 +67,19 @@ function exitFullscreen() {
 }
 
 function showElementsOnFullscreen() {
-    document.getElementById('settings_fullscreen').style.visibility = 'visible';
+    document.getElementById("settings_fullscreen").style.visibility = "visible";
 }
 
 function hideElementsOnFullscreen() {
-    document.getElementById('settings_fullscreen').style.visibility = 'hidden';
+    document.getElementById("settings_fullscreen").style.visibility = "hidden";
 }
 
 function closeHowToPlay() {
-    document.getElementById('how_to_play').style.visibility = "hidden";
+    document.getElementById("how_to_play").style.visibility = "hidden";
 }
 
 function showHowToPlay() {
-    document.getElementById('how_to_play').style.visibility = "visible";
+    document.getElementById("how_to_play").style.visibility = "visible";
 }
 
 function playAgain() {
@@ -116,15 +116,20 @@ function toggleAudio() {
             world.AUDIO_MUTE = false;
             img1.src = "./img/11_html_img/mute.png";
             img2.src = "./img/11_html_img/mute.png";
+            console.log("unmuted");
         } else if (world.AUDIO_MUTE == false) {
             world.muteAllAudio();
             world.AUDIO_MUTE = true;
             img1.src = "./img/11_html_img/unmute.png";
             img2.src = "./img/11_html_img/unmute.png";
+            console.log("muted");
         }
     } catch (error) {
-        if (error.name === 'NotAllowedError' || error.name === 'NotSupportedError') {
-            console.log('Error: ' + error.name + ': ' + error.message);
+        if (
+            error.name === "NotAllowedError" ||
+            error.name === "NotSupportedError"
+        ) {
+            console.log("Error: " + error.name + ": " + error.message);
         } else {
             console.log(error);
         }
@@ -147,7 +152,7 @@ function init() {
     canvas = document.getElementById("canvas");
     initLevel();
     world = new World(canvas, keyboard);
-    touchButtons();
+    // touchButtons();
     lastMoved = new Date().getTime();
 }
 
@@ -157,26 +162,26 @@ function touchButtons() {
     const btnThrow = document.getElementById("btn_throw");
     const btnJump = document.getElementById("btn_jump");
 
-    const audio_icon1 = document.getElementById("audio_icon1");
-    const audio_icon2 = document.getElementById("audio_icon2");
-    const fullscreen_icon1= document.getElementById("fullscreen_icon1");
-    const fullscreen_icon2 = document.getElementById("fullscreen_icon2");
+    const audio_btn1 = document.getElementById("audio_btn1");
+    const audio_btn2 = document.getElementById("audio_btn2");
+    const fullscreen_btn1 = document.getElementById("fullscreen_icon1");
+    const fullscreen_btn2 = document.getElementById("fullscreen_icon2");
     const how_to_play_btn1 = document.getElementById("how_to_play_btn1");
 
-    audio_icon2.addEventListener("click", toggleAudio);
-    audio_icon2.addEventListener("touchstart", toggleAudio);
+    audio_btn2.addEventListener("click", toggleAudio);
+    audio_btn2.addEventListener("touchstart", toggleAudio);
 
-    fullscreen_icon1.addEventListener("click", screenSize);
-    fullscreen_icon1.addEventListener("touchstart", screenSize);
+    fullscreen_btn1.addEventListener("click", screenSize);
+    fullscreen_btn1.addEventListener("touchstart", screenSize);
 
-    fullscreen_icon2.addEventListener("click", screenSize);
-    fullscreen_icon2.addEventListener("touchstart", screenSize);
+    fullscreen_btn2.addEventListener("click", screenSize);
+    fullscreen_btn2.addEventListener("touchstart", screenSize);
 
     how_to_play_btn1.addEventListener("click", showHowToPlay);
     how_to_play_btn1.addEventListener("touchstart", showHowToPlay);
 
-    audio_icon1.addEventListener("click", toggleAudio);
-    audio_icon1.addEventListener("touchstart", toggleAudio);
+    audio_btn1.addEventListener("click", toggleAudio);
+    audio_btn1.addEventListener("touchstart", toggleAudio);
 
     let lastTouched = 0;
     let timeout;
